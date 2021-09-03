@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const  Logo = (): JSX.Element => {
     return (
@@ -11,7 +11,7 @@ export const  Logo = (): JSX.Element => {
                 </g>
             </g>
         </svg>
-    )
-}
+    );
+};
 
 

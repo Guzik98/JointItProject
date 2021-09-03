@@ -1,15 +1,14 @@
 import React from 'react';
-import './Header.sass'
+import './Header.sass';
 
-import {Logo} from "../../../assets/icons";
+import { Logo } from '../../../assets/icons';
 
-// import MenuIcon from '@material-ui/icons/Menu';
-import MenuOutlinedIcon from '@material-ui/icons/MenuOutlined';
+import MenuOutlinedIcon  from '@material-ui/icons/MenuOutlined';
 
 import Divider from '@material-ui/core/Divider';
 
-function Header()  {
-    return(
+function Header():JSX.Element  {
+    return (
         <header className="topBarContainer">
             <div className="header-container">
                 <div className="logo-container">
@@ -50,7 +49,7 @@ function Header()  {
                         <Divider orientation="vertical" flexItem />
                         <button
                             className="side-bar-menu" type="button">
-                            <span className="MuiIconButton-label-6973">
+                            <span>
                                 <MenuOutlinedIcon viewBox="0 0 24 24 " aria-hidden="true"/>
                             </span>
                         </button>
@@ -58,7 +57,7 @@ function Header()  {
                 </div>
             </div>
         </header>
-    )
+    );
 }
 
 export default Header;
