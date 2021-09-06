@@ -1,62 +1,32 @@
 .topBarContainer
-  width: 100%
+  height: 68px
+  padding-right: 0
   display: flex
-  font-size: 15px
-  justify-items: center
+  flex-direction: column
+  position: sticky
 
   .header-container
     align-items: center
     display: flex
-    height: 68px
-    min-height: 68px
+    height: inherit
     padding-left: 24px
     padding-right: 24px
     border-bottom: 1px solid #E4E8F0
     justify-content: space-between
-    width: 100%
+    width: inherit
 
-    .jss62
-      tab-index: 0
-      height: 25px
-      display: flex
-      margin-right: 15px
+    @media(max-width: 1024.95px)
+      height: 40px
+      min-height: 40px
+      padding-left: 8px
+      padding-right: 0
+      justify-content: space-between
 
-
-  .navbar-container
-    display: flex
-    padding-right: 15px
-    width: 100%
-    justify-content: space-between
-
-    .text
-      justify-content: center
-      font-weight: 200
-
-    .navbar-right-side
-      display: flex
-      flex: 1
-      align-items: center
-      justify-content: flex-end
-
-      .navbar-right-side-item
-        padding-right: 10px
-        font-weight: 200
-        .sign-in
-          color: #fff
-          background-color: #ff4081
-          margin: 0px 6px
-          padding: 8px 16px
-          font-size: 0.875rem
-          min-width: 64px
-          box-sizing: border-box
-          transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
-          font-family: Open Sans, sans-serif
-          font-weight: 400
-          line-height: 1.75
-          white-space: nowrap
-          border-radius: 32px
-          letter-spacing: 0.5px
-          text-transform: none
-      .MuiIconButton-label-80
-        display: inline-flex
-
+  .divider
+    margin: 0 12px
+    width: 1px
+    background-color: #E4E8F0
+    @media(max-width: 1024.95px)
+      height: 39px
+      margin: 0
+      margin-left: auto

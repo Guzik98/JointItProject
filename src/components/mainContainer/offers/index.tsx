@@ -1,5 +1,5 @@
 import Offers from './Offers';
 
-export{
+export {
     Offers,
-}
+};
