@@ -1,4 +1,5 @@
 import React from 'react';
+import '../icon.sass';
 
 const Matchmaking = (): JSX.Element => {
     return (

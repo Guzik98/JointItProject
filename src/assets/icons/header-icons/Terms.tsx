@@ -1,4 +1,5 @@
 import React from 'react';
+import '../icon.sass';
 
 const Terms = () : JSX.Element => {
     return (

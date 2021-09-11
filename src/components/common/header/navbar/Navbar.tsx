@@ -4,8 +4,8 @@ import './Navbar.sass';
 
 
 import PostJob from './buttons/postJob/PostJob';
-import RightSiderReferenceArray from './RightSiderReferenceArray';
-import RightSideReferenceComponent from './RightSideReferenceComponent';
+import {RightSiderReferenceArray} from './buttons/rest/RightSiderReferenceArray';
+import RightSideReferenceComponent from './buttons/rest/RightSideReferenceComponent';
 import SignIn from './buttons/signIn/SignIn';
 
 
@@ -17,6 +17,7 @@ const Navbar = (): JSX.Element => {
                     #1 job Board for IT industry in Poland
                 </p>
             </div>
+
             <div className="navbar-right-side">
                 {RightSiderReferenceArray.map(({ text, href }) => <RightSideReferenceComponent text={text} href={href}
                                                                                              key={text}/>)}

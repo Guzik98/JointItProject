@@ -71,8 +71,13 @@
     "@typescript-eslint/comma-dangle": "off",
     "react/require-default-props": "off",
     "react/no-array-index-key": "warn",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
     "@typescript-eslint/indent": "off"
-
   },
   "overrides": [
     {

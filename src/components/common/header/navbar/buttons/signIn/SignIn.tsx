@@ -1,11 +1,9 @@
 import React from 'react';
-
 import './SignIn.sass';
 
 import ArrowIcon from '@material-ui/icons/ExpandMoreOutlined';
 import Popover from '@material-ui/core/Popover';
 import LoginComponent from '../../../buttons/LoginComponent';
-
 
 
 function SignIn(): JSX.Element {

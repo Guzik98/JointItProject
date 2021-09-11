@@ -1,6 +1,7 @@
 import React from 'react';
+import '../icon.sass';
 
-const Help = () => {
+const Help = (): JSX.Element => {
     return (
         <svg className="icon-width" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
             <path

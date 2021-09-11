@@ -4,9 +4,9 @@ import './Map.sass';
 
 function Map(): JSX.Element{
     return (
-        <div>
+        <div className="map">
 
-    </div>
+        </div>
     );
 }
 

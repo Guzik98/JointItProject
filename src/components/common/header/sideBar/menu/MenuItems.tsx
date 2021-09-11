@@ -9,10 +9,10 @@ import Report from '../../../../../assets/icons/header-icons/Report';
 import RSS from '../../../../../assets/icons/header-icons/RSS';
 import Terms from '../../../../../assets/icons/header-icons/Terms';
 import Help from '../../../../../assets/icons/header-icons/Help';
-import Facebook from '../../../../../assets/icons/header-icons/Facebook';
-import YouTube from '../../../../../assets/icons/header-icons/YouTube';
-import Instagram from '../../../../../assets/icons/header-icons/Instagram';
-import Linkedin from '../../../../../assets/icons/header-icons/Linkedin';
+import Facebook from '../../../../../assets/icons/header-icons/social-icons/Facebook';
+import YouTube from '../../../../../assets/icons/header-icons/social-icons/YouTube';
+import Instagram from '../../../../../assets/icons/header-icons/social-icons/Instagram';
+import Linkedin from '../../../../../assets/icons/header-icons/social-icons/Linkedin';
 
 export type MenuElements = {
     text?: string,

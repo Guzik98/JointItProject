@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -15,7 +16,11 @@
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-native-rss-parser": "^1.5.1",
+    "react-rwd": "^0.1.3",
     "react-scripts": "4.0.3",
+    "react-xml-parser": "^1.1.8",
+    "rss-parser": "^3.12.0",
     "typescript": "^4.4.2",
     "web-vitals": "^1.1.2"
   },
@@ -45,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-native-rss-parser": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
@@ -54,6 +60,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "react-responsive": "^9.0.0-beta.4",
     "typescript": "^4.4.2"
   }
 }
