@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 import './buttons.sass';
 

@@ -4,7 +4,7 @@ import './Navbar.sass';
 
 
 import PostJob from './buttons/postJob/PostJob';
-import {RightSiderReferenceArray} from './buttons/rest/RightSiderReferenceArray';
+import { RightSiderReferenceArray } from './buttons/rest/RightSiderReferenceArray';
 import RightSideReferenceComponent from './buttons/rest/RightSideReferenceComponent';
 import SignIn from './buttons/signIn/SignIn';
 

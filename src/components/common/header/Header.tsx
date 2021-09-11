@@ -3,8 +3,8 @@ import './Header.sass';
 
 import Divider from '@material-ui/core/Divider';
 import Navbar from './navbar/Navbar';
-import {SideBar} from './sideBar/SideBar';
-import {Logo} from './logo/LogoComponent';
+import { SideBar } from './sideBar/SideBar';
+import { Logo } from './logo/LogoComponent';
 
 function Header(): JSX.Element {
 

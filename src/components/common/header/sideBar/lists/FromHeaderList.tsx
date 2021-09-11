@@ -8,7 +8,7 @@ const FromHeaderList = (): JSX.Element => {
     return (
         <List className="from-header-to-side-bar">
             {RightSiderReferenceArray.map((item) => {
-                const {href, svg, text} = item;
+                const { href, svg, text } = item;
                 return (
                     <ListItem className="list-row" button key={text} href={href}>
                         {svg && <ListItemIcon className="list-icon">{svg}</ListItemIcon>}

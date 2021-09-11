@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {MenuElements} from './MenuItems';
+import { MenuElements } from './MenuItems';
 
 
 const SocialLinksComponent = ({ href, svg }: MenuElements ) : JSX.Element => {

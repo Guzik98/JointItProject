@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const IconComponent = ({name, icon}: { name: string, icon: JSX.Element }): JSX.Element => {
+const IconComponent = ({ name, icon }: { name: string, icon: JSX.Element }): JSX.Element => {
     return (
         <div className="icon-bar-level2">
             <div className="icon">

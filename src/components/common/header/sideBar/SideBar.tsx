@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/MenuOutlined';
 import ExitButton from './menu/ExitButton';
-import {SocialLinks} from './menu/MenuItems';
+import { SocialLinks } from './menu/MenuItems';
 import SocialLinksComponent from './menu/SocialLinksComponent';
 import LoginComponent from '../buttons/LoginComponent';
 import FromHeaderList from './lists/FromHeaderList';
@@ -136,7 +136,7 @@ export const SideBar = (): JSX.Element => {
                     <LoginComponent/>
 
                     <div className="social-links rwdHideContent">
-                        {SocialLinks.map(({svg, href}) => <SocialLinksComponent svg={svg} href={href} key={href}/>)}
+                        {SocialLinks.map(({ svg, href }) => <SocialLinksComponent svg={svg} href={href} key={href}/>)}
                     </div>
 
                 </Drawer>

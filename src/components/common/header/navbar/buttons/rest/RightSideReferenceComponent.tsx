@@ -1,5 +1,5 @@
 import React from 'react';
-import {HeaderLinkType} from './RightSiderReferenceArray';
+import { HeaderLinkType } from './RightSiderReferenceArray';
 
 const RightSideReferenceComponent = ({ href, text }: HeaderLinkType): JSX.Element => {
     return (

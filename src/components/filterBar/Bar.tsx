@@ -3,15 +3,15 @@ import React from 'react';
 import './Bar.sass';
 import '../../assets/programing-language-icon.svg';
 import IconComponent from './iconBar/IconComponent';
-import {programingLanguageIconArray} from './iconBar/programing-language';
-import {SearchBtn, SearchBtnSmall} from './buttons/Search';
-import {MoreFilters, MoreFiltersSmall} from './buttons/moreFilters';
-import {LocationBtn, LocationSmall} from './buttons/LocationBtn';
+import { programingLanguageIconArray } from './iconBar/programing-language';
+import { SearchBtn, SearchBtnSmall } from './buttons/Search';
+import { MoreFilters, MoreFiltersSmall } from './buttons/moreFilters';
+import { LocationBtn, LocationSmall } from './buttons/LocationBtn';
 import MediaQuery from 'react-responsive';
 import Tech from './buttons/Tech';
 import SortBy from '../mainContainer/offers/buttons/sortBy/SortBy';
 
-const renderIcon = programingLanguageIconArray.map(({name, icon}) =>
+const renderIcon = programingLanguageIconArray.map(({  name, icon  }) =>
     <IconComponent name={name} icon={icon} key={name}/>);
 
 function Bar(): JSX.Element {
