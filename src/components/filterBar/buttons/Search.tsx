@@ -4,18 +4,29 @@ import { Button } from '@material-ui/core';
 
 import './buttons.sass';
 
-export const SearchBtn = (): JSX.Element => {
+
+
+export const SearchBtn = (props: any) : JSX.Element => {
+
+    const onClick = () => {
+        props.open();
+    };
     return (
-        <div className="search">
+        <div className="search" onClick={onClick}>
             <SearchIcon className="search-icon"/>
             Search
         </div>
     );
 };
 
-export const SearchBtnSmall = (): JSX.Element => {
+export const SearchBtnSmall = (props: any): JSX.Element => {
+
+    const handleOpenLongSearch = () => {
+        props.open();
+    };
+
     return (
-        <Button className="small-btn-search">
+        <Button className="small-btn-search" onClick={handleOpenLongSearch}>
             <SearchIcon className="search-icon"/>
         </Button>
     );

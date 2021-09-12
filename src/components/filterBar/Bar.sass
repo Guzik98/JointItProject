@@ -42,47 +42,44 @@
         max-height: 68px
         padding-top: 6px
         padding-left: 5px
-
-        .icon-bar-level2
+        .icon
+          width: 51px
           display: flex
+          flex-direction: column
+          -webkit-box-align: center
+          align-items: center
+          -webkit-box-pack: center
+          justify-content: center
 
-          .icon
-            width: 51px
+          .circle
+            width: 35px
+            height: 35px
             display: flex
-            flex-direction: column
-            -webkit-box-align: center
             align-items: center
-            -webkit-box-pack: center
             justify-content: center
+            box-shadow: none
+            text-transform: none
+            line-height: 35px
+            border-radius: 30px
+            position: relative
+            text-decoration: none
 
-            .circle
-              width: 35px
-              height: 35px
-              display: flex
-              align-items: center
-              justify-content: center
-              box-shadow: none
-              text-transform: none
-              line-height: 35px
-              border-radius: 30px
-              position: relative
-              text-decoration: none
+          .all-icon
+            background: linear-gradient(-90deg, rgb(186, 104, 200), rgb(156, 39, 176))
+            color: white
 
-            .all-icon
-              background: linear-gradient(-90deg, rgb(186, 104, 200), rgb(156, 39, 176))
-              color: white
-
-            .under-icon
-              color: rgb(117, 117, 117)
-              line-height: 8px
-              margin-top: 3px
-              font-size: 11px
+          .under-icon
+            color: rgb(117, 117, 117)
+            line-height: 8px
+            margin-top: 3px
+            font-size: 11px
 
 .long-search-bar
   display: flex
   justify-content: space-between
   padding-right: 15px
   padding-left: 15px
+  padding-top: 14px
 
   .long-search-bar-filter
     width: 60%

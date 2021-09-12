@@ -23,7 +23,7 @@ const PointerIcon = () : JSX.Element => {
 };
 
 
-const OfferComponent = () => {
+const OfferComponent = () : JSX.Element => {
 
     return (
         <div className="offer-border">
