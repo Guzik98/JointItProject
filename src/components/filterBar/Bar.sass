@@ -39,6 +39,7 @@
         flex-grow: 1
         overflow: hidden
         align-items: stretch
+        justify-content: stretch
         max-height: 68px
         padding-top: 6px
         padding-left: 5px
@@ -48,8 +49,10 @@
           flex-direction: column
           -webkit-box-align: center
           align-items: center
-          -webkit-box-pack: center
           justify-content: center
+          -webkit-box-pack: center
+          @media (max-width: 1800px)
+            margin-left: 8px
 
           .circle
             width: 35px
@@ -69,6 +72,8 @@
             color: white
 
           .under-icon
+            display: flex
+            align-items: center
             color: rgb(117, 117, 117)
             line-height: 8px
             margin-top: 3px

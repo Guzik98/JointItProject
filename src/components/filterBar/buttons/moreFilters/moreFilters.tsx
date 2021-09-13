@@ -2,7 +2,7 @@ import React from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
-import './buttons.sass';
+import '../buttons.sass';
 
 
 const IconPath = (): JSX.Element => {
@@ -15,13 +15,16 @@ const IconPath = (): JSX.Element => {
     );
 };
 
-
 export const MoreFilters = (): JSX.Element => {
+
+
     return (
-        <Button size="small" variant="outlined" startIcon={<IconPath/>} endIcon={<ExpandMoreIcon/>}
-                className="mui-btn more-filters">
-            More filters
-        </Button>
+        <div>
+            <Button size="small" variant="outlined" startIcon={<IconPath/>}   endIcon={<ExpandMoreIcon/>}
+                    className="mui-btn more-filters">
+                More filters
+            </Button>
+        </div>
     );
 };
 

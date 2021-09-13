@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AllOffers = () => {
+const AllOffers = () :JSX.Element => {
     return (
         <a className="offers">
             <span>

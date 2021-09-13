@@ -5,7 +5,7 @@ import '../../assets/programing-language-icon.svg';
 import IconComponent from './iconBar/IconComponent';
 import { programingLanguageIconArray } from './iconBar/programing-language';
 import { SearchBtn, SearchBtnSmall } from './buttons/Search';
-import { MoreFilters, MoreFiltersSmall } from './buttons/moreFilters';
+import { MoreFilters, MoreFiltersSmall } from './buttons/moreFilters/moreFilters';
 import { LocationBtn, LocationSmall } from './buttons/LocationBtn';
 import MediaQuery from 'react-responsive';
 import Tech from './buttons/Tech';
@@ -42,7 +42,7 @@ function Bar(): JSX.Element {
                         </div>
                     </MediaQuery>
                     <MediaQuery maxWidth={1024}>
-                        <SearchBtnSmall/>
+                        <SearchBtnSmall open={ handleOpenLongSearch } />
                         <Tech/>
                         <LocationSmall/>
                         <MoreFiltersSmall/>

@@ -47,7 +47,6 @@ export default function LongSearch(): JSX.Element {
         <div className={classes.root} >
             <Autocomplete
                 multiple={true}
-
                 size="medium"
                 options={programingLanguageIconArray}
                 getOptionLabel={(option) => option.name + 'category' }

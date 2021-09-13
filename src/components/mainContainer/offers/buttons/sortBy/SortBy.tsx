@@ -11,6 +11,7 @@ import DropdownIcon from '../../../../../assets/icons/rest/dropdown-icon';
 import './SortBy.sass';
 import MediaQuery from 'react-responsive';
 
+
 const options = ['latest', 'lowest salary', 'highest salary'];
 
 const SortBy = (): JSX.Element => {

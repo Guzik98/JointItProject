@@ -21,12 +21,12 @@ export const SearchBtn = (props: any) : JSX.Element => {
 
 export const SearchBtnSmall = (props: any): JSX.Element => {
 
-    const handleOpenLongSearch = () => {
+    const onClick = () => {
         props.open();
     };
 
     return (
-        <Button className="small-btn-search" onClick={handleOpenLongSearch}>
+        <Button className="small-btn-search" onClick={onClick}>
             <SearchIcon className="search-icon"/>
         </Button>
     );
