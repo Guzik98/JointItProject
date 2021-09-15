@@ -6,9 +6,9 @@ import { Collapse, Divider } from '@material-ui/core';
 import './popOver.sass';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import MediaQuery from 'react-responsive';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-
     city: {
         borderRadius: 32,
         border: '1px solid',
@@ -25,9 +25,7 @@ const useStyles = makeStyles({
         fontSize: 14,
         fontFamily: 'Open Sans,sans-serif',
     },
-
 });
-
 
 type CityType = {
     city : string,

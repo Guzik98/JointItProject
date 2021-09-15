@@ -2,9 +2,7 @@
   display: flex
   flex-direction: column
   flex: 0 0 100%
-  overflow: hidden
   background: rgb(243, 246, 248)
-  z-index: 1
   @media (min-width: 1025px)
     display: flex
     flex: 0 0 60%
@@ -33,7 +31,6 @@
       .left-side-buttons
         display: flex
         flex: 1 1 0
-        overflow: hidden
         height: 36px
         padding: 0 12px
         align-items: center
@@ -71,11 +68,21 @@
     flex: 1 0 0
 
     .offers-content-2
-      overflow: visible
+
 
 
     .offers-content-3
-      height: auto
-      overflow-y: scroll
+      overflow: auto
+      position: absolute
+      top: 28%
+      left: 0
+      right: 50%
+      bottom: 0
+      @media(max-width: 1500.95px)
+        right: 40%
+      @media(max-width: 1024.95px)
+        top: 20%
+        right: 0
+
 
 

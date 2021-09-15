@@ -37,9 +37,6 @@ import { Avatar,  } from '@material-ui/core';
 import { ArrowDropDownCircle } from '@material-ui/icons';
 
 
-
-
-
 export default function LongSearch(): JSX.Element {
     const classes = useStyles();
 

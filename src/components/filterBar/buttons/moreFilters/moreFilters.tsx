@@ -3,6 +3,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
 import '../buttons.sass';
+import { Dialog, } from '@material-ui/core';
+import './moreFilters.sass';
+import MoreFilersPopOut from './moreFilersPopOut';
+
 
 
 const IconPath = (): JSX.Element => {
@@ -15,23 +19,51 @@ const IconPath = (): JSX.Element => {
     );
 };
 
-export const MoreFilters = (): JSX.Element => {
 
+export const MoreFilters = (): JSX.Element => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
-        <div>
-            <Button size="small" variant="outlined" startIcon={<IconPath/>}   endIcon={<ExpandMoreIcon/>}
+        <div >
+            <Button size="small" variant="outlined" startIcon={<IconPath/>} onClick={ handleClickOpen }  endIcon={<ExpandMoreIcon/>}
                     className="mui-btn more-filters">
                 More filters
             </Button>
+            <Dialog  onClose={ handleClose } aria-labelledby="customized-dialog-title" open={open}>
+
+                <MoreFilersPopOut onClick={ handleClose }/>
+
+            </Dialog>
         </div>
     );
 };
 
 export const MoreFiltersSmall = (): JSX.Element => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-        <Button size="small" variant="outlined" className="mui-btn more-filters">
-            More filters
-        </Button>
+        <>
+            <Button size="small" variant="outlined"  onClick={handleClickOpen} className="mui-btn more-filters">
+                More filters
+            </Button>
+
+            <Dialog fullScreen onClose={ handleClose } aria-labelledby="customized-dialog-title" open={open}>
+
+                <MoreFilersPopOut onClick={ handleClose }/>
+            </Dialog>
+        </>
     );
 };

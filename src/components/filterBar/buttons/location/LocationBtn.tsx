@@ -6,9 +6,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import PopOverLocation from './popOver';
 
-import './buttons.sass';
-
-
+import '../buttons.sass';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -101,7 +99,7 @@ export const LocationSmall = () : JSX.Element => {
 
     return (
         <>
-            <Button size="small" variant="outlined"  endIcon = {<ExpandMoreIcon /> } onClick={ handleClick } className="mui-btn">
+            <Button size="small" variant="outlined" onClick={ handleClick } className="mui-btn">
                 Location
             </Button>
 

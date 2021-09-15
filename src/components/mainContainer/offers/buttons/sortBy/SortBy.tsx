@@ -10,11 +10,23 @@ import MenuList from '@material-ui/core/MenuList';
 import DropdownIcon from '../../../../../assets/icons/rest/dropdown-icon';
 import './SortBy.sass';
 import MediaQuery from 'react-responsive';
+// import { makeStyles } from '@material-ui/core/styles';
 
 
 const options = ['latest', 'lowest salary', 'highest salary'];
 
+
+// const useStyles = makeStyles({
+//     root: {
+//
+//     },
+//     li: {
+//         height: 90
+//     },
+// });
+
 const SortBy = (): JSX.Element => {
+    // const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef<HTMLDivElement>(null);
     const [selectedIndex, setSelectedIndex] = React.useState(1);
@@ -55,45 +67,45 @@ const SortBy = (): JSX.Element => {
                     handleToggle();
                 }}
             >
-                        <MediaQuery minWidth={1024}>
-                            <span className="sort-label">
+           <MediaQuery minWidth={1024}>
+           <span className="sort-label" >
                                 Sort by:
-                            </span>
-                        </MediaQuery>
-                                <span className="sort-option">
+           </span>
+           </MediaQuery>
+                <span className="sort-option">
+                    {options[selectedIndex]}
+                </span>
+                <MediaQuery minWidth={1024}>
+                    <DropdownIcon/>
+                </MediaQuery>
+             </Button>
 
-                                {options[selectedIndex]}
-                            </span>
-                        <MediaQuery minWidth={1024}>
-                            <DropdownIcon/>
-                        </MediaQuery>
-                    </Button>
-
-        <Popper className="sort-pop" id={id} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+        <Popper className="sort-pop" id={id} open={open} anchorEl={anchorRef.current} role={undefined} >
             {({ TransitionProps, placement }) => (
                 <Grow
                     {...TransitionProps}
                     style={{
-                        transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                        transformOrigin: placement === 'bottom-end' ? 'center top' : 'center bottom',
                     }}
                 >
 
-                    <Paper>
+                    <Paper className="paper">
                         <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList id="split-button-menu">
+                            <MenuList className="sort-by-list">
                                 {options.map((option, index) => (
                                     <MenuItem
+                                        className="sort-by-label"
                                         key={option}
                                         selected={index === selectedIndex}
                                         onClick={(event) => handleMenuItemClick(event, index)}
                                     >
-                                        {option}
+                                        <span className="sort-by-label">{option} </span>
+
                                     </MenuItem>
                                 ))}
                             </MenuList>
                         </ClickAwayListener>
                     </Paper>
-
                 </Grow>
             )}
         </Popper>

@@ -6,7 +6,7 @@ import IconComponent from './iconBar/IconComponent';
 import { programingLanguageIconArray } from './iconBar/programing-language';
 import { SearchBtn, SearchBtnSmall } from './buttons/Search';
 import { MoreFilters, MoreFiltersSmall } from './buttons/moreFilters/moreFilters';
-import { LocationBtn, LocationSmall } from './buttons/LocationBtn';
+import { LocationBtn, LocationSmall } from './buttons/location/LocationBtn';
 import MediaQuery from 'react-responsive';
 import Tech from './buttons/Tech';
 import SortBy from '../mainContainer/offers/buttons/sortBy/SortBy';
