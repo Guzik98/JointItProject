@@ -2,7 +2,7 @@ import React from 'react';
 
 import './PostJob.sass';
 
-const PostJob = () => {
+const PostJob = (): JSX.Element => {
     return (
         <button className="post-job">
             Post a job

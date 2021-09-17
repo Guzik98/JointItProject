@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import List from '@material-ui/core/List';
 
-const HelpList = () => {
+const HelpList = () : JSX.Element => {
     return (
         <List>
             { SecondItemList.map((item)=>{

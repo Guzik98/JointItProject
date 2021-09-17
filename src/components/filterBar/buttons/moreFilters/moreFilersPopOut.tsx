@@ -82,7 +82,7 @@ const MoreFiltersBtnComponent = ({ name } :ButtonType ) : JSX.Element => {
 };
 
 
-const MoreFilersPopOut = (props: any) => {
+const MoreFilersPopOut = (props: any): JSX.Element => {
     const classesBtn = useStylesBtn();
 
     const [value, setValue] = React.useState<number[]>([0, 100000]);

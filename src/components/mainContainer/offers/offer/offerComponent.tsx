@@ -1,6 +1,9 @@
 import React from 'react';
 import  './offerComponent.sass';
 import MediaQuery from 'react-responsive';
+import { useSettings } from '../../../../Settings';
+
+
 
 const CompanyIcon = (): JSX.Element => {
     return (
@@ -24,6 +27,8 @@ const PointerIcon = () : JSX.Element => {
 
 
 const OfferComponent = () : JSX.Element => {
+    const { tech, city, toSalary, seniority } = useSettings();
+    console.log( tech + city + toSalary, seniority);
 
     return (
         <div className="offer-border">
@@ -41,12 +46,12 @@ const OfferComponent = () : JSX.Element => {
                             <div className="position-info">
                                 <div className="position">
                                     <div className="position-text">
-                                        Front End Develeoper
+
+                                         Front End Develeoper
                                     </div>
                                 </div>
                             </div>
                             <div className="salary-info">
-                                {/* eslint-disable-next-line react/jsx-no-undef */}
                                 <MediaQuery minWidth={1024}>
                                     <div className="salary-text">
                                         5 500 - 9000 PLN
@@ -67,7 +72,7 @@ const OfferComponent = () : JSX.Element => {
                                     <MediaQuery minWidth={1024}>
                                         <PointerIcon/>
                                         <span className="where">
-                                            Poznan
+                                            {city}
                                         </span>
 
                                         <span className="type">
@@ -85,7 +90,7 @@ const OfferComponent = () : JSX.Element => {
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1024}>
                                     <span className="skills">
-                                    Javascript
+                                     {tech}
                                     </span>
                                         <span className="skills">
                                         Kolin

@@ -2,11 +2,13 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ClearIcon from '@material-ui/icons/Clear';
 import Typography from '@material-ui/core/Typography';
-import { Collapse, Divider } from '@material-ui/core';
+
 import './popOver.sass';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import MediaQuery from 'react-responsive';
 import { makeStyles } from '@material-ui/core/styles';
+import { Collapse, Divider } from '@material-ui/core';
+import CityBtnComponent from './CityBtnComponent';
 
 const useStyles = makeStyles({
     city: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles({
     },
     label: {
         textTransform: 'none',
+        textDecoration: 'none',
         fontWeight: 500,
         fontSize: 14,
         fontFamily: 'Open Sans,sans-serif',
@@ -64,21 +67,6 @@ const OtherPolandCities = [
     { city: 'Toruń' },
     { city: 'Zielona Góra' }
 ];
-
-const CityComponent = ({ city }: CityType) : JSX.Element => {
-    const classes = useStyles();
-    return (
-        <Button size="small"
-                variant="outlined"
-                classes = {{
-                    root: classes.city,
-                    label: classes.label
-                }}>
-            {city}
-        </Button>
-    );
-};
-
 
 
 const PopOverLocation = (props : any) :JSX.Element => {
@@ -141,7 +129,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                                 Top Poland
                         </a>
                         <div className="city-buttons">
-                            { cityPoland.map(({ city }: CityType) => <CityComponent city={city} key={city}/>) }
+                            { cityPoland.map(({ city }: CityType) => <CityBtnComponent city={city} key={city}/>) }
                         </div>
                     </div>
                     <div className="city-container">
@@ -149,7 +137,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                             Top World
                         </a>
                         <div className="city-buttons">
-                            { cityWorld.map(({ city } : CityType) => <CityComponent city={city} key={city}/>) }
+                            { cityWorld.map(({ city } : CityType) =>  <CityBtnComponent city={city} key={city}/>)  }
                         </div>
                     </div>
                     <div className="city-container">
@@ -161,11 +149,11 @@ const PopOverLocation = (props : any) :JSX.Element => {
                         <div className="city-buttons"  >
                             <Collapse in={open}>
                                 { OtherPolandCities.map(({ city }: CityType) =>
-                                    <CityComponent city={city} key={city}/>) }
+                                    <CityBtnComponent city={city} key={city}/>) }
                             </Collapse>
                         </div>
                     </div>
-                    <Divider className="divider" variant='fullWidth'/>
+                    <Divider className="divider-pop" variant='fullWidth'/>
                     <div>
                         <Button size="small"
                                 variant="outlined"

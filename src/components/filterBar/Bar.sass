@@ -44,7 +44,8 @@
         padding-top: 6px
         padding-left: 5px
         .icon
-          width: 51px
+          min-width: 51px
+          max-width: 51px
           display: flex
           flex-direction: column
           -webkit-box-align: center
@@ -53,7 +54,8 @@
           -webkit-box-pack: center
           @media (max-width: 1800px)
             margin-left: 8px
-
+          &:active
+            background-color: red
           .circle
             width: 35px
             height: 35px
@@ -73,7 +75,8 @@
 
           .under-icon
             display: flex
-            align-items: center
+            text-align: center
+            justify-content: center
             color: rgb(117, 117, 117)
             line-height: 8px
             margin-top: 3px

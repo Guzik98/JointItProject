@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const AllIcon = () => {
+const AllIcon = () : JSX.Element => {
     return (
         <div className="icon">
             <div className="circle all-icon">

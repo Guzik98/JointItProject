@@ -3,7 +3,7 @@ import React from 'react';
 import './Bar.sass';
 import '../../assets/programing-language-icon.svg';
 import IconComponent from './iconBar/IconComponent';
-import { programingLanguageIconArray } from './iconBar/programing-language';
+import { IconType, programingLanguageIconArray } from './iconBar/programing-language';
 import { SearchBtn, SearchBtnSmall } from './buttons/Search';
 import { MoreFilters, MoreFiltersSmall } from './buttons/moreFilters/moreFilters';
 import { LocationBtn, LocationSmall } from './buttons/location/LocationBtn';
@@ -13,8 +13,8 @@ import SortBy from '../mainContainer/offers/buttons/sortBy/SortBy';
 import { ClickAwayListener } from '@material-ui/core';
 import LongSearch from './common/LongSearch';
 
-const renderIcon = programingLanguageIconArray.map(({  name, icon  }) =>
-    <IconComponent name={name} icon={icon} key={name}/>);
+const renderIcon = programingLanguageIconArray.map(({  name, icon } : IconType) =>
+    <IconComponent name={name} icon={icon}  key={name}/>);
 
 function Bar(): JSX.Element {
 

@@ -7,8 +7,10 @@ import Popover from '@material-ui/core/Popover';
 import PopOverLocation from './popOver';
 
 import '../buttons.sass';
+import { useSettings } from '../../../../Settings';
 
-const useStyles = makeStyles(() =>
+
+export const useStyles = makeStyles(() =>
     createStyles({
         root: {
             '& .MuiPopover-paper': {
@@ -35,15 +37,46 @@ const useStyles = makeStyles(() =>
             },
 
         },
+        choseCity: {
+            borderRadius: '32px',
+            textTransform: 'none',
+            fontSize: '14px',
+            color: 'rgb(119, 119, 119)',
+            background: 'rgb(255, 255, 255)',
+            minWidth: '160px',
+            justifyContent: 'space-between',
+            marginTop: 6,
+            padding: '0px 16px 0px 16px',
+            height: 36
+        },
+        chosenCity: {
+            borderRadius: '32px',
+            textTransform: 'none',
+            fontSize: '14px',
+            color: 'rgb(255, 64, 129)',
+            background: 'rgba(255, 64, 129, 0.08)',
+            borderColor: 'rgb(255, 64, 129)',
+            minWidth: '160px',
+            justifyContent: 'space-between',
+            marginTop: 6,
+            padding: '0px 16px 0px 16px',
+            height: 36
+        },
+        label: {
+            textTransform: 'none',
+            fontWeight: 500,
+            fontSize: 14,
+            fontFamily: 'Open Sans,sans-serif',
+        },
     }),
 );
 
 
  export  const LocationBtn = (): JSX.Element => {
+     const { city } = useSettings();
      const classes = useStyles();
 
      const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-
 
      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
          setAnchorEl(event.currentTarget);
@@ -59,9 +92,26 @@ const useStyles = makeStyles(() =>
 
      return (
         <>
-            <Button size="small" variant="outlined"  endIcon = {<ExpandMoreIcon /> } onClick={ handleClick } className="mui-btn">
-                Location
-            </Button>
+            {
+                (city == 'all') ? ( <Button size="small"
+                                variant="outlined"
+                                endIcon = {<ExpandMoreIcon /> }
+                                onClick={ handleClick }
+                                classes = {{ root: classes.choseCity }}
+                             >
+                                Location
+                                </Button>
+                    ) : ( <Button size="small"
+                                  variant="outlined"
+                                  endIcon = {<ExpandMoreIcon /> }
+                                  onClick={ handleClick }
+                                  classes = {{ root: classes.chosenCity }}
+                        >
+                        {city}
+                        </Button>)
+            }
+
+
             <Popover
                 className={classes.root}
                 id={id}
@@ -114,6 +164,7 @@ export const LocationSmall = () : JSX.Element => {
                     horizontal: 'left',
                 }}
             >
+
                 <PopOverLocation click={ handleClose }/>
             </Popover>
         </>

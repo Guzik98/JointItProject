@@ -1,5 +1,5 @@
 import React from 'react';
-import RightSiderReferenceArray from '../../navbar/buttons/rest/RightSiderReferenceArray';
+import { RightSiderReferenceArray } from '../../navbar/buttons/rest/RightSiderReferenceArray';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import List from '@material-ui/core/List';

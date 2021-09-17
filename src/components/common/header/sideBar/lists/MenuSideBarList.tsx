@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import List from '@material-ui/core/List';
 
-const MenuSideBarList = () => {
+const MenuSideBarList = () : JSX.Element => {
     return (
         <List>
             { FirstItemList.map((item)=>{

@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import './Map.sass';
 
 function Map(): JSX.Element{

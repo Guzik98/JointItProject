@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -67,48 +66,38 @@ const SortBy = (): JSX.Element => {
                     handleToggle();
                 }}
             >
-           <MediaQuery minWidth={1024}>
+                <MediaQuery minWidth={1024}>
            <span className="sort-label" >
                                 Sort by:
            </span>
-           </MediaQuery>
+                </MediaQuery>
                 <span className="sort-option">
                     {options[selectedIndex]}
                 </span>
                 <MediaQuery minWidth={1024}>
                     <DropdownIcon/>
                 </MediaQuery>
-             </Button>
+            </Button>
 
-        <Popper className="sort-pop" id={id} open={open} anchorEl={anchorRef.current} role={undefined} >
-            {({ TransitionProps, placement }) => (
-                <Grow
-                    {...TransitionProps}
-                    style={{
-                        transformOrigin: placement === 'bottom-end' ? 'center top' : 'center bottom',
-                    }}
-                >
+            <Popper  className="sort-pop" id={id} open={open} anchorEl={anchorRef.current} role={undefined} >
+                        <Paper className="paper">
+                            <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList className="sort-by-list">
+                                    {options.map((option, index) => (
+                                        <MenuItem
+                                            className="sort-by-label"
+                                            key={option}
+                                            selected={index === selectedIndex}
+                                            onClick={(event) => handleMenuItemClick(event, index)}
+                                        >
+                                            <span className="sort-by-label">{option} </span>
 
-                    <Paper className="paper">
-                        <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList className="sort-by-list">
-                                {options.map((option, index) => (
-                                    <MenuItem
-                                        className="sort-by-label"
-                                        key={option}
-                                        selected={index === selectedIndex}
-                                        onClick={(event) => handleMenuItemClick(event, index)}
-                                    >
-                                        <span className="sort-by-label">{option} </span>
-
-                                    </MenuItem>
-                                ))}
-                            </MenuList>
-                        </ClickAwayListener>
-                    </Paper>
-                </Grow>
-            )}
-        </Popper>
+                                        </MenuItem>
+                                    ))}
+                                </MenuList>
+                            </ClickAwayListener>
+                        </Paper>
+            </Popper>
         </div>
     );
 };
