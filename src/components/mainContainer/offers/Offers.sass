@@ -28,6 +28,11 @@
         height: 40px
         margin-bottom: 8px
 
+      .offers-menu-left-side
+        display: flex
+        justify-content: flex-end
+        width: 220px
+
       .left-side-buttons
         display: flex
         flex: 1 1 0
@@ -45,7 +50,7 @@
           text-decoration: none
           max-width: 20%
           min-width: 120px
-          height: 100%
+          height: inherit
           color: rgb(119, 119, 119)
           font-weight: 600
           background-color: white
@@ -62,12 +67,23 @@
             border-bottom-right-radius: -120%
             border: 1px solid rgb(243, 246, 248)
 
+.tab-active
+  display: flex
+  height: inherit
+  cursor: pointer
+  background-color: rgb(243, 246, 248) !important
+  border-top-left-radius: 32px
+  border-top-right-radius: 32px
+  border-bottom-right-radius: -120%
+  border: 1px solid rgb(243, 246, 248)
+
   .offersContent
     display: flex
     flex-direction: column
     flex: 1 0 0
 
     .offers-content-2
+
     .offers-content-3
 
 

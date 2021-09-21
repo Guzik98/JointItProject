@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
-import { SettingsContext } from '../../../../Settings';
+import { useSettings } from '../../../../Settings';
 
 const useStyles = makeStyles({
     city: {
@@ -14,32 +14,40 @@ const useStyles = makeStyles({
         paddingRight: 16,
         margin: 6,
         height: 36,
-        '&active': {
-            backgroundColor: 'red'
-        },
     },
     label: {
+
         textTransform: 'none',
         fontWeight: 500,
         fontSize: 14,
         fontFamily: 'Open Sans,sans-serif',
         textDecoration: 'none!important'
     },
+
 });
 
-const CityBtnComponent = ({ city  } : { city : string }) : JSX.Element => {
-    const settingsContext = useContext(SettingsContext);
-    const classes = useStyles();
+const CityBtnComponent = (props: any): JSX.Element => {
+    const classes = useStyles ();
+    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings ();
 
+    const handleClose = () => {
+        props.click ();
+    };
     return (
-        <NavLink  to={`/${city}`} onClick={() => settingsContext?.setCity(`${city}`)} activeClassName="active" >
-            <Button  size="small"
+        <NavLink
+            to={`/Offers/${props.city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
+            onClick={() => setCity (`${props.city}`)}
+            activeClassName="active"
+        >
+            <Button size="small"
                     variant="outlined"
-                    classes = {{
+                    onClick={handleClose}
+                    classes={{
                         root: classes.city,
                         label: classes.label,
-                    }}>
-                {city}
+                    }}
+            >
+                {props.city}
             </Button>
         </NavLink>
     );

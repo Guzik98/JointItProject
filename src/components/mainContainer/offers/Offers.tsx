@@ -17,7 +17,7 @@ function Offers(): JSX.Element {
                         <OffersWithSalary/>
                         <AllOffers/>
                     </div>
-                    <div className="offers-offers-menu-left-side">
+                    <div className="offers-menu-left-side">
                         <MediaQuery minWidth={1024}>
                             <SortBy/>
                         </MediaQuery>

@@ -1,47 +1,49 @@
-.sort-border
+.sort-by-label
+  margin-right: 8px
+  color: rgb(153, 161, 171)
+  text-transform: none
+  font-size: 14px
+  font-weight: 600
+
+.sort-by-option
+  text-transform: none
+  font-size: 14px
+  font-weight: 600
+  font-family: Open Sans, sans-serif
+  @media(max-width: 1024.95px)
+    font-weight: 500
+    font-size: 12px
+
+.sort-by-pop-out-body
+  display: flex
+  flex-direction: column
+  @media(max-width: 1024.95px)
+    width: 100%
+    align-items: center
+
+  .sort-by-link
+    @media(max-width: 1025px)
+      width: 100%
+
+.sort-by-title
+  width: 100%
   display: flex
   align-items: center
-  .sort-button
-    @media(max-width: 1024.95px)
-      border: 1px solid #E4E8F0!important
-      border-radius: 32px
-      height: 34px
-      padding: 1px 16px 1px 16px
-      margin: 10px 5px 10px 0px
+  justify-content: space-between
+  font-size: 18px
+  color: rgb(119, 119, 119)
 
-  .sort-label
-      color: rgb(153, 161, 171)
-      font-size: 12px
-      font-weight: 600
-      padding-right: 8px
-      text-transform: none
-  .sort-option
-      text-transform: lowercase
-      font-size: 12px
-      font-weight: 600
-      color: rgb(119, 119, 119)
-      padding-right: 6px
-      z-index: 3
-  .icon
-      fill: black
+.numer-border
+  font-size: 14px
+  width: 24px
+  height: 24px
+  border-radius: 12px
+  text-align: center
+  line-height: 24px
+  background: rgb(255, 64, 129)
+  color: rgb(255, 255, 255)
+  margin-left: 0px
+  margin-right: 5px
 
-.sort-pop
-  @media( max-width: 1024.95px)
-    position: absolute
-    min-width: 100%
-    min-height: 100%
-  .paper
-    opacity: unset!important
-    visibility: unset!important
-    .sort-by-list
-      @media( max-width: 1024.95px)
-        min-height: 100%
-    .sort-by-label
-      @media( max-width: 1024.95px)
-        width: 100%
-        display: flex!important
-        justify-content: center!important
-        text-transform: none
-        font-weight: 600
-        font-size: 14px
-        color: rgb(119, 119, 119)
+.icon-pad
+  margin-right: 5px

@@ -1,8 +1,7 @@
 import React from 'react';
-import  './offerComponent.sass';
+import './offerComponent.sass';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
-
 
 
 const CompanyIcon = (): JSX.Element => {
@@ -27,8 +26,7 @@ const PointerIcon = () : JSX.Element => {
 
 
 const OfferComponent = () : JSX.Element => {
-    const { tech, city, toSalary, seniority } = useSettings();
-    console.log( tech + city + toSalary, seniority);
+    const { tech, city } = useSettings ();
 
     return (
         <div className="offer-border">
@@ -112,13 +110,11 @@ const OfferComponent = () : JSX.Element => {
                                     </span>
                                     <PointerIcon/>
                                 </MediaQuery>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

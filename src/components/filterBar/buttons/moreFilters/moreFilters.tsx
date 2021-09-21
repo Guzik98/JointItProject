@@ -1,5 +1,4 @@
-import React from 'react';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import '../buttons.sass';
 import { Dialog, } from '@material-ui/core';
@@ -7,6 +6,9 @@ import './moreFilters.sass';
 import MoreFilersPopOut from './moreFilersPopOut';
 
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import MediaQuery from 'react-responsive';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { useSettings } from '../../../../Settings';
 
 const IconPath = (): JSX.Element => {
     return (
@@ -56,9 +58,14 @@ const useStyles = makeStyles(() =>
             marginTop: 6,
             marginLeft: 10,
             padding: '0px 16px 0px 16px',
-            height: 36
+            height: 36,
+            '@media (max-width: 1024px)': {
+                minWidth: 'fit-content',
+                margin: '10px 5px 10px 0px',
+                borderColor: 'rgb(228, 232, 240)',
+            }
         },
-        chosenCity: {
+        moreFiltersBtnChosen: {
             borderRadius: '32px',
             textTransform: 'none',
             fontSize: '14px',
@@ -70,7 +77,11 @@ const useStyles = makeStyles(() =>
             marginTop: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
+            '@media (max-width: 1024px)': {
+                minWidth: 'fit-content',
+                margin: '10px 5px 10px 0px'
+            }
 
         },
         label: {
@@ -79,67 +90,73 @@ const useStyles = makeStyles(() =>
             fontSize: 14,
             fontFamily: 'Open Sans,sans-serif',
             whiteSpace: 'nowrap',
+            '@media (max-width: 1024px)': {
+                fontSize: 12
+            }
         },
     }),
 );
 
 
 export const MoreFilters = (): JSX.Element => {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const classes = useStyles ();
+    const [open, setOpen] = React.useState (false);
+    let [counter, setCounter] = useState (0);
+    const { fromSalary, toSalary, employmentType, seniority } = useSettings ();
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setOpen (true);
     };
+
     const handleClose = () => {
-        setOpen(false);
+        setOpen (false);
+    };
+
+    const increment = () => {
+        setCounter (counter + 1);
+    };
+
+    const decrement = () => {
+        setCounter (counter - 1);
+    };
+    const clearCounter = () => {
+        setCounter (0);
     };
 
     return (
-        <div >
-            <Button size="small"
-                    variant="outlined"
-                    startIcon={<IconPath/>}
-                    onClick={ handleClickOpen }
-                    endIcon={<ExpandMoreIcon/>}
-                    classes={{ root: classes.moreFiltersBtn, label: classes.label }}
-            >
-                More filters
-            </Button>
-            <Dialog  onClose={ handleClose } aria-labelledby="customized-dialog-title" open={open}>
-                <MoreFilersPopOut onClick={ handleClose }/>
-            </Dialog>
+        <div>
+            <MediaQuery maxWidth={1024}>
+                <Button size="small"
+                        variant="outlined"
+                        onClick={handleClickOpen}
+                        classes={(fromSalary != 0 || toSalary != 100000 || employmentType != 'All' || seniority != 'All')
+                            ? { root: classes.moreFiltersBtnChosen, label: classes.label }
+                            : { root: classes.moreFiltersBtn, label: classes.label }}
+                >
+                    {counter > 0 ? <span className="numer-border"> {counter} </span> : null} More filters
+                </Button>
+                <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                    <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
+                                      onClick={handleClose}/>
+                </Dialog>
+            </MediaQuery>
+            <MediaQuery minWidth={1024}>
+                <Button size="small"
+                        variant="outlined"
+                        onClick={handleClickOpen}
+                        endIcon={open ? <ExpandLess/> : <ExpandMore/>}
+                        classes={(fromSalary != 0 || toSalary != 100000 || employmentType != 'All' || seniority != 'All')
+                            ? { root: classes.moreFiltersBtnChosen, label: classes.label }
+                            : { root: classes.moreFiltersBtn, label: classes.label }}
+                >
+                    {counter > 0 ? <span className="numer-border"> {counter} </span> :
+                        <span className="icon-pad"><IconPath/> </span>} More filters
+                </Button>
+                <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                    <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
+                                      onClick={handleClose}/>
+                </Dialog>
+            </MediaQuery>
         </div>
-    );
-};
-
-export const MoreFiltersSmall = (): JSX.Element => {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-    return (
-        <>
-            <Button size="small"
-                    variant="outlined"
-                    onClick={handleClickOpen}
-                    classes={{
-                        root: classes.moreFiltersBtn,
-                        label: classes.label
-                    }}
-            >
-                More filters
-            </Button>
-
-            <Dialog fullScreen onClose={ handleClose } aria-labelledby="customized-dialog-title" open={open}>
-
-                <MoreFilersPopOut onClick={ handleClose }/>
-            </Dialog>
-        </>
     );
 };

@@ -1,15 +1,17 @@
-import { useState, FC, createContext, useContext } from 'react';
+import { createContext, FC, useContext, useState } from 'react';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
 const useProviderSettings = () => {
 
-    const [city,  setCity ] = useState<string>('all');
-    const [tech,  setTech ] = useState<string>('all');
-    const [seniority, setSeniority ] = useState<string>('all');
-    const [fromSalary, setFromSalary ] = useState<number>(0 );
-    const [toSalary, setToSalary ] = useState<number>(100000 );
-    const [employmentType, setEmploymentType ] = useState<string>('all');
+    const [city, setCity] = useState<string> ('all');
+    const [tech, setTech] = useState<string> ('all');
+    const [seniority, setSeniority] = useState<string> ('All');
+    const [fromSalary, setFromSalary] = useState<number> (0);
+    const [toSalary, setToSalary] = useState<number> (100000);
+    const [employmentType, setEmploymentType] = useState<string> ('All');
+    const [sortBy, setSortBy] = useState<string> ('Latest');
+    const [withSalary, setWithSalary] = useState<string> ('all-offers');
 
     return {
         city,
@@ -23,7 +25,11 @@ const useProviderSettings = () => {
         toSalary,
         setToSalary,
         employmentType,
-        setEmploymentType
+        setEmploymentType,
+        sortBy,
+        setSortBy,
+        withSalary,
+        setWithSalary
     };
 };
 

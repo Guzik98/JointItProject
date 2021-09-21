@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DialogActions, DialogContent, Divider, IconButton, Slider } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
+import { useSettings } from '../../../../Settings';
+import { Link, NavLink } from 'react-router-dom';
 
-const useStylesBtn = makeStyles({
+const useStylesBtn = makeStyles ({
     root: {
         borderRadius: '32px',
         borderColor: 'rgb(228, 232, 240)',
@@ -38,6 +40,10 @@ const useStylesBtn = makeStyles({
         fontWeight: 600,
         height: 46,
         color: 'rgb(255, 255, 255)',
+        '&:hover': {
+            background: 'rgb(178, 44, 90)',
+            borderColor: 'rgb(178, 44, 90)',
+        },
     },
     divider: {
         margin: '24px 0px 16px'
@@ -60,48 +66,172 @@ const employmentBtn  = [
     { name: 'Mandate Contract' }
 ];
 
-const seniorityBtn  = [
+const seniorityBtn = [
     { name: 'All' },
     { name: 'Junior' },
     { name: 'Mid' },
     { name: 'Senior' }
 ];
 
-const MoreFiltersBtnComponent = ({ name } :ButtonType ) : JSX.Element => {
-    const classes = useStylesBtn();
+const EmploymentBtnComponent = (props: any): JSX.Element => {
+    const classes = useStylesBtn ();
+    const {
+        city,
+        tech,
+        seniority,
+        setEmploymentType,
+        fromSalary,
+        toSalary,
+        employmentType,
+        sortBy,
+        withSalary
+    } = useSettings ();
+
+    const increment = () => {
+        props.increment ();
+    };
+
+    const decrement = () => {
+        props.decrement ();
+    };
+
+    const onClick = () => {
+        if (employmentType == 'All' && props.name !== 'All') {
+            increment ();
+        }
+        if (props.name == 'All' && employmentType !== 'All') {
+            decrement ();
+        }
+        setEmploymentType (`${props.name}`);
+    };
+
     return (
-        <Button size="small"
-                variant="outlined"
-                classes = {{
-                    root: classes.root,
-                    label: classes.label
-                }}>
-            {name}
-        </Button>
+        <NavLink
+            to={`/Offers/${city}/${tech}/${seniority}/${props.name}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}>
+            <Button size="small"
+                    variant="outlined"
+                    onClick={onClick}
+                    classes={{
+                        root: classes.root,
+                        label: classes.label
+                    }}
+            >
+                {props.name}
+            </Button>
+        </NavLink>
     );
 };
 
+const SeniorityBtnComponent = (props: any): JSX.Element => {
+    const classes = useStylesBtn ();
+    const {
+        city,
+        tech,
+        setSeniority,
+        employmentType,
+        fromSalary,
+        toSalary,
+        seniority,
+        sortBy,
+        withSalary
+    } = useSettings ();
 
-const MoreFilersPopOut = (props: any): JSX.Element => {
-    const classesBtn = useStylesBtn();
-
-    const [value, setValue] = React.useState<number[]>([0, 100000]);
-
-    const handleChange = (event: any, newValue: number | number[]) => {
-        setValue(newValue as number[]);
+    const increment = () => {
+        props.increment ();
     };
 
-    function numberWithSpaces(x : number) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    }
-    
+    const decrement = () => {
+        props.decrement ();
+    };
+
     const onClick = () => {
-        props.onClick();
+        if (seniority == 'All' && props.name !== 'All') {
+            increment ();
+        }
+        if (props.name == 'All' && seniority !== 'All') {
+            decrement ();
+        }
+        setSeniority (`${props.name}`);
+    };
+
+    return (
+        <NavLink
+            to={`/Offers/${city}/${tech}/${props.name}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}>
+            <Button size="small"
+                    onClick={onClick}
+                    variant="outlined"
+                    classes={{
+                        root: classes.root,
+                        label: classes.label
+                    }}>
+                {props.name}
+            </Button>
+        </NavLink>
+    );
+};
+
+const MoreFilersPopOut = (props: any): JSX.Element => {
+    const classesBtn = useStylesBtn ();
+    const {
+        city,
+        tech,
+        seniority,
+        employmentType,
+        setEmploymentType,
+        setToSalary,
+        setFromSalary,
+        toSalary,
+        fromSalary,
+        setSeniority,
+        sortBy,
+        withSalary
+    } = useSettings ();
+    const [value, setValue] = React.useState<number[]> ([fromSalary, toSalary]);
+
+    const handleChange = (event: any, newValue: number | number[]) => {
+        setValue (newValue as number[]);
+    };
+
+    function numberWithSpaces (x: number) {
+        return x.toString ().replace (/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+
+    const increment = () => {
+        props.increment ();
+    };
+    const decrement = () => {
+        props.decrement ();
+    };
+    const clearCounter = () => {
+        props.clearCounter ();
+    };
+    const onClick = () => {
+        props.onClick ();
+    };
+    const submit = () => {
+        if ((value[0] != fromSalary || value[1] != toSalary) && (toSalary == 100000 && fromSalary == 0)) {
+            increment ();
+        }
+        setFromSalary (value[0]);
+        setToSalary (value[1]);
+        if ((value[0] == 0 && value[1] == 100000) && (toSalary !== 100000 && fromSalary !== 0)) {
+            decrement ();
+        }
+        onClick ();
+    };
+
+    const clear = () => {
+        setEmploymentType ('All');
+        setToSalary (100000);
+        setFromSalary (0);
+        setSeniority ('All');
+        clearCounter ();
+        onClick ();
     };
 
     return (
         <>
-            <div  className="dialog-title">
+            <div className="dialog-title">
                 <span>More filters</span>
                 <IconButton aria-label="close" onClick={onClick}>
                     <CloseIcon/>
@@ -127,7 +257,6 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                             </div>
                         </div>
                         <div className="slider-output-between">
-                            —
                         </div>
                         <div className="slider-output">
                             <div className="slider-text">Max. amount</div>
@@ -144,33 +273,43 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                     Employment Type
                 </div>
                 <div>
-                    { employmentBtn.map(({ name }: ButtonType) => <MoreFiltersBtnComponent name={name} key={name}/>) }
+                    {employmentBtn.map (({ name }: ButtonType) => <EmploymentBtnComponent increment={increment}
+                                                                                          decrement={decrement}
+                                                                                          name={name} key={name}/>)}
                 </div>
-                <Divider classes={{ root: classesBtn.divider }} />
+                <Divider classes={{ root: classesBtn.divider }}/>
                 <div className="label-title">
                     Seniority
                 </div>
                 <div>
-                    { seniorityBtn.map(({ name }: ButtonType) => <MoreFiltersBtnComponent name={name} key={name}/>) }
+                    {seniorityBtn.map (({ name }: ButtonType) => <SeniorityBtnComponent increment={increment}
+                                                                                        decrement={decrement}
+                                                                                        name={name} key={name}/>)}
                 </div>
             </DialogContent>
             <DialogActions classes={{ root: classesBtn.headerFooter }}>
-                <Button size="small"
-                        variant="outlined"
-                        classes = {{
-                            root: classesBtn.clearFilter,
-                            label: classesBtn.label
-                        }}>
-                    Clear filters
-                </Button>
-
-                <Button size="small"
-                        variant="outlined"
-                        classes = {{
-                            root: classesBtn.showOffers,
-                        }}>
-                    Show offers
-                </Button>
+                <Link to={`/Offers/${city}/${tech}/All/All/0/100000/${sortBy}/${withSalary}`}>
+                    <Button size="small"
+                            variant="outlined"
+                            onClick={clear}
+                            classes={{
+                                root: classesBtn.clearFilter,
+                                label: classesBtn.label
+                            }}>
+                        Clear filters
+                    </Button>
+                </Link>
+                <Link
+                    to={`/Offers/${city}/${tech}/${seniority}/${employmentType}/${value[0]}/${value[1]}/${sortBy}/${withSalary}`}>
+                    <Button size="small"
+                            variant="outlined"
+                            onClick={submit}
+                            classes={{
+                                root: classesBtn.showOffers,
+                            }}>
+                        Show offers
+                    </Button>
+                </Link>
             </DialogActions>
         </>
     );

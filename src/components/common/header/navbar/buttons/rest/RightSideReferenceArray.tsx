@@ -5,31 +5,26 @@ import Matchmaking from '../../../../../../assets/icons/header-icons/Matchmaking
 
 export type HeaderLinkType = {
     text: string,
-    href: string
     svg?: JSX.Element
 };
 
-export const RightSiderReferenceArray = [
+export const RightSideReferenceArray = [
     {
         text: 'Offers',
-        href: 'http://localhost:3000',
-        svg: <Offers/>
+        svg: <Offers/>,
     },
     {
         text: 'Brand Stories',
-        href: 'https://justjoin.it/brands',
         svg: <BrandStories/>
     },
     {
         text: 'Geek',
-        href: 'https://geek.justjoin.it',
         svg: <Geek/>
     },
     {
         text: 'Matchmaking',
-        href: 'https://geek.justjoin.it',
         svg: <Matchmaking/>
     }
 ];
 
-export default RightSiderReferenceArray;
+export default RightSideReferenceArray;

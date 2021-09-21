@@ -1,13 +1,10 @@
 import React from 'react';
-
 import './Navbar.sass';
 
-
 import PostJob from './buttons/postJob/PostJob';
-import { RightSiderReferenceArray } from './buttons/rest/RightSiderReferenceArray';
+import { RightSideReferenceArray } from './buttons/rest/RightSideReferenceArray';
 import RightSideReferenceComponent from './buttons/rest/RightSideReferenceComponent';
 import SignIn from './buttons/signIn/SignIn';
-
 
 const Navbar = (): JSX.Element => {
     return (
@@ -19,8 +16,8 @@ const Navbar = (): JSX.Element => {
             </div>
 
             <div className="navbar-right-side">
-                {RightSiderReferenceArray.map(({ text, href }) => <RightSideReferenceComponent text={text} href={href}
-                                                                                             key={text}/>)}
+                {RightSideReferenceArray.map (({ text }) =>
+                    <RightSideReferenceComponent text={text} key={text}/>)}
                 <a className="navbar-right-side-item rwdDisplay">
                     <PostJob/>
                 </a>

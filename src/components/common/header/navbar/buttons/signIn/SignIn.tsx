@@ -21,7 +21,7 @@ function SignIn(): JSX.Element {
     const id = open ? 'simple-popover' : undefined;
 
         return (
-            <div>
+            <>
                 <button className="navbar-right-side-item sign-in" aria-describedby={id} color="primary"
                         onClick={handleClick}>
             <span className="sign-in-text">
@@ -43,9 +43,9 @@ function SignIn(): JSX.Element {
                         horizontal: 'right',
                     }}
                 >
-                   <LoginComponent/>
+                    <LoginComponent/>
                 </Popover>
-            </div>
+            </>
         );
 }
 

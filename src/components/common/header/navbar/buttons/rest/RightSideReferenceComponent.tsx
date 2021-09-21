@@ -1,16 +1,20 @@
 import React from 'react';
-import { HeaderLinkType } from './RightSiderReferenceArray';
+import { NavLink } from 'react-router-dom';
+import { HeaderLinkType } from './RightSideReferenceArray';
+import { useSettings } from '../../../../../../Settings';
 
-const RightSideReferenceComponent = ({ href, text }: HeaderLinkType): JSX.Element => {
+const RightSideReferenceComponent = ({ text }: HeaderLinkType): JSX.Element => {
+    const { city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings ();
     return (
-        <a className="navbar-right-side-item rwdDisplay"
-           aria-disabled="false" rel="noreferrer"
-           href={href} target="_blank"
-        >
-            <span className="navbar-right-side-item-label ">
+        <NavLink className="navbar-right-side-item rwdDisplay"
+                 aria-disabled="false" rel="noreferrer"
+                 to={`/${text}/${city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
+                 target="_blank" activeClassName="active">
+            <span className="navbar-right-side-item-label">
                 {text}
             </span>
-        </a>
+        </NavLink>
+
     );
 };
 

@@ -29,6 +29,7 @@ const NestedList = (): JSX.Element => {
     const handleClick = () => {
         setOpen(!open);
     };
+
     return (
         <List
             component="nav"

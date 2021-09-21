@@ -1,104 +1,122 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
-import DropdownIcon from '../../../../../assets/icons/rest/dropdown-icon';
 import './SortBy.sass';
 import MediaQuery from 'react-responsive';
-// import { makeStyles } from '@material-ui/core/styles';
+import { useSettings } from '../../../../../Settings';
+import Popover from '@material-ui/core/Popover';
+import { Dialog } from '@material-ui/core';
+import SortByPopOut from './SortByPopOut';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 
-const options = ['latest', 'lowest salary', 'highest salary'];
+const useStyles = makeStyles (() =>
+    createStyles ({
+        root: {
+            '& .MuiPopover-paper': {
+                margin: '0 6px 0 6px',
+                minWidth: 126,
+                maxWidth: 126,
+                padding: 0,
+            },
+        },
+        sortButton: {
+            '@media (max-width: 1024px)': {
+                minWidth: 'fit-content',
+                margin: '10px 5px 10px 0px',
+                borderRadius: '32px',
+                textTransform: 'none',
+                border: '1px solid',
+                fontSize: '12px',
+                borderColor: 'rgb(228, 232, 240)',
+                color: 'rgb(119, 119, 119)',
+                background: 'rgb(255, 255, 255)',
+                justifyContent: 'space-between',
+                marginTop: 10,
+                padding: '0px 16px 0px 16px',
+                height: 36,
+            }
+        },
+        sortButtonChosen: {
+            '@media (max-width: 1024px)': {
+                borderRadius: '32px',
+                textTransform: 'none',
+                fontSize: '14px',
+                color: 'rgb(255, 64, 129)',
+                background: 'rgb(255, 248, 251)',
+                borderColor: 'rgb(255, 64, 129)',
+                border: '1px solid',
+                justifyContent: 'space-between',
+                marginTop: 10,
+                padding: '0px 16px 0px 16px',
+                height: 36,
+                minWidth: 'fit-content',
+                margin: '10px 5px 10px 0px'
+            }
+        },
+    }),
+);
 
-
-// const useStyles = makeStyles({
-//     root: {
-//
-//     },
-//     li: {
-//         height: 90
-//     },
-// });
 
 const SortBy = (): JSX.Element => {
-    // const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef<HTMLDivElement>(null);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const classes = useStyles ();
+    const { sortBy } = useSettings ();
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null> (null);
 
-    const handleClick = () => {
-        console.info(`You clicked ${options[selectedIndex]}`);
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl (event.currentTarget);
     };
 
-    const handleMenuItemClick = (
-        event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-        index: number,
-    ) => {
-        setSelectedIndex(index);
-        setOpen(false);
+    const handleClose = () => {
+        setAnchorEl (null);
     };
 
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
-
-    const handleClose = (event: React.MouseEvent<Document, MouseEvent>) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-            return;
-        }
-        setOpen(false);
-    };
-
-    const id = open ? 'spring-popper' : undefined;
+    const open = Boolean (anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
-        <div className="sort-border"  ref={ anchorRef }>
+        <>
             <Button
-                aria-haspopup="true"
-                aria-describedby={id}
-                className="sort-button"
-                onClick={() => {
-                    handleClick();
-                    handleToggle();
-                }}
+                classes={sortBy == 'Latest' ? { root: classes.sortButton } : { root: classes.sortButtonChosen }}
+                onClick={handleClick}
+
             >
                 <MediaQuery minWidth={1024}>
-           <span className="sort-label" >
-                                Sort by:
-           </span>
+                    <span className="sort-by-label">
+                       Sort by:
+                    </span>
                 </MediaQuery>
-                <span className="sort-option">
-                    {options[selectedIndex]}
+                <span className="sort-by-option">
+                    {sortBy}
                 </span>
                 <MediaQuery minWidth={1024}>
-                    <DropdownIcon/>
+                    {open ? <ExpandLess/> : <ExpandMore/>}
                 </MediaQuery>
             </Button>
 
-            <Popper  className="sort-pop" id={id} open={open} anchorEl={anchorRef.current} role={undefined} >
-                        <Paper className="paper">
-                            <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList className="sort-by-list">
-                                    {options.map((option, index) => (
-                                        <MenuItem
-                                            className="sort-by-label"
-                                            key={option}
-                                            selected={index === selectedIndex}
-                                            onClick={(event) => handleMenuItemClick(event, index)}
-                                        >
-                                            <span className="sort-by-label">{option} </span>
+            <MediaQuery maxWidth={1024}>
+                <Dialog fullScreen aria-labelledby="customized-dialog-title" open={open}>
+                    <SortByPopOut click={handleClose}/>
+                </Dialog>
+            </MediaQuery>
 
-                                        </MenuItem>
-                                    ))}
-                                </MenuList>
-                            </ClickAwayListener>
-                        </Paper>
-            </Popper>
-        </div>
+            <MediaQuery minWidth={1024}>
+
+                <Popover
+                    className={classes.root}
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                >
+                    <SortByPopOut click={handleClose}/>
+                </Popover>
+            </MediaQuery>
+        </>
     );
 };
 

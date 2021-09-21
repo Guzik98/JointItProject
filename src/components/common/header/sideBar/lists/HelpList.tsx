@@ -7,16 +7,15 @@ import List from '@material-ui/core/List';
 const HelpList = () : JSX.Element => {
     return (
         <List>
-            { SecondItemList.map((item)=>{
+            {SecondItemList.map ((item) => {
                 const { text, svg } = item;
                 return (
-                    <ListItem className="list-row"  button key={text} >
+                    <ListItem className="list-row" button key={text}>
                         {svg && <ListItemIcon className="list-icon"> {svg}</ListItemIcon>}
                         {text}
                     </ListItem>
                 );
-            })
-            }
+            })}
         </List>
     );
 };

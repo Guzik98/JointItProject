@@ -7,16 +7,15 @@ import List from '@material-ui/core/List';
 const MenuSideBarList = () : JSX.Element => {
     return (
         <List>
-            { FirstItemList.map((item)=>{
+            {FirstItemList.map ((item) => {
                 const { text, svg } = item;
                 return (
-                    <ListItem className="list-row" button key={text} >
+                    <ListItem className="list-row" button key={text}>
                         {svg && <ListItemIcon className="list-icon"> {svg}</ListItemIcon>}
                         {text}
                     </ListItem>
                 );
-            })
-            }
+            })}
         </List>
     );
 };

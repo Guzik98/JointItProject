@@ -12,7 +12,6 @@ function Header(): JSX.Element {
         <header className="topBarContainer">
             <div className="header-container">
                 <Logo/>
-
                 <Navbar/>
                 <Divider className="divider" orientation="vertical" flexItem/>
                 <SideBar/>
