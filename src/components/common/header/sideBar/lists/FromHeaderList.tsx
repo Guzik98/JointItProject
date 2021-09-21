@@ -7,7 +7,7 @@ import List from '@material-ui/core/List';
 const FromHeaderList = (): JSX.Element => {
     return (
         <List className="from-header-to-side-bar">
-            {RightSideReferenceArray.map ((item) => {
+            {RightSideReferenceArray.map((item) => {
                 const { svg, text } = item;
                 return (
                     <ListItem className="list-row" button key={text}>

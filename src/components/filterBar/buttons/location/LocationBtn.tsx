@@ -8,8 +8,8 @@ import { useSettings } from '../../../../Settings';
 import MediaQuery from 'react-responsive';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
-export const useStyles = makeStyles (() =>
-    createStyles ({
+export const useStyles = makeStyles(() =>
+    createStyles({
         root: {
             '& .MuiPopover-paper': {
                 margin: 0,
@@ -79,18 +79,18 @@ export const useStyles = makeStyles (() =>
 );
 
  export  const LocationBtn = (): JSX.Element => {
-     const classes = useStyles ();
-     const { city } = useSettings ();
-     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null> (null);
+     const classes = useStyles();
+     const { city } = useSettings();
+     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-         setAnchorEl (event.currentTarget);
+         setAnchorEl(event.currentTarget);
      };
 
      const handleClose = () => {
-         setAnchorEl (null);
+         setAnchorEl(null);
      };
-     const open = Boolean (anchorEl);
+     const open = Boolean(anchorEl);
      const id = open ? 'simple-popover' : undefined;
 
      return (

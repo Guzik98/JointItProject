@@ -13,7 +13,7 @@ import { useSettings } from '../../../../Settings';
 import { Link, NavLink } from 'react-router-dom';
 import { cityPoland, CityType, cityWorld, OtherPolandCities } from './CityBtn';
 
-const useStyles = makeStyles ({
+const useStyles = makeStyles({
     city: {
         borderRadius: 32,
         border: '1px solid',
@@ -36,20 +36,20 @@ const useStyles = makeStyles ({
 
 
 const PopOverLocation = (props : any) :JSX.Element => {
-    const classes = useStyles ();
-    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings ();
+    const classes = useStyles();
+    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
 
-    const [open, setOpen] = React.useState (false);
+    const [open, setOpen] = React.useState(false);
 
     const toggle = () => {
-        setOpen (!open);
+        setOpen(!open);
     };
     const handleClose = () => {
-        props.click ();
+        props.click();
     };
     const clear = () => {
-        setCity ('all');
-        handleClose ();
+        setCity('all');
+        handleClose();
     };
 
     return (
@@ -71,7 +71,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                         <div className="type-work-level2">
                             <NavLink
                                 to={`/Offers/Remote-Poland/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-                                onClick={() => setCity ('Remote Poland')}
+                                onClick={() =>setCity('Remote Poland')}
                                 activeClassName="active"
                             >
                                 <Button size="small"
@@ -87,7 +87,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                             </NavLink>
                             <NavLink
                                 to={`/Offers/Remote Global/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-                                onClick={() => setCity ('Remote Global')}
+                                onClick={() => setCity('Remote Global')}
                                 activeClassName="active"
                             >
                                 <Button size="small"
@@ -115,7 +115,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                             Top Poland
                         </a>
                         <div className="city-buttons">
-                            {cityPoland.map (({ city }: CityType) =>
+                            {cityPoland.map(({ city }: CityType) =>
                                 <CityBtnComponent click={handleClose} city={city} key={city}/>)
                             }
                         </div>
@@ -125,7 +125,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                             Top World
                         </a>
                         <div className="city-buttons">
-                            {cityWorld.map (({ city }: CityType) =>
+                            {cityWorld.map(({ city }: CityType) =>
                                 <CityBtnComponent click={handleClose} city={city} key={city}/>)
                             }
                         </div>
@@ -138,7 +138,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
 
                         <div className="city-buttons"  >
                             <Collapse in={open}>
-                                {OtherPolandCities.map (({ city }: CityType) =>
+                                {OtherPolandCities.map(({ city }: CityType) =>
                                     <CityBtnComponent click={handleClose} city={city} key={city}/>)
                                 }
                             </Collapse>

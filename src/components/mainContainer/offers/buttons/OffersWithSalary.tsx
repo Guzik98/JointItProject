@@ -5,14 +5,14 @@ import { NavLink } from 'react-router-dom';
 
 
 const OffersWithSalary = (): JSX.Element => {
-    const { city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, setWithSalary } = useSettings ();
+    const { city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, setWithSalary } = useSettings();
 
     return (
         <NavLink
             to={`/Offers/${city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/offers-with-salary`}
             activeClassName="tab-active"
             className="offers"
-            onClick={() => setWithSalary ('offers-with-salary')}
+            onClick={() => setWithSalary('offers-with-salary')}
         >
             <MediaQuery minWidth={1024}>
                 <span className="tab-offers-text">

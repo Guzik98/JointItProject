@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { useSettings } from '../../../../Settings';
 import { Link, NavLink } from 'react-router-dom';
 
-const useStylesBtn = makeStyles ({
+const useStylesBtn = makeStyles({
     root: {
         borderRadius: '32px',
         borderColor: 'rgb(228, 232, 240)',
@@ -74,7 +74,7 @@ const seniorityBtn = [
 ];
 
 const EmploymentBtnComponent = (props: any): JSX.Element => {
-    const classes = useStylesBtn ();
+    const classes = useStylesBtn();
     const {
         city,
         tech,
@@ -85,24 +85,24 @@ const EmploymentBtnComponent = (props: any): JSX.Element => {
         employmentType,
         sortBy,
         withSalary
-    } = useSettings ();
+    } = useSettings();
 
     const increment = () => {
-        props.increment ();
+        props.increment();
     };
 
     const decrement = () => {
-        props.decrement ();
+        props.decrement();
     };
 
     const onClick = () => {
         if (employmentType == 'All' && props.name !== 'All') {
-            increment ();
+            increment();
         }
         if (props.name == 'All' && employmentType !== 'All') {
-            decrement ();
+            decrement();
         }
-        setEmploymentType (`${props.name}`);
+        setEmploymentType(`${props.name}`);
     };
 
     return (
@@ -123,7 +123,7 @@ const EmploymentBtnComponent = (props: any): JSX.Element => {
 };
 
 const SeniorityBtnComponent = (props: any): JSX.Element => {
-    const classes = useStylesBtn ();
+    const classes = useStylesBtn();
     const {
         city,
         tech,
@@ -134,24 +134,24 @@ const SeniorityBtnComponent = (props: any): JSX.Element => {
         seniority,
         sortBy,
         withSalary
-    } = useSettings ();
+    } = useSettings();
 
     const increment = () => {
-        props.increment ();
+        props.increment();
     };
 
     const decrement = () => {
-        props.decrement ();
+        props.decrement();
     };
 
     const onClick = () => {
         if (seniority == 'All' && props.name !== 'All') {
-            increment ();
+            increment();
         }
         if (props.name == 'All' && seniority !== 'All') {
-            decrement ();
+            decrement();
         }
-        setSeniority (`${props.name}`);
+        setSeniority(`${props.name}`);
     };
 
     return (
@@ -171,7 +171,7 @@ const SeniorityBtnComponent = (props: any): JSX.Element => {
 };
 
 const MoreFilersPopOut = (props: any): JSX.Element => {
-    const classesBtn = useStylesBtn ();
+    const classesBtn = useStylesBtn();
     const {
         city,
         tech,
@@ -185,48 +185,48 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
         setSeniority,
         sortBy,
         withSalary
-    } = useSettings ();
-    const [value, setValue] = React.useState<number[]> ([fromSalary, toSalary]);
+    } = useSettings();
+    const [value, setValue] = React.useState<number[]>([fromSalary, toSalary]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
-        setValue (newValue as number[]);
+        setValue(newValue as number[]);
     };
 
-    function numberWithSpaces (x: number) {
-        return x.toString ().replace (/\B(?=(\d{3})+(?!\d))/g, ' ');
+    function numberWithSpaces(x: number) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
 
     const increment = () => {
-        props.increment ();
+        props.increment();
     };
     const decrement = () => {
-        props.decrement ();
+        props.decrement();
     };
     const clearCounter = () => {
-        props.clearCounter ();
+        props.clearCounter();
     };
     const onClick = () => {
-        props.onClick ();
+        props.onClick();
     };
     const submit = () => {
         if ((value[0] != fromSalary || value[1] != toSalary) && (toSalary == 100000 && fromSalary == 0)) {
-            increment ();
+            increment();
         }
-        setFromSalary (value[0]);
-        setToSalary (value[1]);
+        setFromSalary(value[0]);
+        setToSalary(value[1]);
         if ((value[0] == 0 && value[1] == 100000) && (toSalary !== 100000 && fromSalary !== 0)) {
-            decrement ();
+            decrement();
         }
-        onClick ();
+        onClick();
     };
 
     const clear = () => {
-        setEmploymentType ('All');
-        setToSalary (100000);
-        setFromSalary (0);
-        setSeniority ('All');
-        clearCounter ();
-        onClick ();
+        setEmploymentType('All');
+        setToSalary(100000);
+        setFromSalary(0);
+        setSeniority('All');
+        clearCounter();
+        onClick();
     };
 
     return (
@@ -273,7 +273,7 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                     Employment Type
                 </div>
                 <div>
-                    {employmentBtn.map (({ name }: ButtonType) => <EmploymentBtnComponent increment={increment}
+                    {employmentBtn.map(({ name }: ButtonType) => <EmploymentBtnComponent increment={increment}
                                                                                           decrement={decrement}
                                                                                           name={name} key={name}/>)}
                 </div>
@@ -282,7 +282,7 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                     Seniority
                 </div>
                 <div>
-                    {seniorityBtn.map (({ name }: ButtonType) => <SeniorityBtnComponent increment={increment}
+                    {seniorityBtn.map(({ name }: ButtonType) => <SeniorityBtnComponent increment={increment}
                                                                                         decrement={decrement}
                                                                                         name={name} key={name}/>)}
                 </div>

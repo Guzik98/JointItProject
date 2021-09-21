@@ -27,16 +27,16 @@ const useStyles = makeStyles({
 });
 
 const CityBtnComponent = (props: any): JSX.Element => {
-    const classes = useStyles ();
-    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings ();
+    const classes = useStyles();
+    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
 
     const handleClose = () => {
-        props.click ();
+        props.click();
     };
     return (
         <NavLink
             to={`/Offers/${props.city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-            onClick={() => setCity (`${props.city}`)}
+            onClick={() => setCity(`${props.city}`)}
             activeClassName="active"
         >
             <Button size="small"

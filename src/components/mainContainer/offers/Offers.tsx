@@ -6,9 +6,14 @@ import AllOffers from './buttons/AllOffers';
 import SortBy from './buttons/sortBy/SortBy';
 import MediaQuery from 'react-responsive';
 import OfferComponent from './offer/offerComponent';
+import { useSettings } from '../../../Settings';
+import OfferType from '../../../offerType';
+
 
 
 function Offers(): JSX.Element {
+    const { data } = useSettings();
+    const size = 3;
     return (
         <div className="offers">
             <div className="offers-level-2">
@@ -26,21 +31,10 @@ function Offers(): JSX.Element {
                 <div className="offersContent">
                     <div className="offers-content-2">
                         <div className="offers-content-3">
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
-                            <OfferComponent/>
+                            {
+                                data?.slice(0, size).map(( { ...props } :OfferType) =>
+                                <OfferComponent key={props.id}  {...props}/>
+                            )}
                         </div>
                     </div>
                 </div>

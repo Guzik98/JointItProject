@@ -16,7 +16,7 @@ const Navbar = (): JSX.Element => {
             </div>
 
             <div className="navbar-right-side">
-                {RightSideReferenceArray.map (({ text }) =>
+                {RightSideReferenceArray.map(({ text }) =>
                     <RightSideReferenceComponent text={text} key={text}/>)}
                 <a className="navbar-right-side-item rwdDisplay">
                     <PostJob/>

@@ -99,28 +99,28 @@ const useStyles = makeStyles(() =>
 
 
 export const MoreFilters = (): JSX.Element => {
-    const classes = useStyles ();
-    const [open, setOpen] = React.useState (false);
-    let [counter, setCounter] = useState (0);
-    const { fromSalary, toSalary, employmentType, seniority } = useSettings ();
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [counter, setCounter] = useState(0);
+    const { fromSalary, toSalary, employmentType, seniority } = useSettings();
 
     const handleClickOpen = () => {
-        setOpen (true);
+        setOpen(true);
     };
 
     const handleClose = () => {
-        setOpen (false);
+        setOpen(false);
     };
 
     const increment = () => {
-        setCounter (counter + 1);
+        setCounter(counter + 1);
     };
 
     const decrement = () => {
-        setCounter (counter - 1);
+        setCounter(counter - 1);
     };
     const clearCounter = () => {
-        setCounter (0);
+        setCounter(0);
     };
 
     return (

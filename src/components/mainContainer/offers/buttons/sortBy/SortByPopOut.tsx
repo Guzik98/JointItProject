@@ -6,8 +6,8 @@ import { useSettings } from '../../../../../Settings';
 import MediaQuery from 'react-responsive';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles (() =>
-    createStyles ({
+const useStyles = makeStyles(() =>
+    createStyles({
         label: {
             whiteSpace: 'nowrap',
             textTransform: 'none',
@@ -40,12 +40,12 @@ const sortByButtons = [
 ];
 
 const SortByButtonsComponent = (props: any) => {
-    const classes = useStyles ();
-    const { city, tech, seniority, employmentType, fromSalary, toSalary, setSortBy, withSalary } = useSettings ();
+    const classes = useStyles();
+    const { city, tech, seniority, employmentType, fromSalary, toSalary, setSortBy, withSalary } = useSettings();
 
     const handleClose = () => {
-        setSortBy (props.name);
-        props.click ();
+        setSortBy(props.name);
+        props.click();
     };
 
     return (
@@ -89,7 +89,7 @@ const SortByButtonsComponent = (props: any) => {
 const SortByPopOut = (props: any): JSX.Element => {
 
     const handleClose = () => {
-        props.click ();
+        props.click();
     };
 
     return (
@@ -106,7 +106,7 @@ const SortByPopOut = (props: any): JSX.Element => {
             <Divider/>
             <DialogContent>
                 <div className="sort-by-pop-out-body">
-                    {sortByButtons.map (({ name }: ButtonType) => <SortByButtonsComponent click={handleClose}
+                    {sortByButtons.map(({ name }: ButtonType) => <SortByButtonsComponent click={handleClose}
                                                                                           name={name} key={name}/>)}
                 </div>
             </DialogContent>

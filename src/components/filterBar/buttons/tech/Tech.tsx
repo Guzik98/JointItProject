@@ -5,8 +5,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TechPopOut from './TechPopOut';
 
 
-export const useStyles = makeStyles (() =>
-    createStyles ({
+export const useStyles = makeStyles(() =>
+    createStyles({
         choseTech: {
             borderRadius: '32px',
             textTransform: 'none',
@@ -48,15 +48,15 @@ export const useStyles = makeStyles (() =>
     }),
 );
 const Tech = (): JSX.Element => {
-    const classes = useStyles ();
-    const [open, setOpen] = useState (false);
+    const classes = useStyles();
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
-        setOpen (true);
+        setOpen(true);
     };
 
     const handleClose = () => {
-        setOpen (false);
+        setOpen(false);
     };
 
     return (

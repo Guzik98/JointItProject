@@ -12,10 +12,10 @@ import SortBy from '../mainContainer/offers/buttons/sortBy/SortBy';
 import { ClickAwayListener } from '@material-ui/core';
 import LongSearch from './common/LongSearch';
 
-const renderIcon = programingLanguageIconArray.map (({ name, icon }: IconType) =>
+const renderIcon = programingLanguageIconArray.map(({ name, icon }: IconType) =>
     <IconComponent name={name} icon={icon} key={name}/>);
 
-function Bar (): JSX.Element {
+function Bar(): JSX.Element {
 
     const [ isOpen, setIsOpen ] = React.useState(false);
 

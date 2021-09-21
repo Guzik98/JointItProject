@@ -10,8 +10,8 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 
-const useStyles = makeStyles (() =>
-    createStyles ({
+const useStyles = makeStyles(() =>
+    createStyles({
         root: {
             '& .MuiPopover-paper': {
                 margin: '0 6px 0 6px',
@@ -59,19 +59,19 @@ const useStyles = makeStyles (() =>
 
 
 const SortBy = (): JSX.Element => {
-    const classes = useStyles ();
-    const { sortBy } = useSettings ();
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null> (null);
+    const classes = useStyles();
+    const { sortBy } = useSettings();
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl (event.currentTarget);
+        setAnchorEl(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorEl (null);
+        setAnchorEl(null);
     };
 
-    const open = Boolean (anchorEl);
+    const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
     return (

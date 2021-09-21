@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './MainContainer.sass';
 import { Map } from './map';
 import { Offers } from './offers';

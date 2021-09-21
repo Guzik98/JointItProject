@@ -4,7 +4,7 @@ import { HeaderLinkType } from './RightSideReferenceArray';
 import { useSettings } from '../../../../../../Settings';
 
 const RightSideReferenceComponent = ({ text }: HeaderLinkType): JSX.Element => {
-    const { city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings ();
+    const { city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
     return (
         <NavLink className="navbar-right-side-item rwdDisplay"
                  aria-disabled="false" rel="noreferrer"

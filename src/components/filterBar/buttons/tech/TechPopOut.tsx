@@ -9,7 +9,7 @@ import './Tech.sass';
 const TechPopOut = (props: any) => {
 
     const handleClose = () => {
-        props.handleClose ();
+        props.handleClose();
     };
 
     return (
@@ -26,7 +26,7 @@ const TechPopOut = (props: any) => {
             </div>
             <Divider/>
             <div className="tech-pop-out-content">
-                {programingLanguageIconArray.map (({ name, icon }: IconType) =>
+                {programingLanguageIconArray.map(({ name, icon }: IconType) =>
                     <IconComponent name={name} icon={icon} key={name}/>)
                 }
             </div>

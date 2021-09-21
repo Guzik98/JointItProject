@@ -1,18 +1,23 @@
-import { createContext, FC, useContext, useState } from 'react';
+import React, { createContext, FC, useContext, useState } from 'react';
+import useFetch from './useFetch';
+
+
+const url = 'http://localhost:8000/offers';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
+
 const useProviderSettings = () => {
-
-    const [city, setCity] = useState<string> ('all');
-    const [tech, setTech] = useState<string> ('all');
-    const [seniority, setSeniority] = useState<string> ('All');
-    const [fromSalary, setFromSalary] = useState<number> (0);
-    const [toSalary, setToSalary] = useState<number> (100000);
-    const [employmentType, setEmploymentType] = useState<string> ('All');
-    const [sortBy, setSortBy] = useState<string> ('Latest');
-    const [withSalary, setWithSalary] = useState<string> ('all-offers');
-
+    const { data } = useFetch<[]>(url);
+    const [ city, setCity ] = useState<string>('all');
+    const [ tech, setTech ] = useState<string>('all');
+    const [ seniority, setSeniority ] = useState<string>('All');
+    const [ fromSalary, setFromSalary ] = useState<number>(0);
+    const [ toSalary, setToSalary ] = useState<number>(100000);
+    const [ employmentType, setEmploymentType ] = useState<string>('All');
+    const [ sortBy, setSortBy ] = useState<string>('Latest');
+    const [ withSalary, setWithSalary ] = useState<string>('all-offers');
+    console.log(data);
     return {
         city,
         setCity,
@@ -29,7 +34,8 @@ const useProviderSettings = () => {
         sortBy,
         setSortBy,
         withSalary,
-        setWithSalary
+        setWithSalary,
+        data
     };
 };
 

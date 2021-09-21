@@ -1,7 +1,7 @@
 import React from 'react';
 import './offerComponent.sass';
 import MediaQuery from 'react-responsive';
-import { useSettings } from '../../../../Settings';
+import offerType from '../../../../offerType';
 
 
 const CompanyIcon = (): JSX.Element => {
@@ -25,8 +25,7 @@ const PointerIcon = () : JSX.Element => {
 };
 
 
-const OfferComponent = () : JSX.Element => {
-    const { tech, city } = useSettings ();
+const OfferComponent = (props : offerType) : JSX.Element => {
 
     return (
         <div className="offer-border">
@@ -44,8 +43,7 @@ const OfferComponent = () : JSX.Element => {
                             <div className="position-info">
                                 <div className="position">
                                     <div className="position-text">
-
-                                         Front End Develeoper
+                                        {props.title}
                                     </div>
                                 </div>
                             </div>
@@ -64,23 +62,28 @@ const OfferComponent = () : JSX.Element => {
                             <div className="bottom-info-left">
                                 <div className="company-name">
                                     <CompanyIcon/>
-                                    Sofomo
+                                    {props.company_name}
                                 </div>
                                 <div className="where-type">
                                     <MediaQuery minWidth={1024}>
                                         <PointerIcon/>
                                         <span className="where">
-                                            {city}
+                                            {props.city}
                                         </span>
 
                                         <span className="type">
-                                              Fully remote
+                                             {props.workplace_type}
                                         </span>
                                     </MediaQuery>
 
                                     <MediaQuery maxWidth={1024}>
                                         <div className="salary-text">
-                                            5 500 - 9000 PLN
+                                            {props.employment_types.map((type, key)  => {
+                                                if (type.salary !== null){
+                                                    type.salary.map((type2) =>
+                                                        <span key={key} >{type2.from + ' - ' + type2.to}</span>);
+                                                    }
+                                                })};
                                         </div>
                                     </MediaQuery>
                                 </div>
@@ -88,7 +91,7 @@ const OfferComponent = () : JSX.Element => {
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1024}>
                                     <span className="skills">
-                                     {tech}
+
                                     </span>
                                         <span className="skills">
                                         Kolin
