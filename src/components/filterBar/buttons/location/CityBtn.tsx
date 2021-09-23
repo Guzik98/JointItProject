@@ -5,7 +5,7 @@ export type CityType = {
 
 export const cityPoland = [
     { city: 'Warszawa' },
-    { city: 'Krakow' },
+    { city: 'Kraków' },
     { city: 'Wrocław' },
     { city: 'Poznań' },
     { city: 'Trójmiasto' },

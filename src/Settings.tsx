@@ -8,35 +8,35 @@ export const SettingsContext = createContext<SettingsContextData | null>(null);
 
 
 const useProviderSettings = () => {
-    const { data } = useFetch<[]>(url);
+    const { data, error } = useFetch<[]>(url);
     const [ city, setCity ] = useState<string>('all');
-    const [ tech, setTech ] = useState<string>('all');
+    const [ tech, setTech ] = useState<string>('All');
     const [ seniority, setSeniority ] = useState<string>('All');
     const [ fromSalary, setFromSalary ] = useState<number>(0);
     const [ toSalary, setToSalary ] = useState<number>(100000);
     const [ employmentType, setEmploymentType ] = useState<string>('All');
     const [ sortBy, setSortBy ] = useState<string>('Latest');
     const [ withSalary, setWithSalary ] = useState<string>('all-offers');
-    console.log(data);
-    return {
-        city,
-        setCity,
-        tech,
-        setTech,
-        seniority,
-        setSeniority,
-        fromSalary,
-        setFromSalary,
-        toSalary,
-        setToSalary,
-        employmentType,
-        setEmploymentType,
-        sortBy,
-        setSortBy,
-        withSalary,
-        setWithSalary,
-        data
-    };
+        return {
+            city,
+            setCity,
+            tech,
+            setTech,
+            seniority,
+            setSeniority,
+            fromSalary,
+            setFromSalary,
+            toSalary,
+            setToSalary,
+            employmentType,
+            setEmploymentType,
+            sortBy,
+            setSortBy,
+            withSalary,
+            setWithSalary,
+            data,
+            error
+        };
 };
 
 export const SettingsProvider: FC = ({ children }) => {

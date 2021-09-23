@@ -7,7 +7,6 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 import { SettingsProvider } from './Settings';
 
 function App(): JSX.Element {
-
     return (
         <SettingsProvider>
             <BrowserRouter>

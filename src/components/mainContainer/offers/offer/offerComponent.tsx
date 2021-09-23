@@ -1,7 +1,7 @@
 import React from 'react';
 import './offerComponent.sass';
 import MediaQuery from 'react-responsive';
-import offerType from '../../../../offerType';
+import { OfferType, EmploymentType } from '../../../../offerType';
 
 
 const CompanyIcon = (): JSX.Element => {
@@ -24,8 +24,39 @@ const PointerIcon = () : JSX.Element => {
     );
 };
 
+const OfferComponent = (props : OfferType) : JSX.Element => {
 
-const OfferComponent = (props : offerType) : JSX.Element => {
+    let minSalary = 0;
+    let maxSalary = 0;
+    let currency = 'Undisclosed Salary';
+    let today = new Date().toISOString().split('T')[0];
+
+    function displaySalary(type : EmploymentType) {
+        if (type[0].salary !== null && type[0].salary !== undefined) {
+            minSalary = type[0].salary.from;
+            maxSalary = type[0].salary.to;
+            currency = type[0].salary.currency;
+        } else {
+            currency = 'Undisclosed Salary';
+        }
+    }
+
+    function getNumberOfDays(start: string, end: string){
+        const date1 = new Date(start);
+        const date2 = new Date(end);
+
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        const diffInTime = date2.getTime() - date1.getTime();
+
+        const diffInDays = Math.round(diffInTime / oneDay);
+
+        if ( diffInDays < 1 ){
+            return 'now';
+        } else {
+            return diffInDays + 'd ago';
+        }
+    }
 
     return (
         <div className="offer-border">
@@ -34,8 +65,8 @@ const OfferComponent = (props : offerType) : JSX.Element => {
                     <div className="logo">
                         <div className="logo-border">
                             <img
-                                src="https://bucket.justjoin.it/offers/company_logos/thumb/bf134c3b721167aeb70871e08e523190c99bb65c.png?1617968818"
-                                alt="Front-End Developer (Junior/Mid)" className="image"/>
+                                src={props.company_logo_url}
+                                alt={props.title + ' ' +  props.experience_level} className="image"/>
                         </div>
                     </div>
                     <div className="info">
@@ -50,12 +81,16 @@ const OfferComponent = (props : offerType) : JSX.Element => {
                             <div className="salary-info">
                                 <MediaQuery minWidth={1024}>
                                     <div className="salary-text">
-                                        5 500 - 9000 PLN
+                                        {props.employment_types.map((type)  => {
+                                            displaySalary(type);
+                                        })
+                                        }
+                                        {currency !== 'Undisclosed Salary' ? minSalary + ' - ' + maxSalary + ' ' + currency : currency }
                                     </div>
                                 </MediaQuery>
                             </div>
                             <div className="update-info">
-                                New
+                                {getNumberOfDays(props.published_at, today)}
                             </div>
                         </div>
                         <div className="bottom-info">
@@ -78,38 +113,34 @@ const OfferComponent = (props : offerType) : JSX.Element => {
 
                                     <MediaQuery maxWidth={1024}>
                                         <div className="salary-text">
-                                            {props.employment_types.map((type, key)  => {
-                                                if (type.salary !== null){
-                                                    type.salary.map((type2) =>
-                                                        <span key={key} >{type2.from + ' - ' + type2.to}</span>);
-                                                    }
-                                                })};
+                                            {props.employment_types.map((type)  => {
+                                                displaySalary(type);
+                                            })
+                                            }
+                                            {currency !== 'Undisclosed Salary' ?
+                                                minSalary.toString().slice(0, -3) + 'k - '
+                                                + maxSalary.toString().slice(0, -3) + 'k ' + currency
+                                                : currency }
                                         </div>
+
                                     </MediaQuery>
                                 </div>
                             </div>
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1024}>
-                                    <span className="skills">
-
-                                    </span>
-                                        <span className="skills">
-                                        Kolin
-                                    </span>
-                                        <span className="skills">
-                                        Java
-                                    </span>
+                                    {props.skills.map((type, index) =>
+                                        <span key={index} className="skills">{type.name}</span>
+                                    )}
                                 </MediaQuery>
 
                             </div>
                             <div className="bottom-info-where">
                                 <MediaQuery maxWidth={1024}>
-
                                     <span className="where">
-                                            Poznan
+                                            {props.city}
                                         </span>
                                     <span className="type-small-screen">
-                                              , Fully remote
+                                              , {props.workplace_type}
                                     </span>
                                     <PointerIcon/>
                                 </MediaQuery>

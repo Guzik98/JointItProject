@@ -1,20 +1,20 @@
-type SalaryType = {
-    from: number,
-    to: number,
-    currency: string,
-};
+export type EmploymentType = [
+    {
+        type: string,
+        salary: {
+            from: number,
+            to: number,
+            currency: string,
+        } | null
+    }
+];
 
-type EmploymentType = {
-    type: string,
-    salary: null | Array<SalaryType>
-};
-
-type SkillsType = {
+export type SkillsType = {
     name: string,
     level: number
 };
 
-type OfferType = {
+export  type OfferType = {
     title: string,
     street: string,
     city: string
@@ -31,10 +31,8 @@ type OfferType = {
     published_at: string,
     remote_interview: boolean,
     id: string,
-    employment_types: Array<EmploymentType>
+    employment_types: EmploymentType
     company_logo_url: string
     skills: Array<SkillsType>
     remote: boolean
 };
-
-export default  OfferType;
