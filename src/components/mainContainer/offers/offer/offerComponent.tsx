@@ -1,7 +1,7 @@
 import React from 'react';
 import './offerComponent.sass';
 import MediaQuery from 'react-responsive';
-import { OfferType, EmploymentType } from '../../../../offerType';
+import { OfferType } from '../../../../offerType';
 
 
 const CompanyIcon = (): JSX.Element => {
@@ -31,11 +31,11 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
     let currency = 'Undisclosed Salary';
     let today = new Date().toISOString().split('T')[0];
 
-    function displaySalary(type : EmploymentType) {
-        if (type[0].salary !== null && type[0].salary !== undefined) {
-            minSalary = type[0].salary.from;
-            maxSalary = type[0].salary.to;
-            currency = type[0].salary.currency;
+    function displaySalary(type: { type: string; salary: { from: number; to: number; currency: string } | null }) {
+        if (type.salary !== null && type.salary !== undefined) {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
         } else {
             currency = 'Undisclosed Salary';
         }
@@ -57,9 +57,17 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
             return diffInDays + 'd ago';
         }
     }
+    async function details() {
+        const url = `https://justjoin.it/api/offers/${props.id}`;
+        fetch(url, {
+            mode: 'no-cors',
+        })
+        .then(res => res.json())
+            .then(data => console.log(data));
+    }
 
     return (
-        <div className="offer-border">
+        <div className="offer-border" onClick = {details}>
             <div className="offer-border-level2">
                 <div className="offer-border-level3">
                     <div className="logo">

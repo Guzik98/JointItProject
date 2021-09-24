@@ -9,12 +9,12 @@ const RightSideReferenceComponent = ({ text }: HeaderLinkType): JSX.Element => {
         <NavLink className="navbar-right-side-item rwdDisplay"
                  aria-disabled="false" rel="noreferrer"
                  to={`/${text}/${city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-                 target="_blank" activeClassName="active">
+                 target="_blank"
+                 activeClassName="active">
             <span className="navbar-right-side-item-label">
                 {text}
             </span>
         </NavLink>
-
     );
 };
 

@@ -6,7 +6,6 @@ import './Map.sass';
 function Map(): JSX.Element{
     return (
         <div className="map">
-
         </div>
     );
 }

@@ -1,10 +1,8 @@
 import React from 'react';
 import './SignIn.sass';
-
 import ArrowIcon from '@material-ui/icons/ExpandMoreOutlined';
 import Popover from '@material-ui/core/Popover';
-import LoginComponent from '../../../buttons/LoginComponent';
-
+import LoginComponent from '../../../login/LoginComponent';
 
 function SignIn(): JSX.Element {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -20,33 +18,34 @@ function SignIn(): JSX.Element {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
-        return (
-            <>
-                <button className="navbar-right-side-item sign-in" aria-describedby={id} color="primary"
-                        onClick={handleClick}>
+    return (
+        <>
+            <button className="navbar-right-side-item sign-in"
+                    aria-describedby={id}
+                    onClick={handleClick}>
             <span className="sign-in-text">
                 Sign in
             </span>
                     <ArrowIcon className="arrow-icon"/>
                 </button>
-                <Popover
-                    id={ id }
-                    open={ open }
-                    anchorEl={ anchorEl }
-                    onClose={ handleClose }
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
+            <Popover
+                id={ id }
+                open={ open }
+                anchorEl={ anchorEl }
+                onClose={ handleClose }
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
                 >
-                    <LoginComponent/>
-                </Popover>
-            </>
-        );
+                <LoginComponent/>
+            </Popover>
+        </>
+    );
 }
 
 export default SignIn;

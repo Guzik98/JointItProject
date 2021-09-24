@@ -5,7 +5,7 @@ import './SignAs.sass';
 
 const LoginToEmployerPanel = (): JSX.Element => {
     return (
-        <a className="sign-btn" aria-disabled="false" href="/users/sign_in">
+        <a className="sign-btn">
             <span className="sign-btn-label ">
                  <Employer/>
                 Sign in to Employer Panel

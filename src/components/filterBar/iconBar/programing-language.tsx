@@ -45,7 +45,7 @@ export const programingLanguageIconArray = [
     { name: 'Testing', icon: <Testing/> },
     { name: 'DevOps', icon: <DevOps/> },
     { name: 'Admin', icon: <Admin/> },
-    { name: 'UXUI', icon: <UXUI/> },
+    { name: 'UX/UI', icon: <UXUI/> },
     { name: 'PM', icon: <PM/> },
     { name: 'Game', icon: <Game/> },
     { name: 'Analytics', icon: <Analytics/> },

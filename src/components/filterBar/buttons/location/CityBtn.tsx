@@ -24,14 +24,14 @@ export const OtherPolandCities = [
     { city: 'Białystok' },
     { city: 'Bielsko-Biała' },
     { city: 'Bydgoszcz' },
-    { city: 'Czestochowa' },
+    { city: 'Częstochowa' },
     { city: 'Kielce' },
     { city: 'Lublin' },
     { city: 'Łódź' },
     { city: 'Olsztyn' },
     { city: 'Opole' },
     { city: 'Rzeszów' },
-    { city: 'Szecin' },
+    { city: 'Szczecin' },
     { city: 'Toruń' },
     { city: 'Zielona Góra' }
 ];

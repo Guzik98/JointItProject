@@ -81,7 +81,7 @@ export const useStyles = makeStyles(() =>
  export  const LocationBtn = (): JSX.Element => {
      const classes = useStyles();
      const { city } = useSettings();
-     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+     const [ anchorEl, setAnchorEl ] = React.useState<HTMLButtonElement | null>(null);
 
      const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
          setAnchorEl(event.currentTarget);

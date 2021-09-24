@@ -14,7 +14,6 @@ const Navbar = (): JSX.Element => {
                     #1 job Board for IT industry in Poland
                 </p>
             </div>
-
             <div className="navbar-right-side">
                 {RightSideReferenceArray.map(({ text }) =>
                     <RightSideReferenceComponent text={text} key={text}/>)}

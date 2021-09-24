@@ -1,9 +1,8 @@
 import React from 'react';
 import './Header.sass';
-
 import Divider from '@material-ui/core/Divider';
 import Navbar from './navbar/Navbar';
-import { SideBar } from './sideBar/SideBar';
+import  SideBarButton  from './sideBar/SideBarButton';
 import { Logo } from './logo/LogoComponent';
 
 function Header(): JSX.Element {
@@ -14,7 +13,7 @@ function Header(): JSX.Element {
                 <Logo/>
                 <Navbar/>
                 <Divider className="divider" orientation="vertical" flexItem/>
-                <SideBar/>
+                <SideBarButton/>
             </div>
         </header>
     );

@@ -21,7 +21,6 @@ function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
         data: undefined,
     };
 
-    // Keep state logic separated
     const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
         switch (action.type) {
             case 'loading':
@@ -75,6 +74,5 @@ function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
 
     return state;
 }
-
 
 export default useFetch;

@@ -5,7 +5,7 @@ import './SignAs.sass';
 
 const LoginAsDeveloper = () :JSX.Element => {
     return (
-            <a className="sign-btn" role="button" aria-disabled="false" href="" >
+            <a className="sign-btn" role="button">
                 <span className="sign-btn-label">
                 <Developer/>
                     Sign in as a developer
