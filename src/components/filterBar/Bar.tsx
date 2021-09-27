@@ -31,7 +31,7 @@ function Bar(): JSX.Element {
             <div className="filter-bar">
                 <div className="filter-bar-elements">
                     <MediaQuery minWidth={1024}>
-                        <SearchBtn  open={ handleOpenLongSearch } />
+                        <SearchBtn  open={ handleOpenLongSearch }/>
                         <div className="location-icon">
                             <LocationBtn/>
                             <div className="icon-bar">
@@ -41,7 +41,7 @@ function Bar(): JSX.Element {
                         </div>
                     </MediaQuery>
                     <MediaQuery maxWidth={1024}>
-                        <SearchBtnSmall open={handleOpenLongSearch}/>
+                        <SearchBtnSmall open={handleOpenLongSearch} />
                         <Tech/>
                         <LocationBtn/>
                         <MoreFilters/>
@@ -55,7 +55,7 @@ function Bar(): JSX.Element {
             <ClickAwayListener onClickAway={handleCloseLongSearch}>
                 <div className="long-search-bar">
                     <div className="long-search-bar-filter" >
-                        <LongSearch/>
+                        <LongSearch close ={handleCloseLongSearch}/>
                     </div>
                 </div>
             </ClickAwayListener>

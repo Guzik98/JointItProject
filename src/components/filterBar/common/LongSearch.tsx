@@ -1,56 +1,82 @@
 import React from 'react';
-import Chip from '@material-ui/core/Chip';
 import { Autocomplete } from '@material-ui/lab';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import { programingLanguageIconArray } from '../iconBar/programing-language';
-
+import { createStyles, makeStyles, Theme, Chip, TextField } from '@material-ui/core';
 import './LongSearch.sass';
+
+const IconStart = () : JSX.Element => {
+    return (
+        <svg className="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+    );
+};
 
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             width: '100%',
+            height: 34,
+            padding: '3px 10px 3px 10px',
             '&:focus': {
                 width: '20ch',
             },
             '& > * + *': {
                 marginTop: theme.spacing(2),
             },
-            display: 'flex'
+            display: 'flex',
+            backgroundColor : 'rgb(228, 232, 240)',
+            borderRadius: '20px',
+            textDecoration: 'none',
+            '& .MuiInput-underline:before': {
+                borderBottom: 'unset',
+            },
+            '& .MuiInput-underline:hover:before': {
+                borderBottom: 'unset',
+            },
+            '& .MuiInput-underline:after': {
+                borderBottom: 'unset',
+            },
+            '& .MuiIconButton-label' : {
+                display: 'none',
+            },
         },
         '& .MuiSvgIcon-root' : {
-                paddingRight: 10,
-                fill: 'black',
-                paddingTop: 20,
-                color: 'black',
-                position: 'absolute',
-                marginTop: 20,
+                width : 0,
+                 height :0,
+        },
 
-        }
+        input : {
+            marginLeft: 0,
+        },
+        item : {
+            backgroundColor: 'rgb(255, 255, 255)',
+            margin: '2px 5px 2px 2px',
+            padding: '0px 10px 0px 10px',
+            border: '1px solid rgb(228, 232, 240)',
+            height: '30px',
+            fontWeight: 600,
+            fontSize: 12
+        },
     }),
 );
 
-import { Avatar,  } from '@material-ui/core';
-
-import { ArrowDropDownCircle } from '@material-ui/icons';
-
-
-export default function LongSearch(): JSX.Element {
+export default function LongSearch( props : any ): JSX.Element {
     const classes = useStyles();
 
+    const onClickClose =  () => {
+        props.close();
+    };
+
     return (
-        <div className={classes.root} >
+        <>
             <Autocomplete
+                classes={{ root: classes.root, input: classes.input  }}
                 multiple={true}
                 size="medium"
                 options={programingLanguageIconArray}
-                getOptionLabel={(option) => option.name + 'category' }
-                fullWidth={true}
-                popupIcon={ <ArrowDropDownCircle />}
-                limitTags = {2}
-
+                getOptionLabel={(option) => option.name }
                 renderOption={(option) => {
                     if ( option.name !== 'All') {
                         return (
@@ -71,23 +97,32 @@ export default function LongSearch(): JSX.Element {
 
                 renderTags={(value, getTagProps) =>
                     value.map((option, index) => (
+                        <>
                             <Chip
+                                classes = {{ root : classes.item }}
                                 key={option.name}
-                                label={ option.name + 'category'}
                                 size="small"
-                                avatar={<Avatar>{option.icon}</Avatar> }
                                 {...getTagProps({ index })}
+                                label={(
+                                    <section className = "chip-label">
+                                        <span className= "category">  CATEGORY </span>
+                                        <span className = "describe"> { option.name } </span>
+                                    </section>
+                                )}
                             />
-                            
+                        </>
                     ))
                 }
 
-                renderInput={(params) => (
-                        <TextField {...params}    className="long-text-field" placeholder= "Skill, Company, Location">
-
-                        </TextField>
+                renderInput={(params )   => (
+                    <div className="input">
+                        <div className="back-icon" onClick = {onClickClose}>
+                            <IconStart/>
+                        </div>
+                        <TextField {...params} className="long-text-field" placeholder= "Skill, Company, Location"/>
+                    </div>
                 )}
             />
-        </div>
+        </>
     );
 }

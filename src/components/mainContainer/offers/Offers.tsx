@@ -1,58 +1,52 @@
 import React, { useEffect, useState } from 'react';
-
 import './Offers.sass';
 import OffersWithSalary from './buttons/OffersWithSalary';
 import AllOffers from './buttons/AllOffers';
 import SortBy from './buttons/sortBy/SortBy';
 import  MediaQuery  from 'react-responsive';
 import OfferComponent from './offer/offerComponent';
-
 import { OfferType } from '../../../offerType';
 import { filterFunction } from './filters';
+import { useSettings } from '../../../Settings';
 
 interface Size {
     width: number | undefined;
     height: number | undefined;
 }
+
 function useWindowSize(): Size {
-    // Initialize state with undefined width/height so server and client renders match
-    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
     const [windowSize, setWindowSize] = useState<Size>({
         width: undefined,
         height: undefined,
     });
 
     useEffect(() => {
-        // Handler to call on window resize
         function handleResize() {
-            // Set window width/height to state
             setWindowSize({
                 width: window.innerWidth,
                 height: window.innerHeight - 200,
             });
         }
-        // Add event listener
+
         window.addEventListener('resize', handleResize);
-        // Call handler right away so state gets updated with initial window size
         handleResize();
-        // Remove event listener on cleanup
         return () => window.removeEventListener('resize', handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
+    }, []);
     return windowSize;
 }
 
-
 function Offers(): JSX.Element {
+    const { error, data } = useSettings();
     const size: Size = useWindowSize();
-    const filter3 = filterFunction();
-
-
+    const filter = filterFunction();
+    console.log( filter);
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
     };
 
-
+    if (error) return  ( <span>There is error</span>);
+    if (!data) return ( <span>Loading...</span>);
     return (
         <div className="offers">
             <div className="offers-level-2">
@@ -70,11 +64,9 @@ function Offers(): JSX.Element {
                 <div className="offersContent">
                     <div className="offers-content-2">
                         <div className="offers-content-3" style={style}>
-                            {
-                                filter3?.slice(0, 200).map(( { ...props } :OfferType) =>
+                            { filter?.slice(0, 100).map(( { ...props } :OfferType) =>
                                     <OfferComponent key={props.id}  {...props}/>
-                                )
-                            }
+                                )}
                         </div>
                     </div>
                 </div>

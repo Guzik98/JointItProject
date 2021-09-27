@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
 import { useSettings } from '../../../../Settings';
 
 const useStyles = makeStyles({
@@ -28,20 +27,18 @@ const useStyles = makeStyles({
 
 const CityBtnComponent = (props: any): JSX.Element => {
     const classes = useStyles();
-    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
+    const { setCity, city } = useSettings();
 
-    const handleClose = () => {
+    const handleClick = () => {
         props.click();
+        setCity(`${props.city}`);
     };
+
     return (
-        <NavLink
-            to={`/Offers/${props.city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-            onClick={() => setCity(`${props.city}`)}
-            activeClassName="active"
-        >
             <Button size="small"
                     variant="outlined"
-                    onClick={handleClose}
+                    onClick={handleClick}
+                    className={ `${city == props.city ? 'active' : '' } `}
                     classes={{
                         root: classes.city,
                         label: classes.label,
@@ -49,7 +46,6 @@ const CityBtnComponent = (props: any): JSX.Element => {
             >
                 {props.city}
             </Button>
-        </NavLink>
     );
 };
 

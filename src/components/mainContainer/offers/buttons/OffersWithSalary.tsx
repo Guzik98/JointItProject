@@ -1,18 +1,12 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
-import { NavLink } from 'react-router-dom';
-
-
 const OffersWithSalary = (): JSX.Element => {
-    const { city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, setWithSalary } = useSettings();
-
+    const { setWithSalary, withSalary } = useSettings();
     return (
-        <NavLink
-            to={`/Offers/${city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/offers-with-salary`}
-            activeClassName="tab-active"
-            className="offers"
-            onClick={() => setWithSalary('offers-with-salary')}
+        <div
+            className= {`${withSalary ? 'tab-active offers' : 'offers'}`}
+            onClick={() => setWithSalary(true)}
         >
             <MediaQuery minWidth={1024}>
                 <span className="tab-offers-text">
@@ -24,7 +18,7 @@ const OffersWithSalary = (): JSX.Element => {
                 With salary
                 </span>
             </MediaQuery>
-        </NavLink>
+        </div>
     );
 };
 

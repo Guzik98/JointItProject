@@ -15,14 +15,10 @@ const TechPopOut = (props: any) => {
     return (
         <>
             <div className="tech-pop-out-title">
-                    <span>
                         Technology
-                    </span>
-                <span>
-                         <div className="exit-icon" onClick={handleClose}>
-                             <ClearIcon/>
-                         </div>
-                    </span>
+                <div className="exit-icon" onClick={handleClose}>
+                    <ClearIcon/>
+                </div>
             </div>
             <Divider/>
             <div className="tech-pop-out-content">

@@ -101,7 +101,6 @@ const SortBy = (): JSX.Element => {
             </MediaQuery>
 
             <MediaQuery minWidth={1024}>
-
                 <Popover
                     className={classes.root}
                     id={id}

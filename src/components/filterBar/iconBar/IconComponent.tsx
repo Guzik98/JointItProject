@@ -1,14 +1,16 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { useSettings } from '../../../Settings';
 
 const IconComponent = ({ name, icon }: { name: string, icon: JSX.Element }): JSX.Element => {
-    const { city, setTech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
+    const { setTech, tech } = useSettings();
     return (
-        <NavLink
-            to={`/Offers/${city}/${name}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-            onClick={() => setTech(`${name}`)} className="icon-level-2" activeClassName="active-icon">
-            <div className="icon" key={name}>
+        <div
+            onClick={() => setTech(`${name}`)}
+            className = {`${tech !== name && tech != 'All' ? 'un-active' : '' }` }
+        >
+            <div
+                className="icon"
+                 key={name}>
                 <a className="circle">
                     {icon}
                 </a>
@@ -16,7 +18,7 @@ const IconComponent = ({ name, icon }: { name: string, icon: JSX.Element }): JSX
                     {name}
                 </span>
             </div>
-        </NavLink>
+        </div>
     );
 };
 

@@ -60,12 +60,16 @@
             display: flex
             align-items: center
             justify-content: center
-            box-shadow: none
             text-transform: none
             line-height: 35px
             border-radius: 30px
             position: relative
             text-decoration: none
+            cursor: pointer
+            &:hover
+              box-shadow: 0px 0px 0px 5px #e4e8f0
+              color: rgb(255, 255, 255)
+              fill: rgb(255, 255, 255)
 
           .all-icon
             background: linear-gradient(-90deg, rgb(186, 104, 200), rgb(156, 39, 176))
@@ -83,24 +87,27 @@
 .long-search-bar
   display: flex
   justify-content: space-between
-  padding-right: 15px
-  padding-left: 15px
-  padding-top: 14px
+  padding: 14px 15px 10px
 
   .long-search-bar-filter
     width: 60%
+    margin: 10px
 
 a
   text-decoration: none
 
-
 .active
-  .MuiButton-root
-    background: rgba(255, 64, 129, 0.08) !important
-    border-color: rgb(255, 64, 129)
+  background: rgba(255, 64, 129, 0.08) !important
+  border-color: rgb(255, 64, 129)!important
 
-    .MuiButton-label
-      color: rgb(255, 64, 129) !important
+  .MuiButton-label
+    color: rgb(255, 64, 129)
+
+.un-active
+  .all-icon
+    background: rgb(150, 150, 156)!important
+  circle
+    fill: rgb(142, 142, 161) !important
 
 .icon-level-2
   width: 51px

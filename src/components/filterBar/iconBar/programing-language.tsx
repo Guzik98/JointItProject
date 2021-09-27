@@ -32,9 +32,9 @@ export type IconType = {
 
 export const programingLanguageIconArray = [
     { name: 'All', icon: <AllIcon/>, },
-    { name: 'JavaScript', icon: <JavaScriptIcon/>, },
-    { name: 'Html', icon: <Html/> },
-    { name: 'php', icon: <Php/> },
+    { name: 'JS', icon: <JavaScriptIcon/>, },
+    { name: 'HTML', icon: <Html/> },
+    { name: 'PHP', icon: <Php/> },
     { name: 'Ruby', icon: <Ruby/> },
     { name: 'Python', icon: <Python/> },
     { name: 'Java', icon: <Java/> },

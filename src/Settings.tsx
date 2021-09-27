@@ -1,13 +1,12 @@
 import React, { createContext, FC, useContext, useState } from 'react';
 import useFetch from './useFetch';
 
-
 const url = 'http://localhost:8000/offers';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
-
 const useProviderSettings = () => {
+
     const { data, error } = useFetch<[]>(url);
     const [ city, setCity ] = useState<string>('all');
     const [ tech, setTech ] = useState<string>('All');
@@ -16,7 +15,7 @@ const useProviderSettings = () => {
     const [ toSalary, setToSalary ] = useState<number>(100000);
     const [ employmentType, setEmploymentType ] = useState<string>('All');
     const [ sortBy, setSortBy ] = useState<string>('Latest');
-    const [ withSalary, setWithSalary ] = useState<string>('all-offers');
+    const [ withSalary, setWithSalary ] = useState<boolean>(false);
         return {
             city,
             setCity,

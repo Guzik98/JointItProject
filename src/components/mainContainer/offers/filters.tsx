@@ -1,50 +1,15 @@
 import { EmploymentType } from '../../../offerType';
 import { useSettings } from '../../../Settings';
 
-
-
 export const filterFunction = () => {
     const { data,  city, tech, seniority, fromSalary, employmentType, toSalary, withSalary, sortBy } = useSettings();
 
-    let sortByFilter;
-    if (sortBy === 'Lowest Salary' ) {
-        console.log(sortBy);
-         sortByFilter = data?.filter(function (item : {
-                employment_types : EmploymentType
-            }) : boolean {
-                if (item.employment_types[0].salary == null) {
-                    return false;
-                }
-                return  true;
-            }
-        );
-        sortByFilter = sortByFilter?.sort(function (a: any, b: any) : number {
-            return a.employment_types[0].salary?.to - b.employment_types[0].salary?.to;
-        });
-        }
-
-    if (sortBy === 'Highest Salary' ) {
-        sortByFilter = data?.filter(function (item : {
-                employment_types : EmploymentType
-            }) : boolean {
-                if (item.employment_types[0].salary == null) {
-                    return false;
-                }
-                return  true;
-            }
-        );
-        sortByFilter = sortByFilter?.sort(function (a: any, b: any) : number {
-            return b.employment_types[0].salary?.to - a.employment_types[0].salary?.to;
-        });
-    }
-    if (sortBy === 'Latest' ) {
-        sortByFilter = data;
-    }
-
-
-    const filterTech = sortByFilter?.filter(function (item : {
+    const filterTech = data?.filter(function (item : {
             marker_icon: string;
         }) : boolean {
+            if (tech == 'JS'){
+                return  item.marker_icon === 'javascript';
+            }
             if (tech == 'UX/UI'){
                 return  item.marker_icon === 'ui' || item.marker_icon === 'ux' || item.marker_icon === 'ux/ui';
             }
@@ -80,9 +45,9 @@ export const filterFunction = () => {
         employment_types : EmploymentType
     }) : boolean {
         if (item.employment_types[0].salary != null) {
-            return (item.employment_types[0].salary.from > fromSalary && item.employment_types[0].salary.to < toSalary)  ;
+            return (item.employment_types[0].salary.to > fromSalary && item.employment_types[0].salary.to < toSalary);
         }
-        if ( (fromSalary != 0 && item.employment_types[0].salary == null ) || withSalary == 'offers-with-salary' ) {
+        if ( (fromSalary != 0 && item.employment_types[0].salary == null ) || withSalary ) {
             return false;
         }
         return true;
@@ -106,5 +71,73 @@ export const filterFunction = () => {
         return true;
     });
 
-    return filterEmployment;
+    let filtered: any[] | undefined;
+
+    if (sortBy === 'Lowest Salary' ) {
+        console.log(sortBy);
+        const filtering = filterEmployment?.filter(function (item : {
+                employment_types : EmploymentType
+            }) : boolean {
+                if (item.employment_types[0].salary == null) {
+                    return false;
+                }
+                return  true;
+            }
+        );
+        filtered = filtering?.sort(function (a: any, b: any) : number {
+            if (a.employment_types[0].salary?.currency == 'eur') {
+                return  (a.employment_types[0].salary?.to * 4.6 ) -  b.employment_types[0]?.salary?.to;
+            }
+            if (b.employment_types[0].salary?.currency == 'eur') {
+                return  a.employment_types[0].salary?.to -  (b.employment_types[0]?.salary?.to * 4.6 );
+            }
+            if (a.employment_types[0].salary?.currency == 'usd') {
+                return  (a.employment_types[0].salary?.to * 4) -  b.employment_types[0]?.salary?.to;
+            }
+            if (b.employment_types[0].salary?.currency == 'usd') {
+                return  a.employment_types[0].salary?.to -  (b.employment_types[0]?.salary?.to * 4);
+            }
+            return a.employment_types[0].salary?.to - b.employment_types[0]?.salary?.to;
+        });
+    }
+
+    if (sortBy === 'Highest Salary' ) {
+        const filtering = filterEmployment?.filter(function (item : {
+                employment_types : EmploymentType
+            }) : boolean {
+                if (item.employment_types[0].salary == null) {
+                    return false;
+                }
+                return  true;
+            }
+        );
+        filtered = filtering?.sort(function (a: any, b: any) : number  {
+            let firstOperand : number = a.employment_types[0].salary.to;
+            let secondOperand : number = b.employment_types[0].salary.to;
+            let firstHelper : number  =  a.employment_types[0].salary.from;
+            let secondHelper : number  =  b.employment_types[0].salary.from;
+            if (a.employment_types[0].salary?.currency == 'eur') {
+                firstOperand = (firstOperand * 4.6);
+            }
+            if (b.employment_types[0].salary?.currency == 'eur') {
+                secondOperand = (secondOperand * 4.6);
+            }
+            if (a.employment_types[0].salary?.currency == 'usd') {
+                firstOperand = (firstOperand * 4);
+            }
+            if (b.employment_types[0].salary?.currency == 'usd') {
+                secondOperand = (secondOperand * 4);
+            }
+            if ( secondOperand == firstOperand){
+                return  secondHelper - firstHelper;
+            }
+            return secondOperand - firstOperand ;
+        });
+    }
+
+    if (sortBy === 'Latest') {
+        filtered = filterEmployment;
+    }
+
+    return filtered;
 };

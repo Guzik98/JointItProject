@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ClearIcon from '@material-ui/icons/Clear';
 import Typography from '@material-ui/core/Typography';
-
 import './LocationPopOver.sass';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import MediaQuery from 'react-responsive';
@@ -10,7 +9,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Collapse, Divider } from '@material-ui/core';
 import CityBtnComponent from './CityBtnComponent';
 import { useSettings } from '../../../../Settings';
-import { Link, NavLink } from 'react-router-dom';
 import { cityPoland, CityType, cityWorld, OtherPolandCities } from './CityBtn';
 
 const useStyles = makeStyles({
@@ -33,11 +31,9 @@ const useStyles = makeStyles({
     },
 });
 
-
-
 const PopOverLocation = (props : any) :JSX.Element => {
     const classes = useStyles();
-    const { setCity, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
+    const { setCity, city } = useSettings();
 
     const [open, setOpen] = React.useState(false);
 
@@ -69,13 +65,12 @@ const PopOverLocation = (props : any) :JSX.Element => {
                     </MediaQuery>
                     <div className="type-work">
                         <div className="type-work-level2">
-                            <NavLink
-                                to={`/Offers/Remote-Poland/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
+                            <div
                                 onClick={() =>setCity('Remote Poland')}
-                                activeClassName="active"
                             >
                                 <Button size="small"
                                         variant="outlined"
+                                        className= {`${city === 'Remote Poland' ? 'active' : '' }`}
                                         onClick={handleClose}
                                         classes={{
                                             root: classes.city,
@@ -84,15 +79,14 @@ const PopOverLocation = (props : any) :JSX.Element => {
                                 >
                                     Remote Poland
                                 </Button>
-                            </NavLink>
-                            <NavLink
-                                to={`/Offers/Remote Global/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}
-                                onClick={() => setCity('Remote Global')}
-                                activeClassName="active"
+                            </div>
+                            <div
+                                onClick={() =>setCity('Remote Global')}
                             >
                                 <Button size="small"
                                         variant="outlined"
                                         onClick={handleClose}
+                                        className= {`${city === 'Remote Global' ? 'active' : '' }`}
                                         classes={{
                                             root: classes.city,
                                             label: classes.label
@@ -100,7 +94,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                                 >
                                     Remote Global
                                 </Button>
-                            </NavLink>
+                            </div>
                         </div>
                         <MediaQuery minWidth={1024}>
                             <div className="exit-icon-border" onClick={handleClose}>
@@ -145,21 +139,16 @@ const PopOverLocation = (props : any) :JSX.Element => {
                         </div>
                     </div>
                     <Divider className="divider-pop" variant="fullWidth"/>
-                    <div>
-                        <Link
-                            to={`/Offers/all/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${sortBy}/${withSalary}`}>
-                            <Button size="small"
-                                    onClick={clear}
-                                    variant="outlined"
-                                    classes={{
-                                        root: classes.city,
-                                        label: classes.label
-                                    }}
-                            >
-                                Clear Filter
-                            </Button>
-                        </Link>
-                    </div>
+                    <Button size="small"
+                        onClick={clear}
+                         variant="outlined"
+                         classes={{
+                             root: classes.city,
+                             label: classes.label
+                         }}
+                    >
+                        Clear Filter
+                    </Button>
                 </div>
             </div>
         </Typography>

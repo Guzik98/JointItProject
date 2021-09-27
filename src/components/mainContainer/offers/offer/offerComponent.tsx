@@ -16,7 +16,7 @@ const CompanyIcon = (): JSX.Element => {
 
 const PointerIcon = () : JSX.Element => {
     return (
-        <svg className="MuiSvgIcon-root pointer-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+        <svg className="pointer-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
             <path
                 d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z">
             </path>
@@ -93,7 +93,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                             displaySalary(type);
                                         })
                                         }
-                                        {currency !== 'Undisclosed Salary' ? minSalary + ' - ' + maxSalary + ' ' + currency : currency }
+                                        {currency !== 'Undisclosed Salary' ? minSalary + ' - ' + maxSalary + ' ' + currency.toUpperCase() : currency }
                                     </div>
                                 </MediaQuery>
                             </div>
@@ -127,7 +127,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                             }
                                             {currency !== 'Undisclosed Salary' ?
                                                 minSalary.toString().slice(0, -3) + 'k - '
-                                                + maxSalary.toString().slice(0, -3) + 'k ' + currency
+                                                + maxSalary.toString().slice(0, -3) + 'k ' + currency.toUpperCase()
                                                 : currency }
                                         </div>
 

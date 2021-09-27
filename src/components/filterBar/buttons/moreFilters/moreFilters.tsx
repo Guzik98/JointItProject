@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
+import { useSettings } from '../../../../Settings';
 import '../buttons.sass';
-import { Dialog, } from '@material-ui/core';
 import './moreFilters.sass';
 import MoreFilersPopOut from './moreFilersPopOut';
-
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import MediaQuery from 'react-responsive';
+import { Dialog, Button, createStyles, makeStyles  } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import { useSettings } from '../../../../Settings';
 
 const IconPath = (): JSX.Element => {
     return (
-        <svg className="icon-width MuiButton-iconSizeSmall" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+        <svg className="icon-pad"  focusable="false" viewBox="0 0 24 24" aria-hidden="true">
             <path
                 d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
             </path>
@@ -48,6 +45,7 @@ const useStyles = makeStyles(() =>
 
         },
         moreFiltersBtn: {
+            display: 'flex',
             borderRadius: '32px',
             textTransform: 'none',
             fontSize: '14px',
@@ -66,6 +64,7 @@ const useStyles = makeStyles(() =>
             }
         },
         moreFiltersBtnChosen: {
+            display: 'flex',
             borderRadius: '32px',
             textTransform: 'none',
             fontSize: '14px',
@@ -82,7 +81,6 @@ const useStyles = makeStyles(() =>
                 minWidth: 'fit-content',
                 margin: '10px 5px 10px 0px'
             }
-
         },
         label: {
             textTransform: 'none',
@@ -96,7 +94,6 @@ const useStyles = makeStyles(() =>
         },
     }),
 );
-
 
 export const MoreFilters = (): JSX.Element => {
     const classes = useStyles();
@@ -125,38 +122,36 @@ export const MoreFilters = (): JSX.Element => {
 
     return (
         <div>
-            <MediaQuery maxWidth={1024}>
                 <Button size="small"
                         variant="outlined"
                         onClick={handleClickOpen}
-                        classes={(fromSalary != 0 || toSalary != 100000 || employmentType != 'All' || seniority != 'All')
+                        classes={ (fromSalary != 0 || toSalary != 100000 ||
+                            employmentType != 'All' || seniority != 'All')
                             ? { root: classes.moreFiltersBtnChosen, label: classes.label }
                             : { root: classes.moreFiltersBtn, label: classes.label }}
                 >
-                    {counter > 0 ? <span className="numer-border"> {counter} </span> : null} More filters
+                    {counter > 0 ? <span className="numer-border"> {counter} </span>
+                        : <MediaQuery minWidth={1024}>
+                            <IconPath/>
+                        </MediaQuery>
+                    }
+                    More filters
+                    <MediaQuery minWidth={1024}>
+                        {open ? <ExpandLess fontSize='small' /> : <ExpandMore fontSize='small' />}
+                    </MediaQuery>
                 </Button>
-                <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                    <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
-                                      onClick={handleClose}/>
-                </Dialog>
-            </MediaQuery>
-            <MediaQuery minWidth={1024}>
-                <Button size="small"
-                        variant="outlined"
-                        onClick={handleClickOpen}
-                        endIcon={open ? <ExpandLess/> : <ExpandMore/>}
-                        classes={(fromSalary != 0 || toSalary != 100000 || employmentType != 'All' || seniority != 'All')
-                            ? { root: classes.moreFiltersBtnChosen, label: classes.label }
-                            : { root: classes.moreFiltersBtn, label: classes.label }}
-                >
-                    {counter > 0 ? <span className="numer-border"> {counter} </span> :
-                        <span className="icon-pad"><IconPath/> </span>} More filters
-                </Button>
-                <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                    <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
-                                      onClick={handleClose}/>
-                </Dialog>
-            </MediaQuery>
+                <MediaQuery maxWidth={1024}>
+                    <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                        <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
+                                          onClick={handleClose}/>
+                    </Dialog>
+                </MediaQuery>
+                <MediaQuery minWidth={1024}>
+                    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+                        <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
+                                          onClick={handleClose}/>
+                    </Dialog>
+                </MediaQuery>
         </div>
     );
 };

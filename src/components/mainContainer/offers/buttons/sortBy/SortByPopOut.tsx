@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, DialogContent, DialogTitle, Divider } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { NavLink } from 'react-router-dom';
 import { useSettings } from '../../../../../Settings';
 import MediaQuery from 'react-responsive';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -41,7 +40,7 @@ const sortByButtons = [
 
 const SortByButtonsComponent = (props: any) => {
     const classes = useStyles();
-    const { city, tech, seniority, employmentType, fromSalary, toSalary, setSortBy, withSalary } = useSettings();
+    const { setSortBy, sortBy } = useSettings();
 
     const handleClose = () => {
         setSortBy(props.name);
@@ -51,11 +50,7 @@ const SortByButtonsComponent = (props: any) => {
     return (
         <>
             <MediaQuery maxWidth={1024}>
-                <NavLink
-                    to={`/Offers/${city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${props.name}/${withSalary}`}
-                    activeClassName="active"
-                    className="sort-by-link"
-                >
+                <div className={`${ sortBy === props.name ? 'sort-active sort-by-link' : 'sort-by-link' }` }>
                     <Button
                         onClick={handleClose}
                         classes={{
@@ -64,14 +59,10 @@ const SortByButtonsComponent = (props: any) => {
                         }}>
                         {props.name}
                     </Button>
-                </NavLink>
+                </div>
             </MediaQuery>
             <MediaQuery minWidth={1024}>
-                <NavLink
-                    to={`/Offers/${city}/${tech}/${seniority}/${employmentType}/${fromSalary}/${toSalary}/${props.name}/${withSalary}`}
-                    activeClassName="false"
-                    className="sort-by-link"
-                >
+                <div className={`${ sortBy === props.name ? 'false sort-by-link' : 'sort-by-link' }` }>
                     <Button
                         onClick={handleClose}
                         classes={{
@@ -80,7 +71,7 @@ const SortByButtonsComponent = (props: any) => {
                         }}>
                         {props.name}
                     </Button>
-                </NavLink>
+                </div>
             </MediaQuery>
         </>
     );

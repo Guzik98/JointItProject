@@ -10,7 +10,7 @@ function App(): JSX.Element {
     return (
         <SettingsProvider>
             <BrowserRouter>
-                <Redirect exact from="/" to="Offers/all/all/All/All/0/100000/Latest/all-offers"/>
+                <Redirect exact from="/" to="Offers"/>
                 <div className="App">
                     <Header/>
                     <Bar/>
