@@ -1,13 +1,17 @@
 import React, { createContext, FC, useContext, useState } from 'react';
 import useFetch from './useFetch';
+import { OfferType } from './offerType';
+import OfferTypeDetail from './offerDetailType';
 
-const url = 'http://localhost:8000/offers';
+const url = 'https://justjoin.it/api/offers';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
 const useProviderSettings = () => {
-
-    const { data, error } = useFetch<[]>(url);
+    console.log('start');
+    const { data, error } = useFetch<OfferType[]>(url);
+    const [ urlDetail, setUrlDetail ] = useState<string>();
+    const [ dataDetail, setDataDetail] = useState<OfferTypeDetail>();
     const [ city, setCity ] = useState<string>('all');
     const [ tech, setTech ] = useState<string>('All');
     const [ seniority, setSeniority ] = useState<string>('All');
@@ -34,7 +38,11 @@ const useProviderSettings = () => {
             withSalary,
             setWithSalary,
             data,
-            error
+            error,
+            dataDetail,
+            setDataDetail,
+            urlDetail,
+            setUrlDetail
         };
 };
 

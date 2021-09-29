@@ -9,12 +9,14 @@ export type EmploymentType = [
     }
 ];
 
-export type SkillsType = {
-    name: string,
-    level: number
-};
+export type SkillsType = [
+    {
+        name: string,
+        level: number
+    }
+];
 
-export  type OfferType = {
+export type OfferType = {
     title: string,
     street: string,
     city: string
@@ -33,6 +35,6 @@ export  type OfferType = {
     id: string,
     employment_types: EmploymentType
     company_logo_url: string
-    skills: Array<SkillsType>
+    skills: SkillsType
     remote: boolean
 };

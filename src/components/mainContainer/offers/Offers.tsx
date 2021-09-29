@@ -8,6 +8,7 @@ import OfferComponent from './offer/offerComponent';
 import { OfferType } from '../../../offerType';
 import { filterFunction } from './filters';
 import { useSettings } from '../../../Settings';
+import DetailOffert from './offerDertail/DetailOffert';
 
 interface Size {
     width: number | undefined;
@@ -37,6 +38,17 @@ function useWindowSize(): Size {
 
 function Offers(): JSX.Element {
     const { error, data } = useSettings();
+    const [openDetail, setOpenDetail ] = useState<boolean>(false);
+
+    const handleClickOpen = () => {
+        setOpenDetail(true);
+    };
+
+    const handleClickClose = () => {
+        setOpenDetail(false);
+    };
+
+
     const size: Size = useWindowSize();
     const filter = filterFunction();
     console.log( filter);
@@ -49,7 +61,8 @@ function Offers(): JSX.Element {
     if (!data) return ( <span>Loading...</span>);
     return (
         <div className="offers">
-            <div className="offers-level-2">
+            { !openDetail ?
+                <div className="offers-level-2">
                 <div className="offers-menu">
                     <div className="left-side-buttons">
                         <OffersWithSalary/>
@@ -61,16 +74,20 @@ function Offers(): JSX.Element {
                         </MediaQuery>
                     </div>
                 </div>
-                <div className="offersContent">
-                    <div className="offers-content-2">
-                        <div className="offers-content-3" style={style}>
-                            { filter?.slice(0, 100).map(( { ...props } :OfferType) =>
-                                    <OfferComponent key={props.id}  {...props}/>
-                                )}
-                        </div>
+                    <div className="offers-content-3" style={style}>
+                        { filter?.slice(0, 100).map(( { ...props } :OfferType) =>
+                           <div key={props.id} onClick={handleClickOpen} >
+                               <OfferComponent key={props.id}  {...props} />
+                           </div>
+                        )}
+
                     </div>
                 </div>
-            </div>
+
+                : <div style={style}>
+                    <DetailOffert click = {handleClickClose}/>
+                </div>
+            }
         </div>
     );
 }

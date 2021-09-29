@@ -1,9 +1,9 @@
 import React from 'react';
 import './offerComponent.sass';
-import MediaQuery from 'react-responsive';
 import { OfferType } from '../../../../offerType';
-
-
+import { Link } from 'react-router-dom';
+import MediaQuery from 'react-responsive';
+import { useSettings } from '../../../../Settings';
 const CompanyIcon = (): JSX.Element => {
     return (
         <svg className="company-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
@@ -25,7 +25,7 @@ const PointerIcon = () : JSX.Element => {
 };
 
 const OfferComponent = (props : OfferType) : JSX.Element => {
-
+    const { setUrlDetail } = useSettings();
     let minSalary = 0;
     let maxSalary = 0;
     let currency = 'Undisclosed Salary';
@@ -57,17 +57,9 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
             return diffInDays + 'd ago';
         }
     }
-    async function details() {
-        const url = `https://justjoin.it/api/offers/${props.id}`;
-        fetch(url, {
-            mode: 'no-cors',
-        })
-        .then(res => res.json())
-            .then(data => console.log(data));
-    }
 
     return (
-        <div className="offer-border" onClick = {details}>
+        <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => { setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);} }>
             <div className="offer-border-level2">
                 <div className="offer-border-level3">
                     <div className="logo">
@@ -157,7 +149,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
