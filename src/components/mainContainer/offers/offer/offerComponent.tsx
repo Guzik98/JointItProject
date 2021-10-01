@@ -25,7 +25,7 @@ const PointerIcon = () : JSX.Element => {
 };
 
 const OfferComponent = (props : OfferType) : JSX.Element => {
-    const { setUrlDetail } = useSettings();
+    const { setUrlDetail, setViewport, setOpenDetailComponent } = useSettings();
     let minSalary = 0;
     let maxSalary = 0;
     let currency = 'Undisclosed Salary';
@@ -59,7 +59,17 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
     }
 
     return (
-        <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => { setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);} }>
+        <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => {
+            setOpenDetailComponent(true);
+            setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);
+            setViewport({
+                latitude: +props.latitude,
+                longitude: +props.longitude,
+                width: '100%',
+                height: '98%',
+                zoom: 16,
+            });
+        } }>
             <div className="offer-border-level2">
                 <div className="offer-border-level3">
                     <div className="logo">

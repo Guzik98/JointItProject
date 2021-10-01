@@ -35,10 +35,10 @@ const Tech = () : JSX.Element => {
                 <div className = "skill">
                     <div className = "skill-level">
                         <div className={`${props.level >= 1 ? 'circle active-skill' : ' circle' }  `} />
-                        <div className={`${props.level > 2 ? 'circle active-skill' : ' circle' }  `} />
-                        <div className={`${props.level > 3 ? 'circle active-skill' : ' circle' }  `} />
-                        <div className={`${props.level > 4 ? 'circle active-skill' : ' circle' }  `} />
-                        <div className={`${props.level > 5 ? 'circle active-skill' : ' circle' }  `} />
+                        <div className={`${props.level >= 2 ? 'circle active-skill' : ' circle' }  `} />
+                        <div className={`${props.level >= 3 ? 'circle active-skill' : ' circle' }  `} />
+                        <div className={`${props.level >= 4 ? 'circle active-skill' : ' circle' }  `} />
+                        <div className={`${props.level >= 5 ? 'circle active-skill' : ' circle' }  `} />
                     </div>
                 </div>
                 <div className="skill-name">{ props.name }</div>

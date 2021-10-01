@@ -37,16 +37,7 @@ function useWindowSize(): Size {
 }
 
 function Offers(): JSX.Element {
-    const { error, data } = useSettings();
-    const [openDetail, setOpenDetail ] = useState<boolean>(false);
-
-    const handleClickOpen = () => {
-        setOpenDetail(true);
-    };
-
-    const handleClickClose = () => {
-        setOpenDetail(false);
-    };
+    const { error, data, openDetailComponent } = useSettings();
 
 
     const size: Size = useWindowSize();
@@ -61,7 +52,7 @@ function Offers(): JSX.Element {
     if (!data) return ( <span>Loading...</span>);
     return (
         <div className="offers">
-            { !openDetail ?
+            { !openDetailComponent ?
                 <div className="offers-level-2">
                 <div className="offers-menu">
                     <div className="left-side-buttons">
@@ -75,8 +66,8 @@ function Offers(): JSX.Element {
                     </div>
                 </div>
                     <div className="offers-content-3" style={style}>
-                        { filter?.slice(0, 100).map(( { ...props } :OfferType) =>
-                           <div key={props.id} onClick={handleClickOpen} >
+                        { filter?.slice(0, 50).map(( { ...props } :OfferType) =>
+                           <div key={props.id}>
                                <OfferComponent key={props.id}  {...props} />
                            </div>
                         )}
@@ -85,7 +76,7 @@ function Offers(): JSX.Element {
                 </div>
 
                 : <div style={style}>
-                    <DetailOffert click = {handleClickClose}/>
+                    <DetailOffert />
                 </div>
             }
         </div>

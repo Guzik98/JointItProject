@@ -67,8 +67,9 @@ function useWindowSize(): Size {
     return windowSize;
 }
 
-const DetailOffert = (props : any) : JSX.Element => {
+const DetailOffert = () : JSX.Element => {
     const size: Size = useWindowSize();
+    const { setViewport, setOpenDetailComponent } = useSettings();
 
     const style = {
         maxHeight: size.height,
@@ -87,7 +88,18 @@ const DetailOffert = (props : any) : JSX.Element => {
         <div className = "content-detail" style={style}>
             <div className = "header-detail-offer">
                 <Link to='/Offers'>
-                    <Button classes = {{ root : classes.icon_back }} onClick = { () => props.click()}>
+                    <Button classes = {{ root : classes.icon_back }}
+                            onClick = { () => {
+                                setOpenDetailComponent(false);
+                                setViewport({
+                                    latitude: 52.237049,
+                                    longitude: 21.017532,
+                                    width: '100%',
+                                    height: '98%',
+                                    zoom: 5,
+                                });
+                            }}
+                    >
                         <ArrowBackIcon/>
                     </Button>
                 </Link>

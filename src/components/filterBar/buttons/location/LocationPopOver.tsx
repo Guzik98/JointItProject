@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 const PopOverLocation = (props : any) :JSX.Element => {
     const classes = useStyles();
-    const { setCity, city } = useSettings();
+    const { setCity, city, setViewport } = useSettings();
 
     const [open, setOpen] = React.useState(false);
 
@@ -44,6 +44,13 @@ const PopOverLocation = (props : any) :JSX.Element => {
         props.click();
     };
     const clear = () => {
+        setViewport({
+            latitude: 52.237049,
+            longitude: 21.017532,
+            width: '100%',
+            height: '98%',
+            zoom: 5,
+        });
         setCity('all');
         handleClose();
     };
@@ -109,8 +116,10 @@ const PopOverLocation = (props : any) :JSX.Element => {
                             Top Poland
                         </a>
                         <div className="city-buttons">
-                            {cityPoland.map(({ city }: CityType) =>
-                                <CityBtnComponent click={handleClose} city={city} key={city}/>)
+                            {cityPoland.map(({ city, longitude, latitude }: CityType) =>
+                                <CityBtnComponent click={handleClose} city={city} key={city}
+                                                  longitude={longitude} latitude={latitude}
+                                />)
                             }
                         </div>
                     </div>
@@ -119,8 +128,10 @@ const PopOverLocation = (props : any) :JSX.Element => {
                             Top World
                         </a>
                         <div className="city-buttons">
-                            {cityWorld.map(({ city }: CityType) =>
-                                <CityBtnComponent click={handleClose} city={city} key={city}/>)
+                            {cityWorld.map(({ city, longitude, latitude }: CityType) =>
+                                <CityBtnComponent click={handleClose} city={city} key={city}
+                                                  longitude={longitude} latitude={latitude}
+                                />)
                             }
                         </div>
                     </div>
@@ -132,8 +143,10 @@ const PopOverLocation = (props : any) :JSX.Element => {
 
                         <div className="city-buttons"  >
                             <Collapse in={open}>
-                                {OtherPolandCities.map(({ city }: CityType) =>
-                                    <CityBtnComponent click={handleClose} city={city} key={city}/>)
+                                {OtherPolandCities.map(({ city, longitude, latitude }: CityType) =>
+                                    <CityBtnComponent click={handleClose} city={city} key={city}
+                                                      longitude={longitude} latitude={latitude}
+                                    />)
                                 }
                             </Collapse>
                         </div>
