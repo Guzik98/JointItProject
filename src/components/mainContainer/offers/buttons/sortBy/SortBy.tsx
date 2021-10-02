@@ -21,7 +21,7 @@ const useStyles = makeStyles(() =>
             },
         },
         sortButton: {
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 minWidth: 'fit-content',
                 margin: '10px 5px 10px 0px',
                 borderRadius: '32px',
@@ -38,7 +38,7 @@ const useStyles = makeStyles(() =>
             }
         },
         sortButtonChosen: {
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 borderRadius: '32px',
                 textTransform: 'none',
                 fontSize: '14px',
@@ -81,7 +81,7 @@ const SortBy = (): JSX.Element => {
                 onClick={handleClick}
 
             >
-                <MediaQuery minWidth={1024}>
+                <MediaQuery minWidth={1025}>
                     <span className="sort-by-label">
                        Sort by:
                     </span>
@@ -89,18 +89,18 @@ const SortBy = (): JSX.Element => {
                 <span className="sort-by-option">
                     {sortBy}
                 </span>
-                <MediaQuery minWidth={1024}>
+                <MediaQuery minWidth={1025}>
                     {open ? <ExpandLess/> : <ExpandMore/>}
                 </MediaQuery>
             </Button>
 
-            <MediaQuery maxWidth={1024}>
+            <MediaQuery maxWidth={1025}>
                 <Dialog fullScreen aria-labelledby="customized-dialog-title" open={open}>
                     <SortByPopOut click={handleClose}/>
                 </Dialog>
             </MediaQuery>
 
-            <MediaQuery minWidth={1024}>
+            <MediaQuery minWidth={1025}>
                 <Popover
                     className={classes.root}
                     id={id}

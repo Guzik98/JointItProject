@@ -8,12 +8,12 @@ const OffersWithSalary = (): JSX.Element => {
             className= {`${withSalary ? 'tab-active offers' : 'offers'}`}
             onClick={() => setWithSalary(true)}
         >
-            <MediaQuery minWidth={1024}>
+            <MediaQuery minWidth={1025}>
                 <span className="tab-offers-text">
                 Offers with salary
                 </span>
             </MediaQuery>
-            <MediaQuery maxWidth={1024}>
+            <MediaQuery maxWidth={1025}>
                 <span>
                 With salary
                 </span>

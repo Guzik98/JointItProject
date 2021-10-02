@@ -15,7 +15,7 @@ export const useStyles = makeStyles(() =>
                 margin: 0,
                 minWidth: 650,
                 padding: 0,
-                '@media (max-width: 1024px)': {
+                '@media (max-width: 1025px)': {
                     minWidth: '100%',
                     minHeight: '100%',
                     top: '0px!important',
@@ -26,7 +26,7 @@ export const useStyles = makeStyles(() =>
             '& .MuiTypography-body1' : {
                 width: 650,
                 height: '100%',
-                '@media (max-width: 1024px)':  {
+                '@media (max-width: 1025px)':  {
                     minWidth: '100%',
                     minHeight: '100%',
                     position: 'relative',
@@ -45,7 +45,7 @@ export const useStyles = makeStyles(() =>
             marginTop: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 fontSize: 12,
                 minWidth: 'fit-content',
                 margin: '10px 5px 10px 0px',
@@ -64,7 +64,7 @@ export const useStyles = makeStyles(() =>
             marginTop: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 minWidth: 'fit-content',
                 margin: '10px 5px 10px 0px'
             }
@@ -95,7 +95,7 @@ export const useStyles = makeStyles(() =>
 
      return (
          <>
-             <MediaQuery maxWidth={1024}>
+             <MediaQuery maxWidth={1025}>
                  <Button
                      size="small"
                      variant="outlined"
@@ -106,7 +106,7 @@ export const useStyles = makeStyles(() =>
                  </Button>
              </MediaQuery>
 
-             <MediaQuery minWidth={1024}>
+             <MediaQuery minWidth={1025}>
                  <Button
                      size="small"
                      variant="outlined"

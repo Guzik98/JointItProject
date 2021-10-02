@@ -103,7 +103,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
                                 </Button>
                             </div>
                         </div>
-                        <MediaQuery minWidth={1024}>
+                        <MediaQuery minWidth={1025}>
                             <div className="exit-icon-border" onClick={handleClose}>
                                 <div className="exit-icon">
                                     <ClearIcon/>

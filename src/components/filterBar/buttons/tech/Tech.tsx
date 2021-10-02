@@ -17,7 +17,7 @@ export const useStyles = makeStyles(() =>
             marginTop: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 minWidth: 'fit-content',
                 margin: '10px 5px 10px 0px'
             }
@@ -34,7 +34,7 @@ export const useStyles = makeStyles(() =>
             marginTop: 6,
             padding: '0px 16px 0px 16px',
             height: 36,
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 minWidth: 'fit-content',
                 margin: '10px 10px 10px 0px'
             }

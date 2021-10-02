@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ReactMapGl, { Marker, Popup } from 'react-map-gl';
-import { filterFunction } from '../offers/filters';
-
+import { filterFunction } from '../offers/offer/filters';
 
 import './Map.sass';
 import { OfferType } from '../../../offerType';
 import { useSettings } from '../../../Settings';
-
-
 
 interface Size {
     width: number | undefined;
@@ -24,37 +21,39 @@ function useWindowSize(): Size {
         function handleResize() {
             setWindowSize({
                 width: window.innerWidth,
-                height: window.innerHeight,
+                height: window.innerHeight - 145,
             });
+
         }
 
         window.addEventListener('resize', handleResize);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
     return windowSize;
 }
 
 
 function Map(): JSX.Element{
     const { setUrlDetail, viewport, setViewport, setOpenDetailComponent } = useSettings();
+    const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
+
+    const filter = filterFunction();
     const size: Size = useWindowSize();
+
+
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
-        width: size.width,
     };
-    const filter = filterFunction();
-
-
-
-    const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
-    
 
     return (
         <div className="map" style={style}>
             <ReactMapGl {...viewport}
+                        className="map"
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                        style={style}
                 mapStyle='mapbox://styles/mapbox/streets-v11'
                 onViewportChange = { (viewport: React.SetStateAction<{ latitude: number; longitude: number;
                     width: string; height: string; zoom: number; }>) => {

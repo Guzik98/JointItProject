@@ -30,7 +30,7 @@ function Bar(): JSX.Element {
         return (
             <div className="filter-bar">
                 <div className="filter-bar-elements">
-                    <MediaQuery minWidth={1024}>
+                    <MediaQuery minWidth={1025}>
                         <SearchBtn  open={ handleOpenLongSearch }/>
                         <div className="location-icon">
                             <LocationBtn/>
@@ -40,7 +40,7 @@ function Bar(): JSX.Element {
                             <MoreFilters/>
                         </div>
                     </MediaQuery>
-                    <MediaQuery maxWidth={1024}>
+                    <MediaQuery maxWidth={1025}>
                         <SearchBtnSmall open={handleOpenLongSearch} />
                         <Tech/>
                         <LocationBtn/>

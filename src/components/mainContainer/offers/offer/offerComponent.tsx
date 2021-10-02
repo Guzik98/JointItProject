@@ -25,21 +25,12 @@ const PointerIcon = () : JSX.Element => {
 };
 
 const OfferComponent = (props : OfferType) : JSX.Element => {
-    const { setUrlDetail, setViewport, setOpenDetailComponent } = useSettings();
-    let minSalary = 0;
-    let maxSalary = 0;
-    let currency = 'Undisclosed Salary';
-    let today = new Date().toISOString().split('T')[0];
+    const { setUrlDetail, setViewport, setOpenDetailComponent, employmentType } = useSettings();
 
-    function displaySalary(type: { type: string; salary: { from: number; to: number; currency: string } | null }) {
-        if (type.salary !== null && type.salary !== undefined) {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        } else {
-            currency = 'Undisclosed Salary';
-        }
-    }
+    let today = new Date().toISOString().split('T')[0];
+    let minSalary: number | undefined = 0;
+    let maxSalary: number | undefined = 0;
+    let currency: string | undefined = 'Undisclosed Salary';
 
     function getNumberOfDays(start: string, end: string){
         const date1 = new Date(start);
@@ -57,6 +48,25 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
             return diffInDays + 'd ago';
         }
     }
+
+    function displaySalary(type: { type: string; salary: { from: number; to: number; currency: string } | null }) {
+        if (type.salary !== null && type.salary !== undefined && type.type == employmentType.toLowerCase()) {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+        }
+        if (type.salary !== null && type.salary !== undefined && type.type == 'mandate_contract') {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+        }
+        if (type.salary !== null && type.salary !== undefined && employmentType == 'All') {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+        }
+    }
+
 
     return (
         <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => {
@@ -79,6 +89,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                 alt={props.title + ' ' +  props.experience_level} className="image"/>
                         </div>
                     </div>
+
                     <div className="info">
                         <div className="top-info">
                             <div className="position-info">
@@ -123,16 +134,11 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
 
                                     <MediaQuery maxWidth={1024}>
                                         <div className="salary-text">
-                                            {props.employment_types.map((type)  => {
-                                                displaySalary(type);
-                                            })
-                                            }
                                             {currency !== 'Undisclosed Salary' ?
                                                 minSalary.toString().slice(0, -3) + 'k - '
                                                 + maxSalary.toString().slice(0, -3) + 'k ' + currency.toUpperCase()
                                                 : currency }
                                         </div>
-
                                     </MediaQuery>
                                 </div>
                             </div>

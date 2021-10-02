@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
                 margin: 0,
                 minWidth: 650,
                 padding: 0,
-                '@media (max-width: 1024px)':  {
+                '@media (max-width: 1025px)':  {
                     minWidth: '100%',
                     minHeight: '100%',
                     top: '0px!important',
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() =>
             '& .MuiTypography-body1' : {
                 width: 650,
                 height: '100%',
-                '@media (max-width: 1024px)':  {
+                '@media (max-width: 1025px)':  {
                     minWidth: '100%',
                     minHeight: '100%',
                     position: 'relative',
@@ -77,7 +77,7 @@ const useStyles = makeStyles(() =>
             padding: '0px 16px 0px 16px',
             height: 36,
             whiteSpace: 'nowrap',
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 minWidth: 'fit-content',
                 margin: '10px 5px 10px 0px'
             }
@@ -88,7 +88,7 @@ const useStyles = makeStyles(() =>
             fontSize: 14,
             fontFamily: 'Open Sans,sans-serif',
             whiteSpace: 'nowrap',
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 fontSize: 12
             }
         },
@@ -131,22 +131,22 @@ export const MoreFilters = (): JSX.Element => {
                             : { root: classes.moreFiltersBtn, label: classes.label }}
                 >
                     {counter > 0 ? <span className="numer-border"> {counter} </span>
-                        : <MediaQuery minWidth={1024}>
+                        : <MediaQuery minWidth={1025}>
                             <IconPath/>
                         </MediaQuery>
                     }
                     More filters
-                    <MediaQuery minWidth={1024}>
+                    <MediaQuery minWidth={1025}>
                         {open ? <ExpandLess fontSize='small' /> : <ExpandMore fontSize='small' />}
                     </MediaQuery>
                 </Button>
-                <MediaQuery maxWidth={1024}>
+                <MediaQuery maxWidth={1025}>
                     <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                         <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
                                           onClick={handleClose}/>
                     </Dialog>
                 </MediaQuery>
-                <MediaQuery minWidth={1024}>
+                <MediaQuery minWidth={1025}>
                     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                         <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
                                           onClick={handleClose}/>

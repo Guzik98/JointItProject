@@ -6,9 +6,10 @@ import SortBy from './buttons/sortBy/SortBy';
 import  MediaQuery  from 'react-responsive';
 import OfferComponent from './offer/offerComponent';
 import { OfferType } from '../../../offerType';
-import { filterFunction } from './filters';
+import { filterFunction } from './offer/filters';
 import { useSettings } from '../../../Settings';
 import DetailOffert from './offerDertail/DetailOffert';
+import DeflautComponent from './offer/DeflautComponent';
 
 interface Size {
     width: number | undefined;
@@ -24,12 +25,12 @@ function useWindowSize(): Size {
     useEffect(() => {
         function handleResize() {
             setWindowSize({
-                width: window.innerWidth,
+                width: window.innerWidth / 2,
                 height: window.innerHeight - 200,
             });
         }
-
         window.addEventListener('resize', handleResize);
+        console.log(window.innerWidth);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -37,19 +38,20 @@ function useWindowSize(): Size {
 }
 
 function Offers(): JSX.Element {
-    const { error, data, openDetailComponent } = useSettings();
+    const { openDetailComponent } = useSettings();
 
 
     const size: Size = useWindowSize();
     const filter = filterFunction();
     console.log( filter);
+
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
     };
 
-    if (error) return  ( <span>There is error</span>);
-    if (!data) return ( <span>Loading...</span>);
+
+
     return (
         <div className="offers">
             { !openDetailComponent ?
@@ -60,20 +62,22 @@ function Offers(): JSX.Element {
                         <AllOffers/>
                     </div>
                     <div className="offers-menu-left-side">
-                        <MediaQuery minWidth={1024}>
+                        <MediaQuery minWidth={1025}>
                             <SortBy/>
                         </MediaQuery>
                     </div>
                 </div>
                     <div className="offers-content-3" style={style}>
-                        { filter?.slice(0, 50).map(( { ...props } :OfferType) =>
-                           <div key={props.id}>
-                               <OfferComponent key={props.id}  {...props} />
-                           </div>
-                        )}
 
+                        { filter?.length != 0 ?
+                            filter?.slice(0, 50).map(({ ...props } :OfferType) =>
+                                <div key={props.id}>
+                                    <OfferComponent key={props.id}  {...props} />
+                                 </div>)
+                            : <DeflautComponent/> }
                     </div>
                 </div>
+
 
                 : <div style={style}>
                     <DetailOffert />

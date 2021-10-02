@@ -13,7 +13,7 @@ const useStyles = makeStyles(() =>
             margin: 6,
         },
         root: {
-            '@media (max-width: 1024px)': {
+            '@media (max-width: 1025px)': {
                 width: '100%',
                 borderRadius: '32px',
                 textTransform: 'none',

@@ -32,7 +32,7 @@ type OfferTypeDetail = {
     banner_url: null,
     skills: SkillsType,
     remote: boolean,
-    employment_types : EmploymentType
+    employment_types : EmploymentType[]
     company_profile: {
         url: string,
         short_description: string,

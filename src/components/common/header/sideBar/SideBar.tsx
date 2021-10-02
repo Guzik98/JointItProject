@@ -9,12 +9,16 @@ import { FirstList, FromHeaderList, NestedList, SecondList } from './SideBarComp
 
 const SideBar = (props : any) : JSX.Element => {
 
+    const handleClose = () => {
+        props.click();
+    };
+
     return (
         <>
             <div className='classes.drawerHeader'>
                 <div className="first-section">
                     MENU
-                    <button className="close-menu" type="button" onClick={() => props.click}>
+                    <button className="close-menu" type="button" onClick={ handleClose }>
                         <ExitButton/>
                     </button>
                 </div>

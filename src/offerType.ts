@@ -1,13 +1,12 @@
-export type EmploymentType = [
-    {
+export type EmploymentType = {
         type: string,
         salary: {
             from: number,
             to: number,
             currency: string,
         } | null
-    }
-];
+};
+
 
 export type SkillsType = [
     {
@@ -33,7 +32,7 @@ export type OfferType = {
     published_at: string,
     remote_interview: boolean,
     id: string,
-    employment_types: EmploymentType
+    employment_types: EmploymentType[]
     company_logo_url: string
     skills: SkillsType
     remote: boolean

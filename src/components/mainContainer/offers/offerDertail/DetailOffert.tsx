@@ -12,6 +12,7 @@ import MediaQuery from 'react-responsive';
 import Description from './components/Description';
 
 
+
 const useStyles = makeStyles(() =>
     createStyles({
         icon_back: {
@@ -28,7 +29,6 @@ const useStyles = makeStyles(() =>
         }
     }),
 );
-
 
 const PointerIcon = () : JSX.Element => {
     return (
@@ -67,6 +67,8 @@ function useWindowSize(): Size {
     return windowSize;
 }
 
+
+
 const DetailOffert = () : JSX.Element => {
     const size: Size = useWindowSize();
     const { setViewport, setOpenDetailComponent } = useSettings();
@@ -83,7 +85,8 @@ const DetailOffert = () : JSX.Element => {
         setDataDetail(data);
     }
 
-    if ( !setDataDetail) return ( <span>Loading...</span>);
+
+
     if ( dataDetail != undefined) return (
         <div className = "content-detail" style={style}>
             <div className = "header-detail-offer">
@@ -138,12 +141,14 @@ const DetailOffert = () : JSX.Element => {
                                             : null }
                                     </div>
                                     <div className = "month">
-                                        net/month
+                                        { dataDetail.employment_types[0].type == 'permanent' ? 'gross/month' : null}
+                                        { dataDetail.employment_types[0].type == 'b2b' ? 'net/month' : null}
                                     </div>
                                     <div className = "type">
                                         { ' - ' + dataDetail.employment_types[0].type.toUpperCase() }
                                     </div>
                                 </div>
+
                             </MediaQuery>
                         </div>
                     </div>
@@ -151,14 +156,14 @@ const DetailOffert = () : JSX.Element => {
                         <div className = "salary-type">
                             <div className = "salary">
                                 { dataDetail.employment_types[0].salary !== null ?
-                                    dataDetail.employment_types[0].salary.from + ' + ' + dataDetail.employment_types[0].salary.to  + ' ' + dataDetail.employment_types[0].salary.currency.toUpperCase() + ' '
+                                    dataDetail.employment_types[0].salary.from + ' + ' + dataDetail.employment_types[0].salary.to  + ' ' + dataDetail.employment_types[0].salary.currency.toUpperCase()
                                     : null }
                             </div>
                             <div className = "month">
-                                &nbsp; net/month &nbsp;
+                                net/month
                             </div>
                             <div className = "type">
-                                 - &nbsp; {dataDetail.employment_types[0].type.toUpperCase() }
+                                { ' - ' + dataDetail.employment_types[0].type.toUpperCase() }
                             </div>
                         </div>
                     </MediaQuery>
@@ -172,7 +177,7 @@ const DetailOffert = () : JSX.Element => {
             </div>
         </div>
     );
-    return  ( <span>There is error</span>);
+    return  ( <span>Loading</span>);
 };
 
 export default DetailOffert;
