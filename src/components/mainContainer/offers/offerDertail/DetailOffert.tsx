@@ -10,6 +10,8 @@ import Tab from './components/Tab';
 import Tech from './components/Tech';
 import MediaQuery from 'react-responsive';
 import Description from './components/Description';
+import DisplaySalary from './components/DisplaySalary';
+
 
 
 
@@ -67,8 +69,6 @@ function useWindowSize(): Size {
     return windowSize;
 }
 
-
-
 const DetailOffert = () : JSX.Element => {
     const size: Size = useWindowSize();
     const { setViewport, setOpenDetailComponent } = useSettings();
@@ -122,50 +122,28 @@ const DetailOffert = () : JSX.Element => {
                                     <PointerIcon/>
                                 { dataDetail.address_text }
                             </span>
-                                <MediaQuery minWidth={1024}>
+                                <MediaQuery minWidth={1025}>
                                  <span className = "work-type">
                                     { dataDetail.workplace_type === 'remote' ? 'Fully Remote' : dataDetail.workplace_type }
                                 </span>
                                 </MediaQuery>
                             </div>
-                            <MediaQuery maxWidth={1024}>
+                            <MediaQuery maxWidth={1025}>
                                  <span className = "work-type">
                                     { dataDetail.workplace_type === 'remote' ? 'Fully Remote' : dataDetail.workplace_type }
                                 </span>
                             </MediaQuery>
-                            <MediaQuery minWidth={1024}>
-                                <div className = "salary-type">
-                                    <div className = "salary">
-                                        { dataDetail.employment_types[0].salary !== null ?
-                                            dataDetail.employment_types[0].salary.from + ' + ' + dataDetail.employment_types[0].salary.to  + ' ' + dataDetail.employment_types[0].salary.currency.toUpperCase()
-                                            : null }
-                                    </div>
-                                    <div className = "month">
-                                        { dataDetail.employment_types[0].type == 'permanent' ? 'gross/month' : null}
-                                        { dataDetail.employment_types[0].type == 'b2b' ? 'net/month' : null}
-                                    </div>
-                                    <div className = "type">
-                                        { ' - ' + dataDetail.employment_types[0].type.toUpperCase() }
-                                    </div>
-                                </div>
-
+                            <MediaQuery minWidth={1025}>
+                                { dataDetail.employment_types.map((type) => {
+                                    return ( <DisplaySalary key={type.type}   {...type} /> );
+                                })}
                             </MediaQuery>
                         </div>
                     </div>
-                    <MediaQuery maxWidth={1024}>
-                        <div className = "salary-type">
-                            <div className = "salary">
-                                { dataDetail.employment_types[0].salary !== null ?
-                                    dataDetail.employment_types[0].salary.from + ' + ' + dataDetail.employment_types[0].salary.to  + ' ' + dataDetail.employment_types[0].salary.currency.toUpperCase()
-                                    : null }
-                            </div>
-                            <div className = "month">
-                                net/month
-                            </div>
-                            <div className = "type">
-                                { ' - ' + dataDetail.employment_types[0].type.toUpperCase() }
-                            </div>
-                        </div>
+                    <MediaQuery maxWidth={1025}>
+                        { dataDetail.employment_types.map((type) => {
+                            return ( <DisplaySalary key={type.type}   {...type} /> );
+                        })}
                     </MediaQuery>
                 </div>
                 <Tab/>
