@@ -37,7 +37,6 @@ const useProviderSettings = () => {
         zoom: 5,
     });
         return {
-
             city,
             setCity,
             tech,

@@ -30,7 +30,6 @@ function useWindowSize(): Size {
             });
         }
         window.addEventListener('resize', handleResize);
-        console.log(window.innerWidth);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -40,17 +39,13 @@ function useWindowSize(): Size {
 function Offers(): JSX.Element {
     const { openDetailComponent } = useSettings();
 
-
     const size: Size = useWindowSize();
     const filter = filterFunction();
-    console.log( filter);
 
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
     };
-
-
 
     return (
         <div className="offers">
@@ -68,7 +63,6 @@ function Offers(): JSX.Element {
                     </div>
                 </div>
                     <div className="offers-content-3" style={style}>
-
                         { filter?.length != 0 ?
                             filter?.slice(0, 50).map(({ ...props } :OfferType) =>
                                 <div key={props.id}>
@@ -77,8 +71,6 @@ function Offers(): JSX.Element {
                             : <DeflautComponent/> }
                     </div>
                 </div>
-
-
                 : <div style={style}>
                     <DetailOffert />
                 </div>

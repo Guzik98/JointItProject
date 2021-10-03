@@ -1,11 +1,10 @@
 import { useSettings } from '../../../../Settings';
 import { EmploymentType, OfferType } from '../../../../offerType';
-import sortSalary from './sortSalary';
+import { sortSalary, checkCurrency } from './sortSalary';
 
 
 export const filterFunction = () => {
-    const { data, city, tech, seniority, employmentType, fromSalary, toSalary, sortBy } = useSettings();
-
+    const { data, city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
 
     const filterTech = data?.filter(function (item: {
             marker_icon: string;
@@ -77,56 +76,51 @@ export const filterFunction = () => {
         return true;
     });
 
-    let exchange = 1;
-    const checkCurrency = (currency: string | undefined) => {
-        switch (currency){
-            case 'eur' :
-                exchange = 4.6;
-                break;
-            case 'usd':
-                exchange = 4;
-                break;
-            default :
-                exchange = 1;
-                break;
-        }
-    };
+
 
     const filterSalaryBetween = filterEmploymentType?.filter(function (item: {
         employment_types : EmploymentType[];
     }) : boolean {
-            checkCurrency(item.employment_types[0].salary?.currency);
+       const  exchangeRate = checkCurrency(item.employment_types[0].salary?.currency);
             if (item.employment_types[0]?.salary !== null) {
-                return (item.employment_types[0]?.salary.from * exchange > fromSalary
-                    && item.employment_types[0]?.salary.from < toSalary * exchange);
+                return (item.employment_types[0]?.salary.from * exchangeRate > fromSalary
+                    && item.employment_types[0]?.salary.from * exchangeRate ) < toSalary ;
             }
             if (item.employment_types[1]?.salary !== null) {
-                return (item.employment_types[1]?.salary.from > fromSalary
-                    && item.employment_types[1]?.salary.from < toSalary);
+                return (item.employment_types[1]?.salary.from * exchangeRate > fromSalary
+                    && item.employment_types[1]?.salary.from  * exchangeRate ) < toSalary;
             }
             if (item.employment_types[2]?.salary !== null) {
-                return (item.employment_types[2]?.salary.from > fromSalary
-                    && item.employment_types[2]?.salary.from < toSalary);
+                return (item.employment_types[2]?.salary.from * exchangeRate > fromSalary
+                    && item.employment_types[2]?.salary.from * exchangeRate < toSalary );
             }
             return true;
         }
     );
 
 
+    const filter0ffersWithOutSalary =  filterSalaryBetween?.filter(function ( item : {
+        employment_types : EmploymentType[];
+    }) : boolean {
+        if ( withSalary ) {
+            return  item.employment_types[0]?.salary != null;
+        }
+        return  true;
+    });
 
     let filtered: OfferType[] | undefined;
 
     if ( sortBy !== 'latest') {
         if ( sortBy == 'Highest Salary') {
-            filtered = filterSalaryBetween?.sort(sortSalary);
+            filtered = filter0ffersWithOutSalary?.sort(sortSalary);
         }
         if ( sortBy == 'Lowest Salary') {
-            filtered = filterSalaryBetween?.sort(sortSalary);
+            filtered = filter0ffersWithOutSalary?.sort(sortSalary);
         }
     }
 
     if (sortBy === 'Latest') {
-        filtered = filterSalaryBetween;
+        filtered = filter0ffersWithOutSalary;
     }
 
     return filtered;

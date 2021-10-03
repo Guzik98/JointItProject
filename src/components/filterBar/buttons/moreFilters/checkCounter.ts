@@ -10,7 +10,7 @@ export const checkParametersIncrement = () : number => {
     if ( seniority == 'All' &&  employmentType != 'All' &&  (fromSalary == 0 || toSalary == 100000) ) {
         counter = 1;
     }
-    if ( seniority == 'All' &&  employmentType == 'All' &&  fromSalary != 0 || toSalary != 100000 ) {
+    if ( seniority == 'All' &&  employmentType == 'All' &&  (fromSalary != 0 || toSalary != 100000) ) {
         counter = 1;
     }
     if ( seniority != 'All' &&  employmentType != 'All' &&  (fromSalary == 0 || toSalary == 100000) ) {
@@ -25,9 +25,8 @@ export const checkParametersIncrement = () : number => {
     if ( seniority != 'All' &&  employmentType != 'All' &&  (fromSalary != 0 || toSalary != 100000) ) {
         counter = 3;
     }
-    if ( seniority == 'All' &&  employmentType == 'All' &&  (fromSalary == 0 || toSalary == 100000) ) {
+    if ( seniority == 'All' &&  employmentType == 'All' &&  (fromSalary == 0 && toSalary == 100000) ) {
         counter = 0;
     }
-    console.log(counter);
     return counter;
 };
