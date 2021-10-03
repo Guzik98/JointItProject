@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ReactMapGl, { Marker, Popup } from 'react-map-gl';
+import ReactMapGl, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { filterFunction } from '../offers/offer/filters';
 
 import './Map.sass';
@@ -42,11 +42,21 @@ function Map(): JSX.Element{
     const filter = filterFunction();
     const size: Size = useWindowSize();
 
+    const navControlStyle = {
+        className: 'map-btn',
+        width: 30,
+        height: 30,
+        right: 10,
+        top: 10,
+        showCompass: false,
+    };
+
 
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
     };
+
 
     return (
         <div className="map" style={style}>
@@ -54,12 +64,15 @@ function Map(): JSX.Element{
                         className="map"
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                         style={style}
+
                 mapStyle='mapbox://styles/mapbox/streets-v11'
                 onViewportChange = { (viewport: React.SetStateAction<{ latitude: number; longitude: number;
                     width: string; height: string; zoom: number; }>) => {
                     setViewport(viewport);
                 }}
             >
+                <NavigationControl style={navControlStyle} />
+
                 { filter?.slice(0, 500).map((offer : OfferType) => (
                     <Marker key={offer.id} latitude={+offer.latitude} longitude={+offer.longitude}  >
                         <button className="market-btn"
