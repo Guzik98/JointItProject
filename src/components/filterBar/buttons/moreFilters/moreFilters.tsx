@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSettings } from '../../../../Settings';
 import '../buttons.sass';
 import './moreFilters.sass';
@@ -6,6 +6,7 @@ import MoreFilersPopOut from './moreFilersPopOut';
 import MediaQuery from 'react-responsive';
 import { Dialog, Button, createStyles, makeStyles  } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { checkParametersIncrement } from './checkCounter';
 
 const IconPath = (): JSX.Element => {
     return (
@@ -98,8 +99,10 @@ const useStyles = makeStyles(() =>
 export const MoreFilters = (): JSX.Element => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [counter, setCounter] = useState(0);
     const { fromSalary, toSalary, employmentType, seniority } = useSettings();
+    const counter = checkParametersIncrement();
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -109,16 +112,9 @@ export const MoreFilters = (): JSX.Element => {
         setOpen(false);
     };
 
-    const increment = () => {
-        setCounter(counter + 1);
-    };
 
-    const decrement = () => {
-        setCounter(counter - 1);
-    };
-    const clearCounter = () => {
-        setCounter(0);
-    };
+
+
 
     return (
         <div>
@@ -142,14 +138,12 @@ export const MoreFilters = (): JSX.Element => {
                 </Button>
                 <MediaQuery maxWidth={1025}>
                     <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                        <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
-                                          onClick={handleClose}/>
+                        <MoreFilersPopOut onClick={handleClose}/>
                     </Dialog>
                 </MediaQuery>
                 <MediaQuery minWidth={1025}>
-                    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                        <MoreFilersPopOut clearCounter={clearCounter} decrement={decrement} increment={increment}
-                                          onClick={handleClose}/>
+                    <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
+                        <MoreFilersPopOut   onClick={handleClose}/>
                     </Dialog>
                 </MediaQuery>
         </div>

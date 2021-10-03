@@ -58,31 +58,14 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
 
-    const increment = () => {
-        props.increment();
-    };
-
-    const decrement = () => {
-        props.decrement();
-    };
-
-    const clearCounter = () => {
-        props.clearCounter();
-    };
 
     const onClick = () => {
         props.onClick();
     };
 
     const submit = () => {
-        if ((value[0] != fromSalary || value[1] != toSalary) && (toSalary == 100000 && fromSalary == 0)) {
-            increment();
-        }
         setFromSalary(value[0]);
         setToSalary(value[1]);
-        if ((value[0] == 0 && value[1] == 100000) && (toSalary !== 100000 && fromSalary !== 0)) {
-            decrement();
-        }
         onClick();
     };
 
@@ -91,7 +74,6 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
         setToSalary(100000);
         setFromSalary(0);
         setSeniority('All');
-        clearCounter();
         onClick();
     };
 
@@ -137,7 +119,7 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                 </div>
 
                 {employmentBtn.map(({ name }: ButtonType) =>
-                    <EmploymentBtnComponent increment={increment} decrement={decrement} name={name} key={name}/>)}
+                    <EmploymentBtnComponent  name={name} key={name}/>)}
 
                 <Divider classes={{ root: classesBtn.divider }}/>
                 <div className="label-title">
@@ -145,8 +127,6 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                 </div>
                 {seniorityBtn.map(({ name }: ButtonType) =>
                     <SeniorityBtnComponent
-                        increment={increment}
-                        decrement={decrement}
                         name={name} key={name}
                     />
                 )}

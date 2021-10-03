@@ -43,21 +43,7 @@ export const EmploymentBtnComponent = (props: any): JSX.Element => {
     const classes = useStylesBtn();
     const { setEmploymentType, employmentType } = useSettings();
 
-    const increment = () => {
-        props.increment();
-    };
-
-    const decrement = () => {
-        props.decrement();
-    };
-
     const onClick = () => {
-        if (employmentType == 'All' && props.name !== 'All') {
-            increment();
-        }
-        if (props.name == 'All' && employmentType !== 'All') {
-            decrement();
-        }
         setEmploymentType(`${props.name}`);
     };
 
@@ -81,21 +67,7 @@ export const SeniorityBtnComponent = (props: any): JSX.Element => {
     const classes = useStylesBtn();
     const { setSeniority, seniority } = useSettings();
 
-    const increment = () => {
-        props.increment();
-    };
-
-    const decrement = () => {
-        props.decrement();
-    };
-
     const onClick = () => {
-        if (seniority == 'All' && props.name !== 'All') {
-            increment();
-        }
-        if (props.name == 'All' && seniority !== 'All') {
-            decrement();
-        }
         setSeniority(`${props.name}`);
     };
 
