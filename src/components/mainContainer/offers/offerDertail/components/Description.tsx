@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Description.sass';
 import { useSettings } from '../../../../../Settings';
 import parse from 'html-react-parser';
 
 const Description = (): JSX.Element => {
     const { dataDetail } = useSettings();
+    const [showMore, setShowMore] = useState<boolean>(false);
     if (!dataDetail){
         throw  new Error('fsdfsdfs');
     }
@@ -24,7 +25,16 @@ const Description = (): JSX.Element => {
                     </span>
                 </div>
                 <div className="information-clause">
-                    {dataDetail.information_clause}
+                    { !showMore ?
+                        dataDetail.information_clause.substring(0, 350)
+                        :  dataDetail.information_clause
+                    }
+
+                    <span
+                        className = "showMore"
+                        onClick={ () => setShowMore(!showMore)}>
+                        { showMore ? 'less' : 'more' }
+                    </span>
                 </div>
             </div>
         </div>
