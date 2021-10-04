@@ -83,16 +83,22 @@ export const filterFunction = () => {
     }) : boolean {
        const  exchangeRate = checkCurrency(item.employment_types[0].salary?.currency);
             if (item.employment_types[0]?.salary !== null) {
-                return (item.employment_types[0]?.salary.from * exchangeRate > fromSalary
-                    && item.employment_types[0]?.salary.from * exchangeRate ) < toSalary ;
+                return (
+                     item.employment_types[0]?.salary.to * exchangeRate > fromSalary
+                        &&  item.employment_types[0]?.salary.from * exchangeRate  < toSalary
+                    );
             }
             if (item.employment_types[1]?.salary !== null) {
-                return (item.employment_types[1]?.salary.from * exchangeRate > fromSalary
-                    && item.employment_types[1]?.salary.from  * exchangeRate ) < toSalary;
+                return (
+                    item.employment_types[1]?.salary.to * exchangeRate > fromSalary
+                    && item.employment_types[1]?.salary.from  * exchangeRate  < toSalary
+                );
             }
             if (item.employment_types[2]?.salary !== null) {
-                return (item.employment_types[2]?.salary.from * exchangeRate > fromSalary
-                    && item.employment_types[2]?.salary.from * exchangeRate < toSalary );
+                return (
+                    item.employment_types[2]?.salary.to * exchangeRate > fromSalary
+                    && item.employment_types[2]?.salary.from * exchangeRate < toSalary
+                );
             }
             return true;
         }

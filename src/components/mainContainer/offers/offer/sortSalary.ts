@@ -52,9 +52,13 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
                     }
                 }
                 if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    return   helpATo = 10000000 * exchangeRate, helpAFrom = 1000000 * exchangeRate;
+                    return   helpATo = 10000000, helpAFrom = 1000000 ;
                 }
             }  else {
+                if (item.salary == null && sortBy === 'Lowest Salary' ) {
+                    console.log('hmm');
+                    return   helpATo = 10000000, helpAFrom = 1000000;
+                }
                 if (item.salary != null) {
                    return  helpATo = item.salary?.to * exchangeRate, helpAFrom = item?.salary?.from * exchangeRate ;
                 }
@@ -74,9 +78,14 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
                     }
                 }
                 if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    return   helpBTo = 10000000 * exchangeRate, helpBFrom = 1000000 * exchangeRate;
+                    return   helpBTo = 10000000, helpBFrom = 1000000 ;
                 }
+
             } else {
+                if (item.salary == null && sortBy === 'Lowest Salary' ) {
+                    console.log('hmm');
+                    return   helpBTo = 10000000, helpBFrom = 1000000;
+                }
                 if (item.salary != null) {
                   return   helpBTo = item.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
                 }
@@ -95,12 +104,6 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
         }
     }
     if ( sortBy === 'Lowest Salary'){
-        if ( helpBTo === 1 || helpATo === 1 ) {
-            return  0;
-        }
-        if ( helpBTo === 1 || helpATo === 1 ) {
-            return  0;
-        }
 
         if ( helpBFrom === helpAFrom ) {
             if ( helpBTo < helpATo) {
