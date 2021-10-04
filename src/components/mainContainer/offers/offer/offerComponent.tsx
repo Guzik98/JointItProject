@@ -1,59 +1,28 @@
 import React from 'react';
 import './offerComponent.sass';
-import { OfferType } from '../../../../offerType';
+import { OfferType } from '../../../../types/offerType';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
-const CompanyIcon = (): JSX.Element => {
-    return (
-        <svg className="company-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z">
-            </path>
-        </svg>
-    );
-};
+import { CompanyIcon, PointerIcon, getNumberOfDays } from './offerComponentFunctions';
 
-const PointerIcon = () : JSX.Element => {
-    return (
-        <svg className="pointer-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z">
-            </path>
-        </svg>
-    );
-};
 
 const OfferComponent = (props : OfferType) : JSX.Element => {
     const { setUrlDetail, setViewport, setOpenDetailComponent, employmentType } = useSettings();
 
-    let today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0];
+
     let minSalary: number | undefined = 0;
     let maxSalary: number | undefined = 0;
     let currency: string | undefined = 'Undisclosed Salary';
 
-    function getNumberOfDays(start: string, end: string){
-        const date1 = new Date(start);
-        const date2 = new Date(end);
+    const  displaySalary = (type: { type: string; salary: { from: number; to: number; currency: string } | null })  =>{
 
-        const oneDay = 1000 * 60 * 60 * 24;
-
-        const diffInTime = date2.getTime() - date1.getTime();
-
-        const diffInDays = Math.round(diffInTime / oneDay);
-
-        if ( diffInDays < 1 ){
-            return 'now';
-        } else {
-            return diffInDays + 'd ago';
-        }
-    }
-
-    function displaySalary(type: { type: string; salary: { from: number; to: number; currency: string } | null }) {
         if (type.salary !== null && type.salary !== undefined && type.type == employmentType.toLowerCase()) {
             minSalary = type.salary.from;
             maxSalary = type.salary.to;
             currency = type.salary.currency;
+
         }
         if (type.salary !== null && type.salary !== undefined && type.type == 'mandate_contract') {
             minSalary = type.salary.from;
@@ -65,8 +34,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
             maxSalary = type.salary.to;
             currency = type.salary.currency;
         }
-    }
-
+    };
 
     return (
         <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => {
@@ -106,7 +74,8 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                             displaySalary(type);
                                         })
                                         }
-                                        {currency !== 'Undisclosed Salary' ? minSalary + ' - ' + maxSalary + ' ' + currency.toUpperCase() : currency }
+                                        {currency !== 'Undisclosed Salary' ? minSalary + ' - '
+                                            + maxSalary + ' ' + currency.toUpperCase() : currency }
                                     </div>
                                 </MediaQuery>
                             </div>
@@ -144,8 +113,8 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                             </div>
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1024}>
-                                    {props.skills.map((type, index) =>
-                                        <span key={index} className="skills">{type.name}</span>
+                                    {props.skills.map((type) =>
+                                        <span key={props.longitude} className="skills">{type.name}</span>
                                     )}
                                 </MediaQuery>
 

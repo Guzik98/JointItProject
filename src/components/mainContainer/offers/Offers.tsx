@@ -5,11 +5,10 @@ import AllOffers from './buttons/AllOffers';
 import SortBy from './buttons/sortBy/SortBy';
 import  MediaQuery  from 'react-responsive';
 import OfferComponent from './offer/offerComponent';
-import { OfferType } from '../../../offerType';
 import { filterFunction } from './offer/filters';
 import { useSettings } from '../../../Settings';
-import DetailOffert from './offerDertail/DetailOffert';
-import DeflautComponent from './offer/DeflautComponent';
+import DefaultComponent from './offer/DefaultComponent';
+import DetailOffer from './offerDertail/DetailOffer';
 
 interface Size {
     width: number | undefined;
@@ -38,10 +37,9 @@ function useWindowSize(): Size {
 
 function Offers(): JSX.Element {
     const { openDetailComponent } = useSettings();
-
-    const size: Size = useWindowSize();
     const filter = filterFunction();
 
+    const size: Size = useWindowSize();
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
@@ -63,16 +61,17 @@ function Offers(): JSX.Element {
                     </div>
                 </div>
                     <div className="offers-content-3" style={style}>
+                        { !filter ? 'Loading' : null }
                         { filter?.length != 0 ?
-                            filter?.slice(0, 50).map(({ ...props } :OfferType) =>
-                                <div key={props.id}>
-                                    <OfferComponent key={props.id}  {...props} />
+                            filter?.slice(0, 50).map(( props, index ) =>
+                                <div key={index}>
+                                    <OfferComponent {...props} />
                                  </div>)
-                            : <DeflautComponent/> }
+                            : <DefaultComponent/> }
                     </div>
                 </div>
                 : <div style={style}>
-                    <DetailOffert />
+                    <DetailOffer/>
                 </div>
             }
         </div>

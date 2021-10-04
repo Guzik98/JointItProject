@@ -1,7 +1,7 @@
 import React, { createContext, FC, useContext, useState } from 'react';
-import useFetch from './useFetch';
-import { OfferType } from './offerType';
-import OfferTypeDetail from './offerDetailType';
+import useFetch from './types/useFetch';
+import { OfferType } from './types/offerType';
+import OfferTypeDetail from './types/offerDetailType';
 
 const url = 'https://justjoin.it/api/offers';
 

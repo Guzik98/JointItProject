@@ -6,13 +6,11 @@ import './Tech.sass';
 const Tech = () : JSX.Element => {
     const { dataDetail } = useSettings();
 
-
     if (!dataDetail) {
         throw new Error('Something go wrong fetching detail');
     }
 
-
-    const SkillComponent = (props : any) => {
+    const SkillComponent = (props : any) : JSX.Element => {
         let skillLevelName  = '';
         switch (props.level){
             case 1:

@@ -1,4 +1,4 @@
-import { OfferType } from '../../../../offerType';
+import { OfferType } from '../../../../types/offerType';
 import { useSettings } from '../../../../Settings';
 
 const eur = 4.6;
@@ -6,9 +6,9 @@ const usd = 4.0;
 const gbp = 5.35;
 const chf = 4.25;
 
-export const checkCurrency = (currency: string | undefined) => {
+export const checkCurrency = (currency: string | undefined) : number => {
 
-    let exchangeRate = 1;
+    let exchangeRate;
 
     switch (currency){
         case 'eur':
@@ -44,23 +44,42 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
             }
             if (employmentType != 'All') {
                 if (item.type === employmentType.toLowerCase() && item.salary != null) {
-                  return  ( helpATo = item?.salary?.to * exchangeRate,  helpAFrom = item?.salary?.from * exchangeRate);
+                  return  (
+                      (helpATo = item?.salary?.to * exchangeRate)
+                      &&
+                      (helpAFrom = item?.salary?.from * exchangeRate)
+                  );
                 }
                 if (employmentType == 'Mandate Contract' && item.salary != null) {
                     if (item.type === 'mandate_contract '){
-                        return   helpATo = item?.salary?.to * exchangeRate,  helpAFrom = item?.salary?.from * exchangeRate;
+                        return (
+                            (helpATo = item?.salary?.to * exchangeRate)
+                            &&
+                            (helpAFrom = item?.salary?.from * exchangeRate)
+                        );
                     }
                 }
                 if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    return   helpATo = 10000000, helpAFrom = 1000000 ;
+                    return (
+                        (helpATo = 10000000)
+                        &&
+                        (helpAFrom = 1000000)
+                    );
                 }
             }  else {
                 if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    console.log('hmm');
-                    return   helpATo = 10000000, helpAFrom = 1000000;
+                    return  (
+                        (helpATo = 10000000)
+                        &&
+                        (helpAFrom = 1000000)
+                    );
                 }
                 if (item.salary != null) {
-                   return  helpATo = item.salary?.to * exchangeRate, helpAFrom = item?.salary?.from * exchangeRate ;
+                   return  (
+                       (helpATo = item.salary?.to * exchangeRate)
+                       &&
+                       (helpAFrom = item?.salary?.from * exchangeRate )
+                   );
                 }
             }
         });
@@ -70,24 +89,38 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
             }
             if (employmentType != 'All') {
                 if (item.type === employmentType.toLowerCase() && item.salary != null) {
-                   return  helpBTo = item?.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
+                   return (
+                       (helpBTo = item?.salary?.to * exchangeRate)
+                       &&
+                       (helpBFrom = item?.salary?.from * exchangeRate)
+                   );
                 }
                 if (employmentType == 'Mandate Contract' && item.salary != null) {
-                    if (item.type === 'mandate_contract '){
-                        return   helpBTo = item?.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
-                    }
+                    return (
+                        (helpBTo = item?.salary?.to * exchangeRate)
+                        &&
+                        (helpBFrom = item?.salary?.from * exchangeRate)
+                    );
                 }
                 if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    return   helpBTo = 10000000, helpBFrom = 1000000 ;
+                    return (
+                        ( helpBTo = 10000000 ) &&
+                        ( helpBFrom = 1000000 )
+                    );
                 }
-
             } else {
                 if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    console.log('hmm');
-                    return   helpBTo = 10000000, helpBFrom = 1000000;
+                    return (
+                        ( helpBTo = 10000000 ) &&
+                        ( helpBFrom = 1000000 )
+                    );
                 }
                 if (item.salary != null) {
-                  return   helpBTo = item.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
+                  return (
+                      (helpBTo = item.salary?.to * exchangeRate)
+                      &&
+                      (helpBFrom = item?.salary?.from * exchangeRate)
+                  );
                 }
 
             }

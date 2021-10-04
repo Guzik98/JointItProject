@@ -3,7 +3,7 @@ import './Description.sass';
 import { useSettings } from '../../../../../Settings';
 import parse from 'html-react-parser';
 
-const Description = () => {
+const Description = (): JSX.Element => {
     const { dataDetail } = useSettings();
     if (!dataDetail){
         throw  new Error('fsdfsdfs');

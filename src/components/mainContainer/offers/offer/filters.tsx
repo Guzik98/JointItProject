@@ -1,5 +1,5 @@
 import { useSettings } from '../../../../Settings';
-import { EmploymentType, OfferType } from '../../../../offerType';
+import { EmploymentType, OfferType } from '../../../../types/offerType';
 import { sortSalary, checkCurrency } from './sortSalary';
 
 
@@ -76,8 +76,6 @@ export const filterFunction = () => {
         return true;
     });
 
-
-
     const filterSalaryBetween = filterEmploymentType?.filter(function (item: {
         employment_types : EmploymentType[];
     }) : boolean {
@@ -104,7 +102,6 @@ export const filterFunction = () => {
         }
     );
 
-
     const filter0ffersWithOutSalary =  filterSalaryBetween?.filter(function ( item : {
         employment_types : EmploymentType[];
     }) : boolean {
@@ -129,5 +126,7 @@ export const filterFunction = () => {
         filtered = filter0ffersWithOutSalary;
     }
 
-    return filtered;
+
+    return  filtered;
+
 };

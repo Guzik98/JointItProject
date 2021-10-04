@@ -3,7 +3,7 @@ import ReactMapGl, { Marker, Popup, NavigationControl } from 'react-map-gl';
 import { filterFunction } from '../offers/offer/filters';
 
 import './Map.sass';
-import { OfferType } from '../../../offerType';
+import { OfferType } from '../../../types/offerType';
 import { useSettings } from '../../../Settings';
 
 interface Size {
@@ -42,6 +42,8 @@ function Map(): JSX.Element{
     const filter = filterFunction();
     const size: Size = useWindowSize();
 
+
+
     const navControlStyle = {
         className: 'map-btn',
         width: 30,
@@ -72,8 +74,7 @@ function Map(): JSX.Element{
                 }}
             >
                 <NavigationControl style={navControlStyle} />
-
-                { filter?.slice(0, 500).map((offer : OfferType) => (
+                { filter?.slice(0, 200).map((offer : OfferType) => (
                     <Marker key={offer.id} latitude={+offer.latitude} longitude={+offer.longitude}  >
                         <button className="market-btn"
                             onMouseOver={ () => setSelectedOffer(offer) }
@@ -91,8 +92,8 @@ function Map(): JSX.Element{
                             } }
                         >
                             <img className = 'pointer'
-                                 src={`/markers/${offer.marker_icon}.svg`}/>
-
+                                 src={`/markers/${offer.marker_icon}.svg`}
+                            />
                         </button>
                     </Marker>
                 ))}
@@ -115,7 +116,6 @@ function Map(): JSX.Element{
                         </div>
                     </div>
                 </Popup> : null }
-
             </ReactMapGl>
         </div>
     );
