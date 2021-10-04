@@ -88,8 +88,6 @@ const SideBarButton = () :  JSX.Element => {
                 variant="temporary"
                 anchor="right"
                 open={open}
-                onEscapeKeyDown={handleDrawerClose}
-                onBackdropClick={handleDrawerClose}
                 classes={{
                     paper: classes.drawerPaper,
                 }}

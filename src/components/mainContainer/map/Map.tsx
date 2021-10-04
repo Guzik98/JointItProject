@@ -74,8 +74,8 @@ function Map(): JSX.Element{
                 }}
             >
                 <NavigationControl style={navControlStyle} />
-                { filter?.slice(0, 200).map((offer : OfferType) => (
-                    <Marker key={offer.id} latitude={+offer.latitude} longitude={+offer.longitude}  >
+                { filter?.slice(0, 200).map((offer : OfferType, index: number) => (
+                    <Marker key={index} latitude={+offer.latitude} longitude={+offer.longitude}  >
                         <button className="market-btn"
                             onMouseOver={ () => setSelectedOffer(offer) }
                             onMouseLeave={ () =>setSelectedOffer(null) }

@@ -137,15 +137,15 @@ const DetailOffer = () : JSX.Element => {
                                 </span>
                             </MediaQuery>
                             <MediaQuery minWidth={1025}>
-                                { dataDetail.employment_types.map((type) => {
-                                    return ( <DisplaySalary key={type.type}   {...type} /> );
+                                { dataDetail.employment_types.map((type, index) => {
+                                    return ( <DisplaySalary key={index}   {...type} /> );
                                 })}
                             </MediaQuery>
                         </div>
                     </div>
                     <MediaQuery maxWidth={1025}>
-                        { dataDetail.employment_types.map((type) => {
-                            return ( <DisplaySalary key={type.type}   {...type} /> );
+                        { dataDetail.employment_types.map((type, index) => {
+                            return ( <DisplaySalary key={index}   {...type} /> );
                         })}
                     </MediaQuery>
                 </div>

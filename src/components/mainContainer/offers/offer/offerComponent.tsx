@@ -113,8 +113,8 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                             </div>
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1024}>
-                                    {props.skills.map((type) =>
-                                        <span key={props.longitude} className="skills">{type.name}</span>
+                                    {props.skills.map((type, index) =>
+                                        <span key={index} className="skills">{type.name}</span>
                                     )}
                                 </MediaQuery>
 
