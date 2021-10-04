@@ -62,11 +62,11 @@ function Map(): JSX.Element{
 
     return (
         <div className="map" style={style}>
-            <ReactMapGl {...viewport}
-                        className="map"
+            <ReactMapGl
+                {...viewport}
+                className="map"
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                        style={style}
-
+                style={style}
                 mapStyle='mapbox://styles/mapbox/streets-v11'
                 onViewportChange = { (viewport: React.SetStateAction<{ latitude: number; longitude: number;
                     width: string; height: string; zoom: number; }>) => {

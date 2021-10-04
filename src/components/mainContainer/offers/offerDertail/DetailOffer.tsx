@@ -17,9 +17,9 @@ const useStyles = makeStyles(() =>
         icon_back: {
             position: 'absolute',
             color: 'white',
-            minWidth: '24px',
-            minHeight: 24,
-            maxHeight: 24,
+            maxHeight: 36,
+            maxWidth: 36,
+            minWidth: 36,
             marginTop: 15,
             marginLeft: 9,
             padding: 0,
@@ -156,6 +156,7 @@ const DetailOffer = () : JSX.Element => {
                 <Description/>
             </div>
         </div>
+
     );
     return  ( <span>Loading</span>);
 };

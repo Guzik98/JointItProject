@@ -29,7 +29,6 @@ const Description = (): JSX.Element => {
                         dataDetail.information_clause.substring(0, 350)
                         :  dataDetail.information_clause
                     }
-
                     <span
                         className = "showMore"
                         onClick={ () => setShowMore(!showMore)}>

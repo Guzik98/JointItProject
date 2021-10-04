@@ -39,7 +39,6 @@ const Tab = () : JSX.Element => {
                     >
                         <path
                             d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-
                     </svg>
                 </div>
             </div>
@@ -98,10 +97,12 @@ const Tab = () : JSX.Element => {
         data: string,
         icon: JSX.Element,
         id : number,
+        href? : string
     };
 
     const tab = [
-        { text: 'Company name', data: dataDetail.company_name, icon: <CompanyIcon/>, id: 1 },
+        { text: 'Company name', data: dataDetail.company_name, icon: <CompanyIcon/>,
+            id: 1, href: dataDetail.company_url },
         { text: 'Company size', data: dataDetail.company_size, icon: <CompanySizeIcon/>, id: 2  },
         { text: 'EXP.lvl', data: dataDetail.experience_level, icon: <CompanySeniorIcon/>, id: 3 },
         { text: 'Added', data: getNumberOfDays(dataDetail.published_at, today), icon: <CompanynDataIcon/>, id: 3  },
@@ -114,13 +115,13 @@ const Tab = () : JSX.Element => {
                         <div className = "tab">
                             <div className = "tab-info">
                                 <div className = "tab-info-level2">
-                            <span className = "info">
-                                {props.icon}
-                                {props.data.charAt(0).toUpperCase() + props.data.slice(1)}
-                            </span>
+                                    <span className = "info" >
+                                        {props.icon}
+                                        {props.data.charAt(0).toUpperCase() + props.data.slice(1)}
+                                    </span>
                                     <span className = "tab-text">
-                                {props.text.charAt(0).toUpperCase() + props.text.slice(1)}
-                            </span>
+                                         {props.text.charAt(0).toUpperCase() + props.text.slice(1)}
+                                    </span>
                                 </div>
                             </div>
                         </div>

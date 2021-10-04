@@ -4,20 +4,38 @@ import { Header } from './components/common';
 import { Bar } from './components/filterBar';
 import { MainContainer } from './components/mainContainer';
 import { BrowserRouter, Redirect } from 'react-router-dom';
-import { SettingsProvider } from './Settings';
+import { useSettings } from './Settings';
+import MediaQuery from 'react-responsive';
+
 
 function App(): JSX.Element {
+    const { openDetailComponent } = useSettings();
+
     return (
-        <SettingsProvider>
             <BrowserRouter>
                 <Redirect exact from="/" to="Offers"/>
                 <div className="App">
-                    <Header/>
-                    <Bar/>
-                    <MainContainer/>
+                    { openDetailComponent ?
+                        <>
+                            <MediaQuery maxWidth={ 1025}>
+                                <Header/>
+                                <MainContainer/>
+                            </MediaQuery>
+                            <MediaQuery minWidth={ 1025}>
+                                <Header/>
+                                <Bar/>
+                                <MainContainer/>
+                            </MediaQuery>
+                        </>
+                        :
+                        <>
+                            <Header/>
+                            <Bar/>
+                            <MainContainer/>
+                        </>
+                    }
                 </div>
             </BrowserRouter>
-        </SettingsProvider>
     );
 }
 
