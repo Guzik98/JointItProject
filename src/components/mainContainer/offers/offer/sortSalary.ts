@@ -4,6 +4,7 @@ import { useSettings } from '../../../../Settings';
 const eur = 4.6;
 const usd = 4.0;
 const gbp = 5.35;
+const chf = 4.25;
 
 export const checkCurrency = (currency: string | undefined) => {
 
@@ -19,6 +20,9 @@ export const checkCurrency = (currency: string | undefined) => {
         case 'gbp':
             exchangeRate = gbp;
             break;
+        case 'chf':
+            exchangeRate = chf;
+            break;
         default :
             exchangeRate = 1 ;
             break;
@@ -30,24 +34,29 @@ export const checkCurrency = (currency: string | undefined) => {
 export const sortSalary = function (a :OfferType, b : OfferType ) :number {
     const { sortBy, employmentType } = useSettings();
         let exchangeRate = 1 ;
-        let helpA  = 1;
-        let helpB  = 1;
+        let helpATo  = 1;
+        let helpBTo  = 1;
+        let helpAFrom  = 1;
+        let helpBFrom = 1;
         a.employment_types.map(item => {
             if (item.salary?.currency != null) {
                 exchangeRate  =  checkCurrency(item?.salary?.currency);
             }
             if (employmentType != 'All') {
                 if (item.type === employmentType.toLowerCase() && item.salary != null) {
-                  return   helpA = item?.salary?.to * exchangeRate;
+                  return  ( helpATo = item?.salary?.to * exchangeRate,  helpAFrom = item?.salary?.from * exchangeRate);
                 }
                 if (employmentType == 'Mandate Contract' && item.salary != null) {
                     if (item.type === 'mandate_contract '){
-                        return   helpA = item?.salary?.to * exchangeRate;
+                        return   helpATo = item?.salary?.to * exchangeRate,  helpAFrom = item?.salary?.from * exchangeRate;
                     }
+                }
+                if (item.salary == null && sortBy === 'Lowest Salary' ) {
+                    return   helpATo = 10000000 * exchangeRate, helpAFrom = 1000000 * exchangeRate;
                 }
             }  else {
                 if (item.salary != null) {
-                   return  helpA = item.salary?.to * exchangeRate;
+                   return  helpATo = item.salary?.to * exchangeRate, helpAFrom = item?.salary?.from * exchangeRate ;
                 }
             }
         });
@@ -57,31 +66,51 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
             }
             if (employmentType != 'All') {
                 if (item.type === employmentType.toLowerCase() && item.salary != null) {
-                   return  helpB = item?.salary?.to * exchangeRate;
+                   return  helpBTo = item?.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
                 }
                 if (employmentType == 'Mandate Contract' && item.salary != null) {
                     if (item.type === 'mandate_contract '){
-                        return   helpB = item?.salary?.to * exchangeRate;
+                        return   helpBTo = item?.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
                     }
+                }
+                if (item.salary == null && sortBy === 'Lowest Salary' ) {
+                    return   helpBTo = 10000000 * exchangeRate, helpBFrom = 1000000 * exchangeRate;
                 }
             } else {
                 if (item.salary != null) {
-                  return   helpB = item.salary?.to * exchangeRate;
+                  return   helpBTo = item.salary?.to * exchangeRate, helpBFrom = item?.salary?.from * exchangeRate;
                 }
+
             }
         });
     if ( sortBy === 'Highest Salary'){
-        if ( helpB > helpA ) {
+
+        if ( helpBTo === helpATo ) {
+            if ( helpBFrom > helpAFrom ) {
+                return 1;
+            }
+        }
+        if ( helpBTo > helpATo ) {
             return  1;
         }
     }
     if ( sortBy === 'Lowest Salary'){
-        if (helpA === 1 || helpB == 1 ) {
-            return 0;
+        if ( helpBTo === 1 || helpATo === 1 ) {
+            return  0;
         }
-        if ( helpA > helpB ) {
+        if ( helpBTo === 1 || helpATo === 1 ) {
+            return  0;
+        }
+
+        if ( helpBFrom === helpAFrom ) {
+            if ( helpBTo < helpATo) {
+                return 1;
+            }
+        }
+        if ( helpBFrom < helpAFrom ) {
             return  1;
         }
+
     }
 
     return  -1;
