@@ -105,7 +105,7 @@ const Tab = () : JSX.Element => {
             id: 1, href: dataDetail.company_url },
         { text: 'Company size', data: dataDetail.company_size, icon: <CompanySizeIcon/>, id: 2  },
         { text: 'EXP.lvl', data: dataDetail.experience_level, icon: <CompanySeniorIcon/>, id: 3 },
-        { text: 'Added', data: getNumberOfDays(dataDetail.published_at, today), icon: <CompanynDataIcon/>, id: 3  },
+        { text: 'Added', data: getNumberOfDays(dataDetail.published_at, today), icon: <CompanynDataIcon/>, id: 4  },
     ] ;
 
      const TabComponent = (props: TabType) : JSX.Element => {

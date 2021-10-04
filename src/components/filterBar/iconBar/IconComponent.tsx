@@ -11,9 +11,9 @@ const IconComponent = ({ name, icon }: { name: string, icon: JSX.Element }): JSX
             <div
                 className="icon"
                  key={name}>
-                <a className="circle">
+                <span className="circle">
                     {icon}
-                </a>
+                </span>
                 <span className="under-icon">
                     {name}
                 </span>

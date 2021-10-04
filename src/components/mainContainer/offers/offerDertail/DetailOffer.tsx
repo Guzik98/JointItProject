@@ -11,6 +11,7 @@ import Tech from './components/Tech';
 import MediaQuery from 'react-responsive';
 import Description from './components/Description';
 import DisplaySalary from './components/DisplaySalary';
+import { EmploymentType } from '../../../../types/offerType';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -137,8 +138,8 @@ const DetailOffer = () : JSX.Element => {
                                 </span>
                             </MediaQuery>
                             <MediaQuery minWidth={1025}>
-                                { dataDetail.employment_types.map((type, index) => {
-                                    return ( <DisplaySalary key={index}   {...type} /> );
+                                { dataDetail.employment_types.map((type: EmploymentType) => {
+                                    return ( <DisplaySalary key={type.type}   {...type} /> );
                                 })}
                             </MediaQuery>
                         </div>
