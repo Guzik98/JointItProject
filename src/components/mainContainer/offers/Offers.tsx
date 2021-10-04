@@ -37,7 +37,7 @@ function useWindowSize(): Size {
 }
 
 function Offers(): JSX.Element {
-    const { openDetailComponent } = useSettings();
+    const { openDetailComponent, data } = useSettings();
 
     const size: Size = useWindowSize();
     const filter = filterFunction();
@@ -63,6 +63,7 @@ function Offers(): JSX.Element {
                     </div>
                 </div>
                     <div className="offers-content-3" style={style}>
+                        { data === undefined ? 'YOU NEED TO HAVE CORS PLUGIN ON, IN ORDER TO SEE DATA' : null }
                         { filter?.length != 0 ?
                             filter?.slice(0, 50).map(({ ...props } :OfferType) =>
                                 <div key={props.id}>
