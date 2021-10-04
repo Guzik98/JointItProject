@@ -38,6 +38,13 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
 
     const upadeteSettings = () => {
         setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);
+        setViewport({
+            latitude: +props.latitude,
+            longitude: +props.longitude,
+            width: '100%',
+            height: '98%',
+            zoom: 16,
+        });
     };
 
 
@@ -45,13 +52,6 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
         <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => {
             upadeteSettings();
             setOpenDetailComponent(true);
-            setViewport({
-                latitude: +props.latitude,
-                longitude: +props.longitude,
-                width: '100%',
-                height: '98%',
-                zoom: 16,
-            });
         } }>
             <div className="offer-border-level2">
                 <div className="offer-border-level3">
