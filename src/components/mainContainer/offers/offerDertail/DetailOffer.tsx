@@ -12,6 +12,7 @@ import MediaQuery from 'react-responsive';
 import Description from './components/Description';
 import DisplaySalary from './components/DisplaySalary';
 import { EmploymentType } from '../../../../types/offerType';
+import CompanyProfile from './components/CompanyProfile';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -153,6 +154,7 @@ const DetailOffer = () : JSX.Element => {
                 <Tab/>
             </div>
             <div>
+                { dataDetail.company_profile ? <CompanyProfile/> : null}
                 <Tech/>
                 <Description/>
             </div>

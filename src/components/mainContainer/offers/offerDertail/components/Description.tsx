@@ -15,9 +15,13 @@ const Description = (): JSX.Element => {
 
     return (
         <div className="description">
-            <div className="description-title">
-                Description
+            <div className ="description-title-content">
+                <div className="description-title">
+                    Description
+                </div>
+                { dataDetail.remote_interview ? <span className= 'onlineInterview'> Online interview </span> : null }
             </div>
+
             <div className="description-content">
                 <div className="description-text">
                     <span>
