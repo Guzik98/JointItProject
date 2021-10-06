@@ -1,22 +1,17 @@
 import React from 'react';
+import { HandlePopOut } from '../../../../types/shortTypes';
 import { Divider } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import { IconType, programingLanguageIconArray } from '../../iconBar/programing-language';
 import IconComponent from '../../iconBar/IconComponent';
 import './Tech.sass';
 
-
-const TechPopOut = (props: any) => {
-
-    const handleClose = () => {
-        props.handleClose();
-    };
-
+const TechPopOut = ({ handleClose } : HandlePopOut) : JSX.Element=> {
     return (
         <>
             <div className="tech-pop-out-title">
                         Technology
-                <div className="exit-icon" onClick={handleClose}>
+                <div className="exit-icon" onClick={ handleClose }>
                     <ClearIcon/>
                 </div>
             </div>

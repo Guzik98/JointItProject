@@ -1,6 +1,5 @@
 import React from 'react';
 import './Navbar.sass';
-
 import PostJob from './buttons/postJob/PostJob';
 import { RightSideReferenceArray } from './buttons/rest/RightSideReferenceArray';
 import RightSideReferenceComponent from './buttons/rest/RightSideReferenceComponent';

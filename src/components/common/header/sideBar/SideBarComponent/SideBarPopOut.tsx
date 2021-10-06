@@ -1,17 +1,14 @@
 import React from 'react';
-import ExitButton from './buttons/ExitButton';
+import ExitButton from '../../../../../assets/icons/svg/ExitButton';
 import Divider from '@material-ui/core/Divider';
-import LoginComponent from '../login/LoginComponent';
-import { SocialLinks } from './buttons/MenuItems';
-import SocialLinksComponent from './SideBarComponents/SocialLinksComponent';
-import './SideBar.sass';
-import { FirstList, FromHeaderList, NestedList, SecondList } from './SideBarComponents/SideBarComponents';
+import LoginComponent from '../../login/LoginComponent';
+import { SocialLinks } from './components/MenuItems';
+import SocialLinksComponent from './components/SocialLinksComponent';
+import '../SideBar.sass';
+import { FirstList, FromHeaderList, NestedList, SecondList } from './components/SideBarComponents';
+import { HandlePopOut } from '../../../../../types/shortTypes';
 
-const SideBar = (props : any) : JSX.Element => {
-
-    const handleClose = () => {
-        props.click();
-    };
+const SideBarPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
 
     return (
         <>
@@ -48,4 +45,4 @@ const SideBar = (props : any) : JSX.Element => {
     );
 };
 
-export default SideBar;
+export default SideBarPopOut;

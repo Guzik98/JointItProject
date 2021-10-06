@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { HeaderLinkType } from './RightSideReferenceArray';
+import { HeaderLinkType } from '../../../../../../types/shortTypes';
 
 const RightSideReferenceComponent = ({ text }: HeaderLinkType): JSX.Element => {
     return (

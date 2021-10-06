@@ -1,4 +1,4 @@
-import { useSettings } from '../../../../Settings';
+import { useSettings } from '../../../../../Settings';
 
 export const checkParametersIncrement = () : number => {
     let counter = 0;

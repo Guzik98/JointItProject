@@ -1,8 +1,9 @@
 import React from 'react';
 import { Autocomplete } from '@material-ui/lab';
-import { programingLanguageIconArray } from '../iconBar/programing-language';
+import { programingLanguageIconArray } from '../../../iconBar/programing-language';
 import { createStyles, makeStyles, Theme, Chip, TextField } from '@material-ui/core';
 import './LongSearch.sass';
+import { HandlePopOut } from '../../../../../types/shortTypes';
 
 const IconStart = () : JSX.Element => {
     return (
@@ -43,10 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         '& .MuiSvgIcon-root' : {
-                width : 0,
-                 height :0,
+            width : 0,
+            height :0,
         },
-
         input : {
             marginLeft: 0,
         },
@@ -62,12 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function LongSearch( props : any ): JSX.Element {
+export default function LongSearch({ handleClose } : HandlePopOut ): JSX.Element {
     const classes = useStyles();
-
-    const onClickClose =  () => {
-        props.close();
-    };
 
     return (
         <>
@@ -116,7 +112,7 @@ export default function LongSearch( props : any ): JSX.Element {
 
                 renderInput={(params )   => (
                     <div className="input">
-                        <div className="back-icon" onClick = {onClickClose}>
+                        <div className="back-icon" onClick = {handleClose}>
                             <IconStart/>
                         </div>
                         <TextField {...params} className="long-text-field" placeholder= "Skill, Company, Location"/>

@@ -80,10 +80,12 @@ const DetailOffer = () : JSX.Element => {
     };
     const classes = useStyles();
 
+    useEffect(() => {
+        if (data){
+            setDataDetail(data);
+        }
+    }, [data]);
 
-    if ( data != undefined ){
-        setDataDetail(data);
-    }
 
     if ( dataDetail != undefined)
         return (

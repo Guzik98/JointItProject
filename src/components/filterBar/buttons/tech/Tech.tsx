@@ -66,7 +66,7 @@ const Tech = (): JSX.Element => {
             </Button>
 
             <Dialog fullScreen open={open}>
-                <TechPopOut handleClose={handleClose}/>
+                <TechPopOut handleClose = {handleClose}/>
             </Dialog>
         </>
     );

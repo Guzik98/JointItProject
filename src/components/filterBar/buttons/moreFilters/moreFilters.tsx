@@ -2,21 +2,12 @@ import React from 'react';
 import { useSettings } from '../../../../Settings';
 import '../buttons.sass';
 import './moreFilters.sass';
-import MoreFilersPopOut from './moreFilersPopOut';
+import MoreFilersPopOut from './popOut/moreFilersPopOut';
 import MediaQuery from 'react-responsive';
 import { Dialog, Button, createStyles, makeStyles  } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import { checkParametersIncrement } from './checkCounter';
-
-const IconPath = (): JSX.Element => {
-    return (
-        <svg className="icon-pad"  focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z">
-            </path>
-        </svg>
-    );
-};
+import { checkParametersIncrement } from './popOut/checkCounter';
+import IconPath from '../../../../assets/icons/svg/IconPath';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -43,7 +34,6 @@ const useStyles = makeStyles(() =>
                     padding: 0
                 },
             },
-
         },
         moreFiltersBtn: {
             display: 'flex',
@@ -102,8 +92,6 @@ export const MoreFilters = (): JSX.Element => {
     const { fromSalary, toSalary, employmentType, seniority } = useSettings();
     const counter = checkParametersIncrement();
 
-
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -112,19 +100,15 @@ export const MoreFilters = (): JSX.Element => {
         setOpen(false);
     };
 
-
-
-
-
     return (
         <div>
-                <Button size="small"
-                        variant="outlined"
-                        onClick={handleClickOpen}
-                        classes={ (fromSalary != 0 || toSalary != 100000 ||
-                            employmentType != 'All' || seniority != 'All')
-                            ? { root: classes.moreFiltersBtnChosen, label: classes.label }
-                            : { root: classes.moreFiltersBtn, label: classes.label }}
+            <Button size="small"
+                    variant="outlined"
+                    onClick={handleClickOpen}
+                    classes={ (fromSalary != 0 || toSalary != 100000 ||
+                        employmentType != 'All' || seniority != 'All')
+                        ? { root: classes.moreFiltersBtnChosen, label: classes.label }
+                        : { root: classes.moreFiltersBtn, label: classes.label }}
                 >
                     {counter > 0 ? <span className="numer-border"> {counter} </span>
                         : <MediaQuery minWidth={1025}>
@@ -138,12 +122,12 @@ export const MoreFilters = (): JSX.Element => {
                 </Button>
                 <MediaQuery maxWidth={1025}>
                     <Dialog fullScreen onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                        <MoreFilersPopOut onClick={handleClose}/>
+                        <MoreFilersPopOut handleClose={handleClose}/>
                     </Dialog>
                 </MediaQuery>
                 <MediaQuery minWidth={1025}>
                     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
-                        <MoreFilersPopOut   onClick={handleClose}/>
+                        <MoreFilersPopOut   handleClose={handleClose}/>
                     </Dialog>
                 </MediaQuery>
         </div>

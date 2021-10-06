@@ -1,6 +1,7 @@
 import { useSettings } from '../../../../Settings';
 import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { ButtonType } from '../../../../types/shortTypes';
 
 
 const useStylesBtn = makeStyles({
@@ -20,10 +21,6 @@ const useStylesBtn = makeStyles({
     },
 });
 
-export type ButtonType = {
-    name: string;
-    href?: string;
-};
 
 export const employmentBtn  = [
     { name: 'All' },
@@ -39,7 +36,7 @@ export const seniorityBtn = [
     { name: 'Senior' }
 ];
 
-export const EmploymentBtnComponent = (props: any): JSX.Element => {
+export const EmploymentBtnComponent = (props: ButtonType): JSX.Element => {
     const classes = useStylesBtn();
     const { setEmploymentType, employmentType } = useSettings();
 
@@ -62,19 +59,14 @@ export const EmploymentBtnComponent = (props: any): JSX.Element => {
     );
 };
 
-
-export const SeniorityBtnComponent = (props: any): JSX.Element => {
+export const SeniorityBtnComponent = (props: ButtonType): JSX.Element => {
     const classes = useStylesBtn();
     const { setSeniority, seniority } = useSettings();
-
-    const onClick = () => {
-        setSeniority(`${props.name}`);
-    };
 
     return (
         <Button
             size="small"
-            onClick={onClick}
+            onClick={() => { setSeniority(`${props.name}`); }}
             variant="outlined"
             className={`${seniority == props.name ? 'active' : null }`}
             classes={{

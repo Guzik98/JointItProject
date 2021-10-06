@@ -7,9 +7,11 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import MediaQuery from 'react-responsive';
 import { makeStyles } from '@material-ui/core/styles';
 import { Collapse, Divider } from '@material-ui/core';
-import CityBtnComponent from './CityBtnComponent';
-import { useSettings } from '../../../../Settings';
-import { cityPoland, CityType, cityWorld, OtherPolandCities } from './CityBtn';
+import { cityPoland, cityWorld, OtherPolandCities } from '../cityButtons/cityArrays';
+import { CityType, HandlePopOut } from '../../../../../types/shortTypes';
+import CityBtnComponent from '../cityButtons/CityBtnComponent';
+import { useSettings } from '../../../../../Settings';
+
 
 const useStyles = makeStyles({
     city: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles({
     },
 });
 
-const PopOverLocation = (props : any) :JSX.Element => {
+const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
     const classes = useStyles();
     const { setCity, city, setViewport } = useSettings();
 
@@ -40,9 +42,7 @@ const PopOverLocation = (props : any) :JSX.Element => {
     const toggle = () => {
         setOpen(!open);
     };
-    const handleClose = () => {
-        props.click();
-    };
+
     const clear = () => {
         setViewport({
             latitude: 52.237049,
@@ -52,7 +52,9 @@ const PopOverLocation = (props : any) :JSX.Element => {
             zoom: 5,
         });
         setCity('all');
-        handleClose();
+        if (handleClose){
+            handleClose();
+        }
     };
 
     return (
@@ -117,9 +119,10 @@ const PopOverLocation = (props : any) :JSX.Element => {
                         </a>
                         <div className="city-buttons">
                             {cityPoland.map(({ city, longitude, latitude }: CityType) =>
-                                <CityBtnComponent click={handleClose} city={city} key={city}
-                                                  longitude={longitude} latitude={latitude}
-                                />)
+                                <div onClick={handleClose} key={city}>
+                                    <CityBtnComponent  city={city} longitude={longitude} latitude={latitude}
+                                    />
+                                </div>)
                             }
                         </div>
                     </div>
@@ -129,9 +132,10 @@ const PopOverLocation = (props : any) :JSX.Element => {
                         </a>
                         <div className="city-buttons">
                             {cityWorld.map(({ city, longitude, latitude }: CityType) =>
-                                <CityBtnComponent click={handleClose} city={city} key={city}
-                                                  longitude={longitude} latitude={latitude}
-                                />)
+                                <div onClick={handleClose} key={city}>
+                                    <CityBtnComponent  city={city} longitude={longitude} latitude={latitude}
+                                    />
+                                </div>)
                             }
                         </div>
                     </div>
@@ -144,21 +148,22 @@ const PopOverLocation = (props : any) :JSX.Element => {
                         <div className="city-buttons"  >
                             <Collapse in={open}>
                                 {OtherPolandCities.map(({ city, longitude, latitude }: CityType) =>
-                                    <CityBtnComponent click={handleClose} city={city} key={city}
-                                                      longitude={longitude} latitude={latitude}
-                                    />)
+                                    <div onClick={handleClose} key={city}>
+                                        <CityBtnComponent  city={city} longitude={longitude} latitude={latitude}
+                                        />
+                                    </div>)
                                 }
                             </Collapse>
                         </div>
                     </div>
                     <Divider className="divider-pop" variant="fullWidth"/>
                     <Button size="small"
-                        onClick={clear}
-                         variant="outlined"
-                         classes={{
-                             root: classes.city,
-                             label: classes.label
-                         }}
+                            onClick={clear}
+                            variant="outlined"
+                            classes={{
+                                root: classes.city,
+                                label: classes.label
+                            }}
                     >
                         Clear Filter
                     </Button>

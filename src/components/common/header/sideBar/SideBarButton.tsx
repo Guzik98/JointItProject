@@ -2,7 +2,7 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/MenuOutlined';
 import Drawer from '@material-ui/core/Drawer';
-import SideBar from './SideBar';
+import SideBar from './SideBarComponent/SideBarPopOut';
 import './SideBar.sass';
 const drawerWidth = 320;
 
@@ -64,7 +64,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
 const SideBarButton = () :  JSX.Element => {
     const classes = useStyles();
 
@@ -92,7 +91,7 @@ const SideBarButton = () :  JSX.Element => {
                     paper: classes.drawerPaper,
                 }}
             >
-                <SideBar click={handleDrawerClose}/>
+                <SideBar handleClose={handleDrawerClose}/>
             </Drawer>
         </>
     );

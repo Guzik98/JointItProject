@@ -7,7 +7,6 @@ export type EmploymentType = {
         } | null
 };
 
-
 export type SkillsType = [
     {
         name: string,

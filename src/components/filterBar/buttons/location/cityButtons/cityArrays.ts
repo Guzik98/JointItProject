@@ -1,9 +1,3 @@
-export type CityType = {
-    city: string,
-    latitude: number
-    longitude: number
-};
-
 export const cityPoland = [
     { city: 'Warszawa', latitude: 52.237049, longitude: 21.017532 },
     { city: 'Kraków', latitude: 50.049683, longitude: 19.944544  },

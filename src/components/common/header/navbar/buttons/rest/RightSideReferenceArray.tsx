@@ -3,11 +3,6 @@ import Offers from '../../../../../../assets/icons/header-icons/Offers';
 import Geek from '../../../../../../assets/icons/header-icons/Geek';
 import Matchmaking from '../../../../../../assets/icons/header-icons/Matchmaking';
 
-export type HeaderLinkType = {
-    text: string,
-    svg?: JSX.Element
-};
-
 export const RightSideReferenceArray = [
     {
         text: 'Offers',

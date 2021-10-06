@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSettings } from '../../../../Settings';
+import { useSettings } from '../../../../../Settings';
+import { CityType } from '../../../../../types/shortTypes';
 
 const useStyles = makeStyles({
     city: {
@@ -25,12 +26,12 @@ const useStyles = makeStyles({
 
 });
 
-const CityBtnComponent = (props: any): JSX.Element => {
+const CityBtnComponent = ( props: CityType): JSX.Element => {
     const classes = useStyles();
     const { setCity, city, setViewport } = useSettings();
 
     const handleClick = () => {
-        props.click();
+
         setViewport({
             height: '98%', latitude: props.latitude, longitude: props.longitude, width: '100%', zoom: 11,
         });
@@ -38,17 +39,17 @@ const CityBtnComponent = (props: any): JSX.Element => {
     };
 
     return (
-            <Button size="small"
-                    variant="outlined"
-                    onClick={handleClick}
-                    className={ `${city == props.city ? 'active' : '' } `}
-                    classes={{
-                        root: classes.city,
-                        label: classes.label,
-                    }}
-            >
-                {props.city}
-            </Button>
+        <Button size="small"
+                variant="outlined"
+                onClick={handleClick}
+                className={ `${city == props.city ? 'active' : '' } `}
+                classes={{
+                    root: classes.city,
+                    label: classes.label,
+                }}
+        >
+            {props.city}
+        </Button>
     );
 };
 

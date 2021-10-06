@@ -16,7 +16,6 @@ type View = {
 };
 
 const useProviderSettings = () => {
-    console.log('start');
     const { data, error } = useFetch<OfferType[]>(url);
     const [ urlDetail, setUrlDetail ] = useState<string>();
     const [ dataDetail, setDataDetail] = useState<OfferTypeDetail>();
@@ -29,7 +28,6 @@ const useProviderSettings = () => {
     const [ employmentType, setEmploymentType ] = useState<string>('All');
     const [ sortBy, setSortBy ] = useState<string>('Latest');
     const [ withSalary, setWithSalary ] = useState<boolean>(false);
-    const [ skills, setSkills ] = useState([]);
     const [ viewport, setViewport ] = useState<View>({
         latitude: 52.237049,
         longitude: 21.017532,
@@ -64,8 +62,6 @@ const useProviderSettings = () => {
             setViewport,
             openDetailComponent,
             setOpenDetailComponent,
-            skills,
-            setSkills
         };
 };
 
@@ -82,13 +78,13 @@ export const SettingsProvider: FC = ({ children }) => {
 
 type SettingsContextData = ReturnType<typeof useProviderSettings>;
 
-export  const useSettings = () => {
+
+export  const useSettings = ()  => {
     const settings = useContext(SettingsContext);
     
     if (!settings) {
          throw new Error('useSettings must by used inside SettingsProvider');
     }
-
 
     return settings;
 };

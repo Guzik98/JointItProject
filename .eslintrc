@@ -45,10 +45,6 @@
       "destructuring": "any",
       "ignoreReadBeforeAssign": false
     }],
-    "max-len": ["warn", {
-      "code": 120,
-      "ignoreTrailingComments": true
-    }],
     "react/react-in-jsx-scope": "off",
     "arrow-parens": 0,
     "import/prefer-default-export": "off",

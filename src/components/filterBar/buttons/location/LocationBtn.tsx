@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import PopOverLocation from './LocationPopOver';
+import PopOverLocation from './PopOut/LocationPopOver';
 import { useSettings } from '../../../../Settings';
 import MediaQuery from 'react-responsive';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
@@ -80,6 +80,7 @@ export const useStyles = makeStyles(() =>
 
  export  const LocationBtn = (): JSX.Element => {
      const classes = useStyles();
+
      const { city } = useSettings();
      const [ anchorEl, setAnchorEl ] = React.useState<HTMLButtonElement | null>(null);
 
@@ -90,6 +91,7 @@ export const useStyles = makeStyles(() =>
      const handleClose = () => {
          setAnchorEl(null);
      };
+
      const open = Boolean(anchorEl);
      const id = open ? 'simple-popover' : undefined;
 
@@ -129,7 +131,7 @@ export const useStyles = makeStyles(() =>
                      horizontal: 'left',
                 }}
             >
-                <PopOverLocation click={ handleClose }/>
+                <PopOverLocation handleClose={ handleClose }/>
             </Popover>
         </>
     );

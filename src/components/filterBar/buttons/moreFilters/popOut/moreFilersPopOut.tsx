@@ -1,9 +1,10 @@
 import React from 'react';
 import { DialogActions, DialogContent, Divider, IconButton, Slider, makeStyles, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { useSettings } from '../../../../Settings';
-import { employmentBtn, seniorityBtn, ButtonType,
-    EmploymentBtnComponent, SeniorityBtnComponent } from './MoreFiltersBtns';
+import { useSettings } from '../../../../../Settings';
+import { ButtonType, HandlePopOut } from '../../../../../types/shortTypes';
+import { employmentBtn, seniorityBtn,
+    EmploymentBtnComponent, SeniorityBtnComponent } from '../MoreFiltersComponents';
 
 const useStylesBtn = makeStyles({
     label: {
@@ -45,7 +46,7 @@ const useStylesBtn = makeStyles({
     },
 });
 
-const MoreFilersPopOut = (props: any): JSX.Element => {
+const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     const classesBtn = useStylesBtn();
     const { setEmploymentType, setToSalary, setFromSalary, toSalary, fromSalary, setSeniority } = useSettings();
     const [value, setValue] = React.useState<number[]>([fromSalary, toSalary]);
@@ -59,14 +60,12 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
     }
 
 
-    const onClick = () => {
-        props.onClick();
-    };
-
     const submit = () => {
         setFromSalary(value[0]);
         setToSalary(value[1]);
-        onClick();
+        if (handleClose){
+            handleClose();
+        }
     };
 
     const clear = () => {
@@ -74,14 +73,16 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
         setToSalary(100000);
         setFromSalary(0);
         setSeniority('All');
-        onClick();
+        if (handleClose){
+            handleClose();
+        }
     };
 
     return (
         <>
             <div className="dialog-title">
                 More filters
-                <IconButton aria-label="close" onClick={onClick}>
+                <IconButton aria-label="close" onClick={handleClose}>
                     <CloseIcon/>
                 </IconButton>
             </div>
@@ -91,6 +92,7 @@ const MoreFilersPopOut = (props: any): JSX.Element => {
                 </div>
                 <Slider
                     value={value}
+                    step={1000}
                     onChange={handleChange}
                     aria-labelledby="range-slider"
                     max = { 100000 }

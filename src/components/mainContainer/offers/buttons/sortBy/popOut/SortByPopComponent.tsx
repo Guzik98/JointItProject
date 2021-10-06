@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, DialogContent, DialogTitle, Divider } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import { useSettings } from '../../../../../Settings';
+import { ButtonType } from '../../../../../../types/shortTypes';
+import { useSettings } from '../../../../../../Settings';
 import MediaQuery from 'react-responsive';
+import { Button } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
@@ -28,23 +28,20 @@ const useStyles = makeStyles(() =>
         }
     }),
 );
-type ButtonType = {
-    name: string;
-};
 
-const sortByButtons = [
+export const sortByButtons = [
     { name: 'Latest' },
     { name: 'Highest Salary' },
     { name: 'Lowest Salary' },
 ];
 
-const SortByButtonsComponent = (props: any) => {
+
+export const SortByButtonsComponent = ( props : ButtonType) : JSX.Element => {
     const classes = useStyles();
     const { setSortBy, sortBy } = useSettings();
 
     const handleClose = () => {
         setSortBy(props.name);
-        props.click();
     };
 
     return (
@@ -76,34 +73,3 @@ const SortByButtonsComponent = (props: any) => {
         </>
     );
 };
-
-const SortByPopOut = (props: any): JSX.Element => {
-
-    const handleClose = () => {
-        props.click();
-    };
-
-    return (
-        <>
-            <MediaQuery maxWidth={1024}>
-                <DialogTitle>
-                    <div className="sort-by-title">
-                        <span>Sort By</span>
-                        <CloseIcon onClick={handleClose}/>
-                    </div>
-                </DialogTitle>
-            </MediaQuery>
-
-            <Divider/>
-            <DialogContent>
-                <div className="sort-by-pop-out-body">
-                    {sortByButtons.map(({ name }: ButtonType) => <SortByButtonsComponent click={handleClose}
-                                                                                          name={name} key={name}/>)}
-                </div>
-            </DialogContent>
-
-        </>
-    );
-};
-
-export default SortByPopOut;

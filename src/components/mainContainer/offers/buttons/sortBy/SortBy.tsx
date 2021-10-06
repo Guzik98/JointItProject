@@ -5,7 +5,7 @@ import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../../Settings';
 import Popover from '@material-ui/core/Popover';
 import { Dialog } from '@material-ui/core';
-import SortByPopOut from './SortByPopOut';
+import SortByPopOut from './popOut/SortByPopOut';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
@@ -57,7 +57,6 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-
 const SortBy = (): JSX.Element => {
     const classes = useStyles();
     const { sortBy } = useSettings();
@@ -96,7 +95,7 @@ const SortBy = (): JSX.Element => {
 
             <MediaQuery maxWidth={1025}>
                 <Dialog fullScreen aria-labelledby="customized-dialog-title" open={open}>
-                    <SortByPopOut click={handleClose}/>
+                    <SortByPopOut handleClose={handleClose}/>
                 </Dialog>
             </MediaQuery>
 
@@ -112,7 +111,7 @@ const SortBy = (): JSX.Element => {
                         horizontal: 'left',
                     }}
                 >
-                    <SortByPopOut click={handleClose}/>
+                    <SortByPopOut handleClose={handleClose}/>
                 </Popover>
             </MediaQuery>
         </>

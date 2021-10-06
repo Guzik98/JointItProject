@@ -2,8 +2,7 @@ import { useSettings } from '../../../../Settings';
 import { EmploymentType, OfferType } from '../../../../types/offerType';
 import { sortSalary, checkCurrency } from './sortSalary';
 
-
-export const filterFunction = () => {
+export const filterFunction = ()  => {
     const { data, city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
 
     const filterTech = data?.filter(function (item: {

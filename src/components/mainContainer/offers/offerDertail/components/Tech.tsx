@@ -10,7 +10,7 @@ const Tech = () : JSX.Element => {
         throw new Error('Something go wrong fetching detail');
     }
 
-    const SkillComponent = (props : any) : JSX.Element => {
+    const SkillComponent = (props :  { name: string, level: number }) : JSX.Element => {
         let skillLevelName  = '';
         switch (props.level){
             case 1:
