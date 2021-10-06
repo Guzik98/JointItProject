@@ -32,7 +32,7 @@ export const checkCurrency = (currency: string | undefined) : number => {
 };
 
 export const sortSalary = function (a :OfferType, b : OfferType ) :number {
-    const { sortBy, employmentType } = useSettings();
+    const { sortBy, employmentType, toSalary, fromSalary } = useSettings();
         let exchangeRate = 1 ;
         let helpATo  = 1;
         let helpBTo  = 1;
@@ -66,21 +66,30 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
                         (helpAFrom = 1000000)
                     );
                 }
-            }  else {
-                if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    return  (
-                        (helpATo = 10000000)
+            }
+            if ( (toSalary != 100000 || fromSalary != 0)  && item.salary !== null ){
+                    if (  item.salary.to * exchangeRate > fromSalary
+                        && item.salary.from * exchangeRate < toSalary)
+                        return (
+                        (helpATo = item?.salary?.to * exchangeRate)
                         &&
-                        (helpAFrom = 1000000)
+                        (helpAFrom = item?.salary?.from * exchangeRate)
                     );
-                }
-                if (item.salary != null) {
-                   return  (
-                       (helpATo = item.salary?.to * exchangeRate)
-                       &&
-                       (helpAFrom = item?.salary?.from * exchangeRate )
-                   );
-                }
+            }
+
+            if (item.salary == null && sortBy === 'Lowest Salary') {
+                return (
+                    (helpATo = 10000000)
+                    &&
+                    (helpAFrom = 1000000)
+                );
+            }
+            if (item.salary != null && (toSalary == 100000 && fromSalary == 0)) {
+                return (
+                    (helpATo = item.salary?.to * exchangeRate)
+                    &&
+                    (helpAFrom = item?.salary?.from * exchangeRate)
+                );
             }
         });
         b.employment_types.map(item => {
@@ -88,7 +97,9 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
                 exchangeRate  =  checkCurrency(item?.salary?.currency);
             }
             if (employmentType != 'All') {
-                if (item.type === employmentType.toLowerCase() && item.salary != null) {
+                if (item.type === employmentType.toLowerCase()
+                    && item.salary != null
+                ) {
                    return (
                        (helpBTo = item?.salary?.to * exchangeRate)
                        &&
@@ -109,20 +120,28 @@ export const sortSalary = function (a :OfferType, b : OfferType ) :number {
                     );
                 }
             } else {
-                if (item.salary == null && sortBy === 'Lowest Salary' ) {
-                    return (
-                        ( helpBTo = 10000000 ) &&
-                        ( helpBFrom = 1000000 )
+                if ( (toSalary != 100000 || fromSalary != 0)  && item.salary !== null ){
+                    if (  item.salary.to * exchangeRate > fromSalary
+                        && item.salary.from * exchangeRate < toSalary) return (
+                        (helpBTo = item?.salary?.to * exchangeRate)
+                        &&
+                        (helpBFrom = item?.salary?.from * exchangeRate)
                     );
+                } else {
+                    if (item.salary == null && sortBy === 'Lowest Salary' ) {
+                        return (
+                            ( helpBTo = 10000000 ) &&
+                            ( helpBFrom = 1000000 )
+                        );
+                    }
+                    if (item.salary != null) {
+                        return (
+                            (helpBTo = item.salary?.to * exchangeRate)
+                            &&
+                            (helpBFrom = item?.salary?.from * exchangeRate)
+                        );
+                    }
                 }
-                if (item.salary != null) {
-                  return (
-                      (helpBTo = item.salary?.to * exchangeRate)
-                      &&
-                      (helpBFrom = item?.salary?.from * exchangeRate)
-                  );
-                }
-
             }
         });
     if ( sortBy === 'Highest Salary'){
