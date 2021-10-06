@@ -29,6 +29,7 @@ const useProviderSettings = () => {
     const [ employmentType, setEmploymentType ] = useState<string>('All');
     const [ sortBy, setSortBy ] = useState<string>('Latest');
     const [ withSalary, setWithSalary ] = useState<boolean>(false);
+    const [ skills, setSkills ] = useState([]);
     const [ viewport, setViewport ] = useState<View>({
         latitude: 52.237049,
         longitude: 21.017532,
@@ -62,7 +63,9 @@ const useProviderSettings = () => {
             viewport,
             setViewport,
             openDetailComponent,
-            setOpenDetailComponent
+            setOpenDetailComponent,
+            skills,
+            setSkills
         };
 };
 

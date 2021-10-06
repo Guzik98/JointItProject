@@ -79,25 +79,40 @@ export const filterFunction = () => {
     const filterSalaryBetween = filterEmploymentType?.filter(function (item: {
         employment_types : EmploymentType[];
     }) : boolean {
-       const  exchangeRate = checkCurrency(item.employment_types[0].salary?.currency);
-            if (item.employment_types[0]?.salary !== null) {
+            if (item.employment_types[0]?.salary !== null
+                && item.employment_types[0]?.type == (employmentType.toLowerCase() ||  'mandate_contract' )
+            ) {
+                const  exchangeRate = checkCurrency(item.employment_types[0].salary?.currency);
                 return (
                      item.employment_types[0]?.salary.to * exchangeRate > fromSalary
                         &&  item.employment_types[0]?.salary.from * exchangeRate  < toSalary
                     );
             }
-            if (item.employment_types[1]?.salary !== null) {
+        if (item.employment_types[1]?.salary !== null
+            && item.employment_types[1]?.type == (employmentType.toLowerCase() ||  'mandate_contract' )
+        ) {
+            const  exchangeRate = checkCurrency(item.employment_types[1].salary?.currency);
                 return (
                     item.employment_types[1]?.salary.to * exchangeRate > fromSalary
                     && item.employment_types[1]?.salary.from  * exchangeRate  < toSalary
                 );
             }
-            if (item.employment_types[2]?.salary !== null) {
+        if (item.employment_types[2]?.salary !== null
+            && item.employment_types[2]?.type == (employmentType.toLowerCase() ||  'mandate_contract' )
+        ) {
+                const  exchangeRate = checkCurrency(item.employment_types[2].salary?.currency);
                 return (
                     item.employment_types[2]?.salary.to * exchangeRate > fromSalary
                     && item.employment_types[2]?.salary.from * exchangeRate < toSalary
                 );
             }
+        if (item.employment_types[0]?.salary !== null) {
+            const  exchangeRate = checkCurrency(item.employment_types[0].salary?.currency);
+            return (
+                item.employment_types[0]?.salary.to * exchangeRate > fromSalary
+                &&  item.employment_types[0]?.salary.from * exchangeRate  < toSalary
+            );
+        }
             return true;
         }
     );
@@ -125,7 +140,6 @@ export const filterFunction = () => {
     if (sortBy === 'Latest') {
         filtered = filter0ffersWithOutSalary;
     }
-
 
     return  filtered;
 

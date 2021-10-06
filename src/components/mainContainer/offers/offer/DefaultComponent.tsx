@@ -18,11 +18,11 @@ const DefaultComponent = () : JSX.Element => {
         <div className= "default">
             <div className = "default-content">
                 Sorry, there are no job offers for:
-                { city != 'all' ? <strong> {city}</strong> : null }
-                { tech != 'All' ? <strong> {tech}</strong> : null }
-                { seniority != 'All' ? <strong> {seniority}</strong> : null }
-                { fromSalary != 0 ? <strong> {fromSalary}</strong> : null }
-                { toSalary != 100000 ? <strong> {toSalary}</strong> : null }
+                { city != 'all' ? <strong> {city},</strong> : null }
+                { tech != 'All' ? <strong> {tech},</strong> : null }
+                { seniority != 'All' ? <strong> {seniority},</strong> : null }
+                { fromSalary != 0 ? <strong> {fromSalary},</strong> : null }
+                { toSalary != 100000 ? <strong> {toSalary},</strong> : null }
                 { employmentType != 'All' ? <strong> {employmentType}</strong> : null }
             </div>
             <button className ="clear-btn" onClick={ clear }>Remove Filters</button>

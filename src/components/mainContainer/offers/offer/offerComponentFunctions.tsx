@@ -1,4 +1,3 @@
-
 import './offerComponent.sass';
 
 export  const CompanyIcon = (): JSX.Element => {
@@ -41,5 +40,4 @@ export const getNumberOfDays = ( start: string, end: string ): string => {
         return diffInDays + 'd ago';
     }
 };
-
 

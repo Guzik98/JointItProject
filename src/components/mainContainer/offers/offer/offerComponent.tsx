@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
 import { CompanyIcon, PointerIcon, getNumberOfDays } from './offerComponentFunctions';
+import { checkCurrency } from './sortSalary';
 
 
 const OfferComponent = (props : OfferType) : JSX.Element => {
-    const { setUrlDetail, setViewport, setOpenDetailComponent, employmentType } = useSettings();
+    const { setUrlDetail, setViewport, setOpenDetailComponent, employmentType, fromSalary, toSalary } = useSettings();
 
     const today = new Date().toISOString().split('T')[0];
 
@@ -17,42 +18,69 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
     let currency: string | undefined = 'Undisclosed Salary';
 
     const  displaySalary = (type: { type: string; salary: { from: number; to: number; currency: string } | null })  =>{
-
-        if (type.salary !== null && type.salary !== undefined && type.type == employmentType.toLowerCase()) {
+         const exchangeRate = checkCurrency(type.salary?.currency);
+        if (type.salary !== null
+            && type.salary !== undefined
+            && type.type == employmentType.toLowerCase()
+            && type.salary.to * exchangeRate > fromSalary
+            && type.salary.from * exchangeRate < toSalary
+        ) {
             minSalary = type.salary.from;
             maxSalary = type.salary.to;
             currency = type.salary.currency;
 
         }
-        if (type.salary !== null && type.salary !== undefined && type.type == 'mandate_contract') {
+        if (type.salary !== null
+            && type.salary !== undefined
+            && type.type == 'mandate_contract'
+            && type.salary.to * exchangeRate > fromSalary
+            && type.salary.from * exchangeRate < toSalary
+        ) {
             minSalary = type.salary.from;
             maxSalary = type.salary.to;
             currency = type.salary.currency;
         }
-        if (type.salary !== null && type.salary !== undefined && employmentType == 'All') {
+        if (type.salary !== null && type.salary !== undefined
+            && employmentType == 'All' && type.salary.to * exchangeRate > fromSalary
+            && type.salary.from * exchangeRate < toSalary) {
+            console.log(1);
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+        }
+        if (type.salary !== null && type.salary !== undefined
+            && employmentType == 'All' && ( fromSalary === 0 && toSalary === 100000)) {
             minSalary = type.salary.from;
             maxSalary = type.salary.to;
             currency = type.salary.currency;
         }
     };
 
-    const upadeteSettings = () => {
-        setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);
-        setViewport({
-            latitude: +props.latitude,
-            longitude: +props.longitude,
-            width: '100%',
-            height: '98%',
-            zoom: 16,
-        });
-    };
+const setUrl = () => {
+    setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);
+};
 
+const setViewportFunction = () => {
+    setViewport({
+        latitude: +props.latitude,
+        longitude: +props.longitude,
+        width: '100%',
+        height: '98%',
+        zoom: 16,
+    });
+};
 
+const openComponent = () => {
+        setOpenDetailComponent(true);
+};
     return (
-        <Link className="offer-border" to={`Offers/${props.id}` } onClick={ () => {
-            upadeteSettings();
-            setOpenDetailComponent(true);
-        } }>
+        <Link className="offer-border" to={`Offers/${props.id}` }
+              onClick={ () => {
+                  setUrl();
+                  setViewportFunction();
+                  openComponent();
+                  }}
+        >
             <div className="offer-border-level2">
                 <div className="offer-border-level3">
                     <div className="logo">

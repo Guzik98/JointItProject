@@ -36,7 +36,7 @@ function useWindowSize(): Size {
 
 
 function Map(): JSX.Element{
-    const { setUrlDetail, viewport, setViewport, setOpenDetailComponent } = useSettings();
+    const { setUrlDetail, viewport, setViewport, setOpenDetailComponent, employmentType } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
 
     const filter = filterFunction();
@@ -59,6 +59,29 @@ function Map(): JSX.Element{
         minHeight: size.height,
     };
 
+    let minSalary: number | undefined = 0;
+    let maxSalary: number | undefined = 0;
+    let currency: string | undefined = 'Undisclosed Salary';
+
+    const  displaySalary = (type: { type: string; salary: { from: number; to: number; currency: string } | null })  =>{
+
+        if (type.salary !== null && type.salary !== undefined && type.type == employmentType.toLowerCase()) {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+
+        }
+        if (type.salary !== null && type.salary !== undefined && type.type == 'mandate_contract') {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+        }
+        if (type.salary !== null && type.salary !== undefined && employmentType == 'All') {
+            minSalary = type.salary.from;
+            maxSalary = type.salary.to;
+            currency = type.salary.currency;
+        }
+    };
 
     return (
         <div className="map" style={style}>
@@ -81,14 +104,14 @@ function Map(): JSX.Element{
                             onMouseLeave={ () =>setSelectedOffer(null) }
                             onClick={ () => {
                                  setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
-                                    setOpenDetailComponent(true);
+                                 setOpenDetailComponent(true);
                                  setViewport({
                                     latitude: +offer.latitude,
                                     longitude: +offer.longitude,
                                     width: '100%',
                                     height: '98%',
                                     zoom: 16,
-                                }); 
+                                });
                             } }
                         >
                             <img className = 'pointer'
@@ -105,10 +128,14 @@ function Map(): JSX.Element{
                         <div className="popup-content">
                             <span>{ selectedOffer.title }</span>
                             <span className="popup-salary">
-                                {selectedOffer.employment_types[0].salary != null ?
-                                    selectedOffer.employment_types[0].salary.from + ' - '
-                                    + selectedOffer.employment_types[0].salary.to +
-                                    +  selectedOffer.employment_types[0].salary?.currency
+                                {selectedOffer.employment_types.map((type) =>
+                                    (displaySalary(type))
+                                    )
+                                }
+                                { currency !== 'Undisclosed Salary' ?
+                                    minSalary  + ' - '
+                                    + maxSalary +
+                                    +  currency
                                     :  null
                                 }
                             </span>
