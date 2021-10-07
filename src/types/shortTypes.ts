@@ -3,6 +3,11 @@ export interface HandlePopOut {
     handleOpen?: () => void
 }
 
+export interface Size {
+    width: number | undefined;
+    height: number | undefined;
+}
+
 export type HeaderLinkType = {
     text: string,
     svg?: JSX.Element
@@ -22,4 +27,17 @@ export type CityType = {
 
 export type ButtonType = {
     name: string;
+};
+
+export type IconType = {
+    name: string,
+    icon: JSX.Element
+};
+
+export type TabType = {
+    text: string,
+    data: string,
+    icon: JSX.Element,
+    id : number,
+    href? : string
 };

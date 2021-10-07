@@ -9,7 +9,6 @@ import SortByPopOut from './popOut/SortByPopOut';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
-
 const useStyles = makeStyles(() =>
     createStyles({
         root: {

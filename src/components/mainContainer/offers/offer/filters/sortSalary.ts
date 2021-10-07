@@ -1,5 +1,5 @@
-import { OfferType } from '../../../../types/offerType';
-import { useSettings } from '../../../../Settings';
+import { OfferType } from '../../../../../types/offerType';
+import { useSettings } from '../../../../../Settings';
 
 const eur = 4.6;
 const usd = 4.0;

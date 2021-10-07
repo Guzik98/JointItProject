@@ -1,78 +1,36 @@
 import React from 'react';
 import './offerComponent.sass';
-import { OfferType } from '../../../../types/offerType';
+import { EmploymentType, OfferType } from '../../../../types/offerType';
 import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
-import { CompanyIcon, PointerIcon, getNumberOfDays } from './offerComponentFunctions';
-import { checkCurrency } from './sortSalary';
-
+import { getNumberOfDays, putSalary, ReturnSalary } from './function/offerComponentFunctions';
+import CompanyIconOffer from '../../../../assets/icons/svg/CompanyIconOffer';
+import PointerIconOffer from '../../../../assets/icons/svg/PointerIconOffer';
 
 const OfferComponent = (props : OfferType) : JSX.Element => {
-    const { setUrlDetail, setViewport, setOpenDetailComponent, employmentType, fromSalary, toSalary } = useSettings();
+    const { setUrlDetail, setViewport, setOpenDetailComponent } = useSettings();
 
     const today = new Date().toISOString().split('T')[0];
 
-    let minSalary: number | undefined = 0;
-    let maxSalary: number | undefined = 0;
-    let currency: string | undefined = 'Undisclosed Salary';
-
-    const  displaySalary = (type: { type: string; salary: { from: number; to: number; currency: string } | null })  =>{
-         const exchangeRate = checkCurrency(type.salary?.currency);
-        if (type.salary !== null
-            && type.salary !== undefined
-            && type.type == employmentType.toLowerCase()
-            && type.salary.to * exchangeRate > fromSalary
-            && type.salary.from * exchangeRate < toSalary
-        ) {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-
-        }
-        if (type.salary !== null
-            && type.salary !== undefined
-            && type.type == 'mandate_contract'
-            && type.salary.to * exchangeRate > fromSalary
-            && type.salary.from * exchangeRate < toSalary
-        ) {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        }
-        if (type.salary !== null && type.salary !== undefined
-            && employmentType == 'All' && type.salary.to * exchangeRate > fromSalary
-            && type.salary.from * exchangeRate < toSalary) {
-            console.log(1);
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        }
-        if (type.salary !== null && type.salary !== undefined
-            && employmentType == 'All' && ( fromSalary === 0 && toSalary === 100000)) {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        }
+    const setUrl = () => {
+        setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);
     };
 
-const setUrl = () => {
-    setUrlDetail(`https://justjoin.it/api/offers/${props.id}`);
-};
+    const setViewportFunction = () => {
+        setViewport({
+            latitude: +props.latitude,
+            longitude: +props.longitude,
+            width: '100%',
+            height: '98%',
+            zoom: 16,
+        });
+    };
 
-const setViewportFunction = () => {
-    setViewport({
-        latitude: +props.latitude,
-        longitude: +props.longitude,
-        width: '100%',
-        height: '98%',
-        zoom: 16,
-    });
-};
+    const openComponent = () => {
+            setOpenDetailComponent(true);
+    };
 
-const openComponent = () => {
-        setOpenDetailComponent(true);
-};
     return (
         <Link className="offer-border" to={`Offers/${props.id}` }
               onClick={ () => {
@@ -103,12 +61,10 @@ const openComponent = () => {
                             <div className="salary-info">
                                 <MediaQuery minWidth={1024}>
                                     <div className="salary-text">
-                                        {props.employment_types.map((type)  => {
-                                            displaySalary(type);
-                                        })
-                                        }
-                                        {currency !== 'Undisclosed Salary' ? minSalary + ' - '
-                                            + maxSalary + ' ' + currency.toUpperCase() : currency }
+                                        {props.employment_types.map((type : EmploymentType)  => {
+                                            putSalary(type);
+                                        })}
+                                        <ReturnSalary/>
                                     </div>
                                 </MediaQuery>
                             </div>
@@ -119,12 +75,12 @@ const openComponent = () => {
                         <div className="bottom-info">
                             <div className="bottom-info-left">
                                 <div className="company-name">
-                                    <CompanyIcon/>
+                                    <CompanyIconOffer/>
                                     {props.company_name}
                                 </div>
                                 <div className="where-type">
                                     <MediaQuery minWidth={1024}>
-                                        <PointerIcon/>
+                                        <PointerIconOffer/>
                                         <span className="where">
                                             {props.city}
                                         </span>
@@ -136,10 +92,10 @@ const openComponent = () => {
 
                                     <MediaQuery maxWidth={1024}>
                                         <div className="salary-text">
-                                            {currency !== 'Undisclosed Salary' ?
-                                                minSalary.toString().slice(0, -3) + 'k - '
-                                                + maxSalary.toString().slice(0, -3) + 'k ' + currency.toUpperCase()
-                                                : currency }
+                                            {props.employment_types.map((type : EmploymentType)  => {
+                                              putSalary(type);
+                                            })}
+                                            <ReturnSalary/>
                                         </div>
                                     </MediaQuery>
                                 </div>
@@ -160,7 +116,7 @@ const openComponent = () => {
                                     <span className="type-small-screen">
                                               , {props.workplace_type}
                                     </span>
-                                    <PointerIcon/>
+                                    <PointerIconOffer/>
                                 </MediaQuery>
                             </div>
                         </div>

@@ -24,12 +24,6 @@ import { ReactComponent as Game } from '../../../assets/icons/programing-languag
 import { ReactComponent as Security } from '../../../assets/icons/programing-language/security-icon.svg';
 import AllIcon from '../../../assets/icons/programing-language/all-icon';
 
-
-export type IconType = {
-    name: string,
-    icon: JSX.Element
-};
-
 export const programingLanguageIconArray = [
     { name: 'All', icon: <AllIcon/>, },
     { name: 'JS', icon: <JavaScriptIcon/>, },

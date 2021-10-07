@@ -1,8 +1,8 @@
 import React from 'react';
-import { HandlePopOut } from '../../../../types/shortTypes';
+import { HandlePopOut, IconType } from '../../../../types/shortTypes';
 import { Divider } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
-import { IconType, programingLanguageIconArray } from '../../iconBar/programing-language';
+import { programingLanguageIconArray } from '../../iconBar/programing-language';
 import IconComponent from '../../iconBar/IconComponent';
 import './Tech.sass';
 

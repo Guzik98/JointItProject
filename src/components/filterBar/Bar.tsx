@@ -2,7 +2,7 @@ import React from 'react';
 import './Bar.sass';
 import '../../assets/programing-language-icon.svg';
 import IconComponent from './iconBar/IconComponent';
-import { IconType, programingLanguageIconArray } from './iconBar/programing-language';
+import { programingLanguageIconArray } from './iconBar/programing-language';
 import { SearchBtn, SearchBtnSmall } from './buttons/search/Search';
 import { MoreFilters } from './buttons/moreFilters/moreFilters';
 import { LocationBtn } from './buttons/location/LocationBtn';
@@ -11,6 +11,7 @@ import Tech from './buttons/tech/Tech';
 import SortBy from '../mainContainer/offers/buttons/sortBy/SortBy';
 import { ClickAwayListener } from '@material-ui/core';
 import LongSearch from './buttons/search/popOut/LongSearch';
+import { IconType } from '../../types/shortTypes';
 
 const renderIcon = programingLanguageIconArray.map(({ name, icon }: IconType) =>
     <IconComponent name={name} icon={icon} key={name}/>);

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSettings } from '../../../../Settings';
-import useFetch from '../../../../types/useFetch';
-import OfferTypeDetail from '../../../../types/offerDetailType';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import './DetailOffer.sass' ;
-import { createStyles, makeStyles, Button } from '@material-ui/core';
+import './DetailOffer.sass';
+import { Button, createStyles, makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Tab from './components/Tab';
 import Tech from './components/Tech';
@@ -13,6 +11,10 @@ import Description from './components/Description';
 import DisplaySalary from './components/DisplaySalary';
 import { EmploymentType } from '../../../../types/offerType';
 import CompanyProfile from './components/CompanyProfile';
+import PointerIconDetail from '../../../../assets/icons/svg/PointerIconDetail';
+import { useWindowSize } from '../../../../handleScreen/useWindowSize';
+import { Size } from '../../../../types/shortTypes';
+import { Spinner } from 'react-bootstrap';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -31,63 +33,30 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const PointerIcon = () : JSX.Element => {
-    return (
-        <svg className="pointer-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0
-                9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z">
-            </path>
-        </svg>
-    );
-};
-
-
-interface Size {
-    width: number | undefined;
-    height: number | undefined;
-}
-
-function useWindowSize(): Size {
-    const [windowSize, setWindowSize] = useState<Size>({
-        width: undefined,
-        height: undefined,
-    });
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight - 200,
-            });
-        }
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    return windowSize;
-}
-
 const DetailOffer = () : JSX.Element => {
     const size: Size = useWindowSize();
     const { setViewport, setOpenDetailComponent, urlDetail, setDataDetail,  dataDetail } = useSettings();
-    const { data } = useFetch<OfferTypeDetail>(urlDetail);
+    const classes = useStyles();
+
 
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
     };
-    const classes = useStyles();
-
-    useEffect(() => {
-        if (data){
-            setDataDetail(data);
-        }
-    }, [data]);
 
 
-    if ( dataDetail != undefined)
+    useEffect( () => {
+        if (!urlDetail) return ;
+
+        const fetchData = async () => {
+            const response = await fetch(urlDetail);
+            return response.json();
+        };
+
+        fetchData().then(data =>  setDataDetail(data));
+    }, [urlDetail]);
+
+    if ( dataDetail)
         return (
         <div className = "content-detail" style={style}>
             <div className = "header-detail-offer">
@@ -122,7 +91,7 @@ const DetailOffer = () : JSX.Element => {
                             <div className = "offer-title"> { dataDetail.title } </div>
                             <div className = "address-type">
                             <span className = "address-text">
-                                    <PointerIcon/>
+                                    <PointerIconDetail/>
                                 { dataDetail.address_text }
                             </span>
                                 <MediaQuery minWidth={1025}>
@@ -161,9 +130,12 @@ const DetailOffer = () : JSX.Element => {
                 <Description/>
             </div>
         </div>
-
     );
-    return  ( <span>Loading</span>);
+    return  (
+        <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </Spinner>
+    );
 };
 
 export default DetailOffer;

@@ -1,48 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactMapGl, { Marker, Popup, NavigationControl } from 'react-map-gl';
-import { filterFunction } from '../offers/offer/filters';
-
+import { filterFunction } from '../offers/offer/filters/filters';
 import './Map.sass';
 import { OfferType } from '../../../types/offerType';
 import { useSettings } from '../../../Settings';
-
-interface Size {
-    width: number | undefined;
-    height: number | undefined;
-}
-
-function useWindowSize(): Size {
-    const [windowSize, setWindowSize] = useState<Size>({
-        width: undefined,
-        height: undefined,
-    });
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight - 145,
-            });
-
-        }
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    return windowSize;
-}
-
 
 function Map(): JSX.Element{
     const { setUrlDetail, viewport, setViewport, setOpenDetailComponent, employmentType } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
 
     const filter = filterFunction();
-    const size: Size = useWindowSize();
-
-
 
     const navControlStyle = {
         className: 'map-btn',
@@ -51,12 +18,6 @@ function Map(): JSX.Element{
         right: 10,
         top: 10,
         showCompass: false,
-    };
-
-
-    const style = {
-        maxHeight: size.height,
-        minHeight: size.height,
     };
 
     let minSalary: number | undefined = 0;
@@ -69,7 +30,6 @@ function Map(): JSX.Element{
             minSalary = type.salary.from;
             maxSalary = type.salary.to;
             currency = type.salary.currency;
-
         }
         if (type.salary !== null && type.salary !== undefined && type.type == 'mandate_contract') {
             minSalary = type.salary.from;
@@ -84,12 +44,9 @@ function Map(): JSX.Element{
     };
 
     return (
-        <div className="map" style={style}>
             <ReactMapGl
                 {...viewport}
-                className="map"
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                style={style}
                 mapStyle='mapbox://styles/mapbox/streets-v11'
                 onViewportChange = { (viewport: React.SetStateAction<{ latitude: number; longitude: number;
                     width: string; height: string; zoom: number; }>) => {
@@ -144,7 +101,6 @@ function Map(): JSX.Element{
                     </div>
                 </Popup> : null }
             </ReactMapGl>
-        </div>
     );
 }
 

@@ -1,5 +1,5 @@
-import { useSettings } from '../../../../Settings';
-import { EmploymentType, OfferType } from '../../../../types/offerType';
+import { useSettings } from '../../../../../Settings';
+import { EmploymentType, OfferType } from '../../../../../types/offerType';
 import { sortSalary, checkCurrency } from './sortSalary';
 
 export const filterFunction = ()  => {
