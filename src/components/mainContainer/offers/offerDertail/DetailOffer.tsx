@@ -14,7 +14,6 @@ import CompanyProfile from './components/CompanyProfile';
 import PointerIconDetail from '../../../../assets/icons/svg/PointerIconDetail';
 import { useWindowSize } from '../../../../handleScreen/useWindowSize';
 import { Size } from '../../../../types/shortTypes';
-import { Spinner } from 'react-bootstrap';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -38,12 +37,10 @@ const DetailOffer = () : JSX.Element => {
     const { setViewport, setOpenDetailComponent, urlDetail, setDataDetail,  dataDetail } = useSettings();
     const classes = useStyles();
 
-
     const style = {
         maxHeight: size.height,
         minHeight: size.height,
     };
-
 
     useEffect( () => {
         if (!urlDetail) return ;
@@ -96,17 +93,17 @@ const DetailOffer = () : JSX.Element => {
                             </span>
                                 <MediaQuery minWidth={1025}>
                                  <span className = "work-type">
-                                    { dataDetail.workplace_type === 'remote' ?
-                                        'Fully Remote'
-                                        : dataDetail.workplace_type }
+                                     {dataDetail.workplace_type === 'partly_remote' ? 'Partly Remote' : null}
+                                     {dataDetail.workplace_type === 'office' ? 'Office' : null}
+                                     {dataDetail.workplace_type === 'remote' ? 'Remote' : null}
                                 </span>
                                 </MediaQuery>
                             </div>
                             <MediaQuery maxWidth={1025}>
                                  <span className = "work-type">
-                                    { dataDetail.workplace_type === 'remote'
-                                        ? 'Fully Remote'
-                                        : dataDetail.workplace_type }
+                                     {dataDetail.workplace_type === 'partly_remote' ? 'Partly Remote' : null}
+                                     {dataDetail.workplace_type === 'office' ? 'Office' : null}
+                                     {dataDetail.workplace_type === 'remote' ? 'Remote' : null}
                                 </span>
                             </MediaQuery>
                             <MediaQuery minWidth={1025}>
@@ -117,8 +114,8 @@ const DetailOffer = () : JSX.Element => {
                         </div>
                     </div>
                     <MediaQuery maxWidth={1025}>
-                        { dataDetail.employment_types.map((type, index) => {
-                            return ( <DisplaySalary key={index}   {...type} /> );
+                        { dataDetail.employment_types.map((type) => {
+                            return ( <DisplaySalary key={type.type}   {...type} /> );
                         })}
                     </MediaQuery>
                 </div>
@@ -132,9 +129,7 @@ const DetailOffer = () : JSX.Element => {
         </div>
     );
     return  (
-        <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
+            <span className = "content-detail" style={style} >Loading...</span>
     );
 };
 

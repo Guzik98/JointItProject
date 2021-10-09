@@ -32,6 +32,7 @@ export type ButtonType = {
 export type IconType = {
     name: string,
     icon: JSX.Element
+
 };
 
 export type TabType = {
@@ -40,4 +41,11 @@ export type TabType = {
     icon: JSX.Element,
     id : number,
     href? : string
+};
+export type View = {
+    latitude: number
+    longitude: number
+    width: string
+    height: string
+    zoom: number
 };

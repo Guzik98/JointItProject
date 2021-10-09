@@ -1,7 +1,7 @@
 import React from 'react';
 import ExitButton from '../../../../../assets/icons/svg/ExitButton';
 import Divider from '@material-ui/core/Divider';
-import LoginComponent from '../../login/LoginComponent';
+import LoginComponent from '../../navbar/buttons/clientOptions/login/LoginComponent';
 import { SocialLinks } from './components/MenuItems';
 import SocialLinksComponent from './components/SocialLinksComponent';
 import '../SideBar.sass';

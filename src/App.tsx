@@ -3,39 +3,29 @@ import './App.sass';
 import { Header } from './components/common';
 import { Bar } from './components/filterBar';
 import { MainContainer } from './components/mainContainer';
-import { BrowserRouter, Redirect } from 'react-router-dom';
+
+import useFetch from './types/useFetch';
 import { useSettings } from './Settings';
 import MediaQuery from 'react-responsive';
-
 
 function App(): JSX.Element {
     const { openDetailComponent } = useSettings();
 
+    useFetch();
     return (
-            <BrowserRouter>
-                <Redirect exact from="/" to="Offers"/>
-                <div className="App">
-                    { openDetailComponent ?
-                        <>
-                            <MediaQuery maxWidth={ 1025}>
-                                <Header/>
-                                <MainContainer/>
-                            </MediaQuery>
-                            <MediaQuery minWidth={ 1025}>
-                                <Header/>
-                                <Bar/>
-                                <MainContainer/>
-                            </MediaQuery>
-                        </>
-                        :
-                        <>
-                            <Header/>
+
+
+                    <div className="App">
+                        <Header/>
+                        <MediaQuery maxWidth={1025}>
+                            { openDetailComponent  ? null  : <Bar/>}
+                        </MediaQuery>
+                        <MediaQuery minWidth={1025}>
                             <Bar/>
-                            <MainContainer/>
-                        </>
-                    }
-                </div>
-            </BrowserRouter>
+                        </MediaQuery>
+                        <MainContainer/>
+                    </div>
+
     );
 }
 

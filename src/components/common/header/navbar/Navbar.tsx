@@ -3,7 +3,6 @@ import './Navbar.sass';
 import PostJob from './buttons/postJob/PostJob';
 import { RightSideReferenceArray } from './buttons/rest/RightSideReferenceArray';
 import RightSideReferenceComponent from './buttons/rest/RightSideReferenceComponent';
-import SignIn from './buttons/signIn/SignIn';
 
 const Navbar = (): JSX.Element => {
     return (
@@ -19,7 +18,6 @@ const Navbar = (): JSX.Element => {
                 <a className="navbar-right-side-item rwdDisplay">
                     <PostJob/>
                 </a>
-                <SignIn/>
             </div>
         </div>
     );

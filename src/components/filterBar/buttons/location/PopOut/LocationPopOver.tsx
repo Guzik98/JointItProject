@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import ClearIcon from '@material-ui/icons/Clear';
-import Typography from '@material-ui/core/Typography';
 import './LocationPopOver.sass';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import MediaQuery from 'react-responsive';
@@ -58,7 +57,7 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
     };
 
     return (
-        <Typography className="typography">
+        <div className="typography">
             <div className="typography-border">
                 <div className="typography-container">
                     <MediaQuery maxWidth={1024}>
@@ -145,16 +144,15 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                             {open ? <ExpandLess /> : <ExpandMore />}
                         </a>
 
-                        <div className="city-buttons"  >
                             <Collapse in={open}>
-                                {OtherPolandCities.map(({ city, longitude, latitude }: CityType) =>
-                                    <div onClick={handleClose} key={city}>
-                                        <CityBtnComponent  city={city} longitude={longitude} latitude={latitude}
-                                        />
-                                    </div>)
-                                }
+                                <div className="city-buttons"  >
+                                    {OtherPolandCities.map(({ city, longitude, latitude }: CityType) =>
+                                        <div onClick={handleClose} key={city}>
+                                            <CityBtnComponent  city={city} longitude={longitude} latitude={latitude}/>
+                                        </div>)
+                                    }
+                                </div>
                             </Collapse>
-                        </div>
                     </div>
                     <Divider className="divider-pop" variant="fullWidth"/>
                     <Button size="small"
@@ -169,7 +167,7 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                     </Button>
                 </div>
             </div>
-        </Typography>
+        </div>
     );
 };
 

@@ -25,7 +25,7 @@ let minSalary = 0;
 let maxSalary = 0;
 let currency = 'Undisclosed Salary';
 
-export const  putSalary = ( type: { type: string; salary: { from: number; to: number; currency: string } | null }) => {
+export const  putSalary = ( type: { type: string; salary: { from: number; to: number; currency: string } | null }) : void => {
     const { employmentType, fromSalary, toSalary } = useSettings();
     const exchangeRate = checkCurrency(type.salary?.currency);
     if (type.salary !== null
@@ -77,7 +77,7 @@ export const ReturnSalary = (): JSX.Element => {
         <>
             <MediaQuery minWidth={1025}>
                 { currency !== 'Undisclosed Salary' ? minSalary.toString().slice(0, -3) + ' ' + minSalary.toString().slice(-3) + ' - '
-                    + maxSalary.toString().slice(0, -3) + ' ' + maxSalary.toString().slice(-3) + ' - ' + ' ' + currency.toUpperCase() : currency }
+                    + maxSalary.toString().slice(0, -3) + ' ' + maxSalary.toString().slice(-3)  + ' ' + currency.toUpperCase() : currency }
             </MediaQuery>
             <MediaQuery maxWidth={1024}>
                 {currency !== 'Undisclosed Salary' ?
@@ -88,6 +88,20 @@ export const ReturnSalary = (): JSX.Element => {
         </>
     );
 };
+
+export const ReturnSalaryMap = (): JSX.Element => {
+    return (
+        <>
+            { currency !== 'Undisclosed Salary' ?
+                minSalary  + ' - '
+                + maxSalary + ' ' +
+                  currency.toUpperCase()
+                :  'Undisclosed Salary'
+            }
+        </>
+    );
+};
+
 
 
 

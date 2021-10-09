@@ -4,12 +4,21 @@ import { filterFunction } from '../offers/offer/filters/filters';
 import './Map.sass';
 import { OfferType } from '../../../types/offerType';
 import { useSettings } from '../../../Settings';
+import { putSalary, ReturnSalaryMap } from '../offers/offer/function/offerComponentFunctions';
+import { Size } from '../../../types/shortTypes';
+import { useWindowSize } from '../../../handleScreen/useWindowSize';
 
 function Map(): JSX.Element{
-    const { setUrlDetail, viewport, setViewport, setOpenDetailComponent, employmentType } = useSettings();
+    const { setUrlDetail, viewport, setViewport, setOpenDetailComponent } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
 
     const filter = filterFunction();
+
+    const size: Size = useWindowSize();
+    const style = {
+        maxHeight: size.height,
+        minHeight: size.height,
+    };
 
     const navControlStyle = {
         className: 'map-btn',
@@ -20,32 +29,11 @@ function Map(): JSX.Element{
         showCompass: false,
     };
 
-    let minSalary: number | undefined = 0;
-    let maxSalary: number | undefined = 0;
-    let currency: string | undefined = 'Undisclosed Salary';
-
-    const  displaySalary = (type: { type: string; salary: { from: number; to: number; currency: string } | null })  =>{
-
-        if (type.salary !== null && type.salary !== undefined && type.type == employmentType.toLowerCase()) {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        }
-        if (type.salary !== null && type.salary !== undefined && type.type == 'mandate_contract') {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        }
-        if (type.salary !== null && type.salary !== undefined && employmentType == 'All') {
-            minSalary = type.salary.from;
-            maxSalary = type.salary.to;
-            currency = type.salary.currency;
-        }
-    };
-
     return (
+        <div className="map" style={style}>
             <ReactMapGl
                 {...viewport}
+                style={style}
                 mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 mapStyle='mapbox://styles/mapbox/streets-v11'
                 onViewportChange = { (viewport: React.SetStateAction<{ latitude: number; longitude: number;
@@ -54,22 +42,22 @@ function Map(): JSX.Element{
                 }}
             >
                 <NavigationControl style={navControlStyle} />
-                { filter?.slice(0, 200).map((offer : OfferType, index: number) => (
-                    <Marker key={index} latitude={+offer.latitude} longitude={+offer.longitude}  >
+                { filter?.slice(0, 50).map((offer : OfferType) => (
+                    <Marker key={offer.id} latitude={+offer.latitude} longitude={+offer.longitude}  >
                         <button className="market-btn"
-                            onMouseOver={ () => setSelectedOffer(offer) }
-                            onMouseLeave={ () =>setSelectedOffer(null) }
-                            onClick={ () => {
-                                 setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
-                                 setOpenDetailComponent(true);
-                                 setViewport({
-                                    latitude: +offer.latitude,
-                                    longitude: +offer.longitude,
-                                    width: '100%',
-                                    height: '98%',
-                                    zoom: 16,
-                                });
-                            } }
+                                onMouseOver={ () => setSelectedOffer(offer) }
+                                onMouseLeave={ () =>setSelectedOffer(null) }
+                                onClick={ () => {
+                                    setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
+                                    setOpenDetailComponent(true);
+                                    setViewport({
+                                        latitude: +offer.latitude,
+                                        longitude: +offer.longitude,
+                                        width: '100%',
+                                        height: '98%',
+                                        zoom: 16,
+                                    });
+                                } }
                         >
                             <img className = 'pointer'
                                  src={`/markers/${offer.marker_icon}.svg`}
@@ -86,21 +74,17 @@ function Map(): JSX.Element{
                             <span>{ selectedOffer.title }</span>
                             <span className="popup-salary">
                                 {selectedOffer.employment_types.map((type) =>
-                                    (displaySalary(type))
-                                    )
+                                    (putSalary(type)))
                                 }
-                                { currency !== 'Undisclosed Salary' ?
-                                    minSalary  + ' - '
-                                    + maxSalary +
-                                    +  currency
-                                    :  null
-                                }
+                                <ReturnSalaryMap/>
                             </span>
                             <span>{selectedOffer.company_name}</span>
                         </div>
                     </div>
                 </Popup> : null }
             </ReactMapGl>
+        </div>
+
     );
 }
 

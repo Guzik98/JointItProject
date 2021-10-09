@@ -1,22 +1,12 @@
 import React, { createContext, FC, useContext, useState } from 'react';
-import useFetch from './types/useFetch';
 import { OfferType } from './types/offerType';
 import OfferTypeDetail from './types/offerDetailType';
-
-const url = 'https://justjoin.it/api/offers';
+import { View } from './types/shortTypes';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
 
-type View = {
-    latitude: number
-    longitude: number
-    width: string
-    height: string
-    zoom: number
-};
-
 const useProviderSettings = () => {
-    const { data, error } = useFetch<OfferType[]>(url);
+    const [ data, setData ] = useState<OfferType[]>();
     const [ urlDetail, setUrlDetail ] = useState<string>();
     const [ dataDetail, setDataDetail] = useState<OfferTypeDetail>();
     const [ openDetailComponent, setOpenDetailComponent] = useState<boolean>(false);
@@ -53,7 +43,7 @@ const useProviderSettings = () => {
             withSalary,
             setWithSalary,
             data,
-            error,
+            setData,
             dataDetail,
             setDataDetail,
             urlDetail,
@@ -69,7 +59,6 @@ export const SettingsProvider: FC = ({ children }) => {
     const value = useProviderSettings();
 
     return (
-
         <SettingsContext.Provider value={value}>
             {children}
         </SettingsContext.Provider>
@@ -78,8 +67,7 @@ export const SettingsProvider: FC = ({ children }) => {
 
 type SettingsContextData = ReturnType<typeof useProviderSettings>;
 
-
-export  const useSettings = ()  => {
+export const useSettings = ()  => {
     const settings = useContext(SettingsContext);
     
     if (!settings) {

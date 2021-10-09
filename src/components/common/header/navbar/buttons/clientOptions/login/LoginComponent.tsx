@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginAsDeveloper from './LoginAsDeveloper';
-import LoginToEmployerPanel from './LoginToEmployerPanel';
+import LoginAsDeveloper from './components/LoginAsDeveloper';
+import LoginToEmployerPanel from './components/LoginToEmployerPanel';
 
 const LoginComponent = (): JSX.Element => {
     return (

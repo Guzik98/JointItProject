@@ -1,7 +1,6 @@
 import React from 'react';
 import './offerComponent.sass';
 import { EmploymentType, OfferType } from '../../../../types/offerType';
-import { Link } from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
 import { getNumberOfDays, putSalary, ReturnSalary } from './function/offerComponentFunctions';
@@ -32,7 +31,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
     };
 
     return (
-        <Link className="offer-border" to={`Offers/${props.id}` }
+        <div className="offer-border"
               onClick={ () => {
                   setUrl();
                   setViewportFunction();
@@ -86,7 +85,9 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                         </span>
 
                                         <span className="type">
-                                             {props.workplace_type}
+                                             {props.workplace_type === 'partly_remote' ? 'Partly Remote' : null}
+                                            {props.workplace_type === 'office' ? 'Office' : null}
+                                            {props.workplace_type === 'remote' ? 'Remote' : null}
                                         </span>
                                     </MediaQuery>
 
@@ -102,8 +103,8 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                             </div>
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1024}>
-                                    {props.skills.map((type, index) =>
-                                        <span key={index} className="skills">{type.name}</span>
+                                    {props.skills.map((type) =>
+                                        <span key={type.name} className="skills">{type.name}</span>
                                     )}
                                 </MediaQuery>
 
@@ -114,7 +115,9 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                             {props.city}
                                         </span>
                                     <span className="type-small-screen">
-                                              , {props.workplace_type}
+                                              , {props.workplace_type === 'partly_remote' ? 'Partly Remote' : null}
+                                        {props.workplace_type === 'office' ? 'Office' : null}
+                                        {props.workplace_type === 'remote' ? 'Remote' : null}
                                     </span>
                                     <PointerIconOffer/>
                                 </MediaQuery>
@@ -123,7 +126,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                     </div>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

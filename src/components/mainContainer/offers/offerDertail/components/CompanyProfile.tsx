@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSettings } from '../../../../../Settings';
-import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -43,14 +42,14 @@ const CompanyProfile = () : JSX.Element=> {
             <div className="company-text">
                 {dataDetail?.company_profile.short_description.substring(0, 248) + '...'}
             </div>
-            <Link to={`${dataDetail?.company_profile.url}`}>
+            <a href={`https://justjoin.it${dataDetail?.company_profile.url}`}>
                 <Button size="small" variant="outlined" classes ={{
                     root : styles.root,
                     label : styles.label }}
                 >
                     Brand Story
                 </Button>
-            </Link>
+            </a>
         </div>
     );
 };

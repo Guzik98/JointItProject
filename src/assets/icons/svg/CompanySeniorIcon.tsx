@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CompanySeniorIcon = () => {
+const CompanySeniorIcon = () : JSX.Element => {
     return (
         <div className="tab-icon-border">
             <div className="tab-icon">
