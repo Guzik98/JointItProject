@@ -8,7 +8,7 @@ import { SortByButtonsComponent, sortByButtons } from './SortByPopComponent';
 const SortByPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     return (
         <>
-            <MediaQuery maxWidth={1024}>
+            <MediaQuery maxWidth={1025}>
                 <DialogTitle>
                     <div className="sort-by-title">
                         <span>Sort By</span>

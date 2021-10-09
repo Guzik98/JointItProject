@@ -5,15 +5,16 @@ import Navbar from './navbar/Navbar';
 import  SideBarButton  from './sideBar/SideBarButton';
 import { Logo } from './logo/LogoComponent';
 import SignIn from './navbar/buttons/clientOptions/SignIn';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Header(): JSX.Element {
-
+    const { isAuthenticated } = useAuth0();
     return (
         <header className="topBarContainer">
             <div className="header-container">
                 <Logo/>
                 <Navbar/>
-                <Divider className="divider" orientation="vertical" flexItem/>
+                {isAuthenticated && (   <Divider className="divider" orientation="vertical" flexItem/>)}
                 <SignIn/>
                 <Divider className="divider" orientation="vertical" flexItem/>
                 <SideBarButton/>

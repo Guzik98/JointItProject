@@ -58,7 +58,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                 </div>
                             </div>
                             <div className="salary-info">
-                                <MediaQuery minWidth={1024}>
+                                <MediaQuery minWidth={1025}>
                                     <div className="salary-text">
                                         {props.employment_types.map((type : EmploymentType)  => {
                                             putSalary(type);
@@ -78,7 +78,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                     {props.company_name}
                                 </div>
                                 <div className="where-type">
-                                    <MediaQuery minWidth={1024}>
+                                    <MediaQuery minWidth={1025}>
                                         <PointerIconOffer/>
                                         <span className="where">
                                             {props.city}
@@ -91,7 +91,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                         </span>
                                     </MediaQuery>
 
-                                    <MediaQuery maxWidth={1024}>
+                                    <MediaQuery maxWidth={1025}>
                                         <div className="salary-text">
                                             {props.employment_types.map((type : EmploymentType)  => {
                                               putSalary(type);
@@ -102,7 +102,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                 </div>
                             </div>
                             <div className="bottom-info-skills">
-                                <MediaQuery minWidth={1024}>
+                                <MediaQuery minWidth={1025}>
                                     {props.skills.map((type) =>
                                         <span key={type.name} className="skills">{type.name}</span>
                                     )}
@@ -110,7 +110,7 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
 
                             </div>
                             <div className="bottom-info-where">
-                                <MediaQuery maxWidth={1024}>
+                                <MediaQuery maxWidth={1025}>
                                     <span className="where">
                                             {props.city}
                                         </span>

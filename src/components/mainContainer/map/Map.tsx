@@ -16,8 +16,9 @@ function Map(): JSX.Element{
 
     const size: Size = useWindowSize();
     const style = {
-        maxHeight: size.height,
-        minHeight: size.height,
+        minHeight: size.height - 165,
+        maxWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2),
+        minWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2),
     };
 
     const navControlStyle = {
@@ -49,7 +50,6 @@ function Map(): JSX.Element{
                                 onMouseLeave={ () =>setSelectedOffer(null) }
                                 onClick={ () => {
                                     setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
-                                    setOpenDetailComponent(true);
                                     setViewport({
                                         latitude: +offer.latitude,
                                         longitude: +offer.longitude,
@@ -57,6 +57,7 @@ function Map(): JSX.Element{
                                         height: '98%',
                                         zoom: 16,
                                     });
+                                    setOpenDetailComponent(true);
                                 } }
                         >
                             <img className = 'pointer'

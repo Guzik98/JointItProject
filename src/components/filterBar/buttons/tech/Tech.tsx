@@ -4,7 +4,6 @@ import '../buttons.sass';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import TechPopOut from './TechPopOut';
 
-
 export const useStyles = makeStyles(() =>
     createStyles({
         choseTech: {

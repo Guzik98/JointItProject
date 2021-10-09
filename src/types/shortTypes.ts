@@ -4,8 +4,8 @@ export interface HandlePopOut {
 }
 
 export interface Size {
-    width: number | undefined;
-    height: number | undefined;
+    width: number;
+    height: number;
 }
 
 export type HeaderLinkType = {
@@ -42,6 +42,7 @@ export type TabType = {
     id : number,
     href? : string
 };
+
 export type View = {
     latitude: number
     longitude: number

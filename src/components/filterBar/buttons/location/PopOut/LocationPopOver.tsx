@@ -11,7 +11,6 @@ import { CityType, HandlePopOut } from '../../../../../types/shortTypes';
 import CityBtnComponent from '../cityButtons/CityBtnComponent';
 import { useSettings } from '../../../../../Settings';
 
-
 const useStyles = makeStyles({
     city: {
         borderRadius: 32,
@@ -35,7 +34,6 @@ const useStyles = makeStyles({
 const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
     const classes = useStyles();
     const { setCity, city, setViewport } = useSettings();
-
     const [open, setOpen] = React.useState(false);
 
     const toggle = () => {

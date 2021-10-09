@@ -39,4 +39,5 @@ type OfferTypeDetail = {
         cover_photo_url: string,
     }
 };
+
 export default OfferTypeDetail;

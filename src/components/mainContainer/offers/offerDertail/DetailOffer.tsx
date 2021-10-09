@@ -3,7 +3,6 @@ import { useSettings } from '../../../../Settings';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import './DetailOffer.sass';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import Tab from './components/Tab';
 import Tech from './components/Tech';
 import MediaQuery from 'react-responsive';
@@ -38,8 +37,8 @@ const DetailOffer = () : JSX.Element => {
     const classes = useStyles();
 
     const style = {
-        maxHeight: size.height,
-        minHeight: size.height,
+        maxHeight: (size.width < 1025 ? size.height - 50 :  size.height - 200 ),
+        minHeight: (size.width < 1025 ? size.height - 50 :  size.height - 200 ),
     };
 
     useEffect( () => {
@@ -57,7 +56,6 @@ const DetailOffer = () : JSX.Element => {
         return (
         <div className = "content-detail" style={style}>
             <div className = "header-detail-offer">
-                <Link to='/Offers'>
                     <Button classes = {{ root : classes.icon_back }}
                             onClick = { () => {
                                 setOpenDetailComponent(false);
@@ -72,7 +70,6 @@ const DetailOffer = () : JSX.Element => {
                     >
                         <ArrowBackIcon/>
                     </Button>
-                </Link>
                 <div className = "header">
                     <div className = "header-content">
                         <div className = "logo">

@@ -6,12 +6,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Logged from './logged/Logged';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
-
 function SignIn(): JSX.Element {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const { user, isAuthenticated } = useAuth0();
 
-    console.log(user);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -31,10 +29,11 @@ function SignIn(): JSX.Element {
                     onClick={ handleClick }>
                 <span className="sign-in-text">
                     { !isAuthenticated && ('Sign in')}
-                    { isAuthenticated && ( user?.given_name) }
+                    { isAuthenticated && ( ( user?.given_name || user?.nickname) ) }
 
                 </span>
-                {open ? <ExpandLess fontSize='small'/> : <ExpandMore fontSize='small'/>}
+                {open ? <ExpandLess className ='arrow-icon' fontSize='small'/>
+                    : <ExpandMore  className ='arrow-icon' fontSize='small'/>}
             </button>
             <Popover
                 id={ id }

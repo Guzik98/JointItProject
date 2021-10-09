@@ -11,12 +11,14 @@ import { useWindowSize } from '../../../handleScreen/useWindowSize';
 import { Size } from '../../../types/shortTypes';
 
 function Offers(): JSX.Element {
+    const size: Size = useWindowSize();
     const filter = filterFunction();
 
-    const size: Size = useWindowSize();
     const style = {
-        maxHeight: size.height,
-        minHeight: size.height,
+        minHeight: size.height - 200,
+        maxHeight: size.height - 200,
+        maxWidth: size.width < 1025 ? size.width - 20 : (size.width < 1500 ? size.width / 1.68 : size.width / 2),
+        minWidth: size.width < 1025 ? size.width - 20 : (size.width < 1500 ? size.width / 1.68 : size.width / 2),
     };
 
     return (

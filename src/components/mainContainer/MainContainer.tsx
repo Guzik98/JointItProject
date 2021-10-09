@@ -6,7 +6,6 @@ import  Map  from './map/Map';
 import  Offers  from './offers/Offers';
 import DetailOffer from './offers/offerDertail/DetailOffer';
 
-
 function MainContainer(): JSX.Element {
     const { openDetailComponent } = useSettings();
     return (

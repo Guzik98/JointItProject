@@ -23,7 +23,6 @@ const useStyles = makeStyles({
         fontFamily: 'Open Sans,sans-serif',
         textDecoration: 'none!important'
     },
-
 });
 
 const CityBtnComponent = ( props: CityType): JSX.Element => {

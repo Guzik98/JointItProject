@@ -3,15 +3,15 @@ import { Size } from '../types/shortTypes';
 
 export function useWindowSize(): Size {
     const [windowSize, setWindowSize] = useState<Size>({
-        width: undefined,
-        height: undefined,
+        width: 0,
+        height: 0,
     });
 
     useEffect(() => {
         function handleResize() {
             setWindowSize({
                 width: window.innerWidth,
-                height: window.innerHeight - 200,
+                height: window.innerHeight,
             });
         }
 

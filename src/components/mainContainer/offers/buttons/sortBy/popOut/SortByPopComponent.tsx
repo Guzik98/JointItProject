@@ -46,7 +46,7 @@ export const SortByButtonsComponent = ( props : ButtonType) : JSX.Element => {
 
     return (
         <>
-            <MediaQuery maxWidth={1024}>
+            <MediaQuery maxWidth={1025}>
                 <div className={`${ sortBy === props.name ? 'sort-active sort-by-link' : 'sort-by-link' }` }>
                     <Button
                         onClick={handleClose}
@@ -58,7 +58,7 @@ export const SortByButtonsComponent = ( props : ButtonType) : JSX.Element => {
                     </Button>
                 </div>
             </MediaQuery>
-            <MediaQuery minWidth={1024}>
+            <MediaQuery minWidth={1025}>
                 <div className={`${ sortBy === props.name ? 'false sort-by-link' : 'sort-by-link' }` }>
                     <Button
                         onClick={handleClose}
