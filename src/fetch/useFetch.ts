@@ -7,6 +7,7 @@ const useFetch = () : void => {
     const { setData } = useSettings();
 
     useEffect( () => {
+
             const fetchData = async () => {
             const response = await fetch(url);
             return response.json();

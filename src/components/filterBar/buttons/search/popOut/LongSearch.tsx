@@ -10,8 +10,6 @@ import PointerIconOffer from '../../../../../assets/icons/svg/PointerIconOffer';
 import { programingLanguageIconArray } from '../../../iconBar/programing-language';
 import CompanyIconOffer from '../../../../../assets/icons/svg/CompanyIconOffer';
 
-
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -65,7 +63,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
     const classes = useStyles();
     const { data } = useSettings();
 
-
     let category: string;
 
     const cityAll = data?.map((item: OfferType) => {
@@ -82,7 +79,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
     const CityUnig = cityAll?.filter(function (item, pos, self) {
         return self.indexOf(item) == pos;
     });
-
 
     const city = CityUnig?.map((item) => {
         category = 'Location';
@@ -105,8 +101,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
 
     const cityTechCompany = skill?.concat(city).concat(company);
 
-    console.log(cityTechCompany);
-
     return (
         <>
             <Autocomplete
@@ -121,17 +115,17 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                 renderOption={(option ) => {
                      if ( option.name !== 'All') {
                         return (
-                            <span className="search-label">
-                            <span className="circle">
-                                {option.svg}
-                            </span>
-                            <span className="text-label">
-                               {option.name}
-                                <span className="category-label">
-                                    {option.category}
+                            <div className="search-label">
+                                <span className="circle">
+                                    {option.svg}
                                 </span>
-                            </span>
-                        </span>
+                                <span className="text-label">
+                                   {option.name}
+                                    <span className="category-label">
+                                        {option.category}
+                                    </span>
+                                </span>
+                             </div>
                         );
                     }
                 }}
@@ -141,7 +135,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                             <Chip
                                 classes = {{ root : classes.item }}
                                 key={option.name}
-
                                 size="small"
                                 {...getTagProps({ index })}
                                 label={(

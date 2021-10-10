@@ -72,8 +72,8 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                                 </div>
                             </div>
                         </div>
+                        <Divider classes={{ root: classes.divider }}/>
                     </MediaQuery>
-                    <Divider classes={{ root: classes.divider }}/>
                     <div className="type-work">
                         <div className="type-work-level2">
                             <div
