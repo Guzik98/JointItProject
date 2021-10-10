@@ -59,7 +59,6 @@ const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     }
 
-
     const submit = () => {
         setFromSalary(value[0]);
         setToSalary(value[1]);

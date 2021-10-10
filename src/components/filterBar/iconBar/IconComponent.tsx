@@ -1,21 +1,23 @@
 import React from 'react';
 import { useSettings } from '../../../Settings';
+import { IconType } from '../../../types/shortTypes';
 
-const IconComponent = ({ name, icon }: { name: string, icon: JSX.Element }): JSX.Element => {
+const IconComponent = (  props  : IconType) : JSX.Element => {
     const { setTech, tech } = useSettings();
+
     return (
         <div
-            onClick={() => setTech(`${name}`)}
-            className = {`${tech !== name && tech != 'All' ? 'un-active' : '' }` }
+            onClick={() =>  setTech(`${props.name}`) }
+            className = {`${tech !== props.name && tech != 'All' ? 'un-active' : '' }` }
         >
             <div
                 className="icon"
-                 key={name}>
+                 key={props.name}>
                 <span className="circle">
-                    {icon}
+                    {props.icon}
                 </span>
                 <span className="under-icon">
-                    {name}
+                    {props.name}
                 </span>
             </div>
         </div>

@@ -29,7 +29,12 @@ const useStyles = makeStyles({
         fontSize: 14,
         fontFamily: 'Open Sans,sans-serif',
     },
+    divider: {
+        margin: '24px 0px 16px'
+    },
 });
+
+
 
 const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
     const classes = useStyles();
@@ -67,8 +72,8 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                                 </div>
                             </div>
                         </div>
-                        <Divider className="divider" variant='fullWidth'/>
                     </MediaQuery>
+                    <Divider classes={{ root: classes.divider }}/>
                     <div className="type-work">
                         <div className="type-work-level2">
                             <div

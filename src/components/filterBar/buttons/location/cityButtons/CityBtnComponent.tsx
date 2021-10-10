@@ -30,7 +30,6 @@ const CityBtnComponent = ( props: CityType): JSX.Element => {
     const { setCity, city, setViewport } = useSettings();
 
     const handleClick = () => {
-
         setViewport({
             height: '98%', latitude: props.latitude, longitude: props.longitude, width: '100%', zoom: 11,
         });

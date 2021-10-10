@@ -8,7 +8,8 @@ import { useSettings } from '../../../../../Settings';
 import { OfferType } from '../../../../../types/offerType';
 import PointerIconOffer from '../../../../../assets/icons/svg/PointerIconOffer';
 import { programingLanguageIconArray } from '../../../iconBar/programing-language';
-import CompanyIconOfferDetail from '../../../../../assets/icons/svg/CompanyIconOfferDetail';
+import CompanyIconOffer from '../../../../../assets/icons/svg/CompanyIconOffer';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -90,7 +91,7 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
 
     const company = companyUnig?.map((item) => {
         category = 'Company';
-        return ({ name: item, category: category, svg: <CompanyIconOfferDetail/> });
+        return ({ name: item, category: category, svg: <CompanyIconOffer/> });
     });
 
     const skill = programingLanguageIconArray?.map((item) => {
@@ -98,13 +99,11 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
         return ({ name: item.name, category: category, svg: item.icon });
     });
 
-
     if (!city || !company) {
         throw new Error('d');
     }
 
     const cityTechCompany = skill?.concat(city).concat(company);
-
 
     console.log(cityTechCompany);
 
@@ -116,10 +115,11 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                 limitTags={5}
                 loading={true}
                 size="medium"
+                loadingText = {'It is loading'}
                 options={cityTechCompany}
                 getOptionLabel={(option) => option.name }
                 renderOption={(option ) => {
-                    if ( option.name !== 'All') {
+                     if ( option.name !== 'All') {
                         return (
                             <span className="search-label">
                             <span className="circle">
@@ -154,7 +154,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                         </>
                     ))
                 }
-
                 renderInput={(params )   => (
                     <div className="input">
                         <div className="back-icon" onClick = {handleClose}>

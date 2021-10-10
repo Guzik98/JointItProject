@@ -25,34 +25,35 @@ const useProviderSettings = () => {
         height: '98%',
         zoom: 5,
     });
-        return {
-            city,
-            setCity,
-            tech,
-            setTech,
-            seniority,
-            setSeniority,
-            fromSalary,
-            setFromSalary,
-            toSalary,
-            setToSalary,
-            employmentType,
-            setEmploymentType,
-            sortBy,
-            setSortBy,
-            withSalary,
-            setWithSalary,
-            data,
-            setData,
-            dataDetail,
-            setDataDetail,
-            urlDetail,
-            setUrlDetail,
-            viewport,
-            setViewport,
-            openDetailComponent,
-            setOpenDetailComponent,
-        };
+
+    return {
+        city,
+        setCity,
+        tech,
+        setTech,
+        seniority,
+        setSeniority,
+        fromSalary,
+        setFromSalary,
+        toSalary,
+        setToSalary,
+        employmentType,
+        setEmploymentType,
+        sortBy,
+        setSortBy,
+        withSalary,
+        setWithSalary,
+        data,
+        setData,
+        dataDetail,
+        setDataDetail,
+        urlDetail,
+        setUrlDetail,
+        viewport,
+        setViewport,
+        openDetailComponent,
+        setOpenDetailComponent,
+    };
 };
 
 export const SettingsProvider: FC = ({ children }) => {
@@ -67,7 +68,7 @@ export const SettingsProvider: FC = ({ children }) => {
 
 type SettingsContextData = ReturnType<typeof useProviderSettings>;
 
-export const useSettings = ()  => {
+export const useSettings = () : SettingsContextData  => {
     const settings = useContext(SettingsContext);
     
     if (!settings) {

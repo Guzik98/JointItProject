@@ -43,8 +43,8 @@ function Bar(): JSX.Element {
                     </MediaQuery>
                     <MediaQuery maxWidth={1025}>
                         <SearchBtnSmall handleOpen={handleOpenLongSearch} />
-                        <Tech/>
                         <LocationBtn/>
+                        <Tech/>
                         <MoreFilters/>
                         <SortBy/>
                     </MediaQuery>

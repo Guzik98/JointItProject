@@ -2,11 +2,11 @@ import React from 'react';
 
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Popover from '@material-ui/core/Popover';
 import PopOverLocation from './PopOut/LocationPopOver';
 import { useSettings } from '../../../../Settings';
 import MediaQuery from 'react-responsive';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Dialog, Popover } from '@material-ui/core';
 
 export const useStyles = makeStyles(() =>
     createStyles({
@@ -120,19 +120,32 @@ export const useStyles = makeStyles(() =>
                  </Button>
              </MediaQuery>
 
-             <Popover
-                 className={classes.root}
-                 id={id}
-                 open={open}
-                 anchorEl={anchorEl}
-                 onClose={handleClose}
-                 anchorOrigin={{
-                     vertical: 'bottom',
-                     horizontal: 'left',
-                }}
-            >
-                <PopOverLocation handleClose={ handleClose }/>
-            </Popover>
+             <MediaQuery maxWidth={1025}>
+                 <Dialog
+                     className={classes.root}
+                     id={id}
+                     open={open}
+                     fullScreen
+                     onClose={handleClose}
+                 >
+                     <PopOverLocation  handleClose={ handleClose }/>
+                 </Dialog>
+             </MediaQuery>
+             <MediaQuery minWidth={1025}>
+                 <Popover
+                     className={classes.root}
+                     id={id}
+                     open={open}
+                     anchorEl={anchorEl}
+                     onClose={handleClose}
+                     anchorOrigin={{
+                         vertical: 'bottom',
+                         horizontal: 'left',
+                     }}
+                 >
+                     <PopOverLocation handleClose={ handleClose }/>
+                 </Popover>
+             </MediaQuery>
         </>
     );
 };

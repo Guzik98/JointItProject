@@ -17,8 +17,8 @@ function Map(): JSX.Element{
     const size: Size = useWindowSize();
     const style = {
         minHeight: size.height - 165,
-        maxWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2),
-        minWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2),
+        maxWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2 - 20),
+        minWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2 - 20),
     };
 
     const navControlStyle = {
@@ -29,6 +29,7 @@ function Map(): JSX.Element{
         top: 10,
         showCompass: false,
     };
+
 
     return (
         <div className="map" style={style}>
@@ -46,18 +47,18 @@ function Map(): JSX.Element{
                 { filter?.slice(0, 50).map((offer : OfferType) => (
                     <Marker key={offer.id} latitude={+offer.latitude} longitude={+offer.longitude}  >
                         <button className="market-btn"
-                                onMouseOver={ () => setSelectedOffer(offer) }
+                                onMouseOver={ () =>setSelectedOffer(offer) }
                                 onMouseLeave={ () =>setSelectedOffer(null) }
-                                onClick={ () => {
-                                    setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
-                                    setViewport({
+                                onClick={ async () => {
+                                    await  setViewport({
                                         latitude: +offer.latitude,
                                         longitude: +offer.longitude,
                                         width: '100%',
                                         height: '98%',
                                         zoom: 16,
                                     });
-                                    setOpenDetailComponent(true);
+                                    await  setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
+                                    await setOpenDetailComponent(true);
                                 } }
                         >
                             <img className = 'pointer'

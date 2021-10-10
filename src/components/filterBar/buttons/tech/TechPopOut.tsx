@@ -17,9 +17,11 @@ const TechPopOut = ({ handleClose } : HandlePopOut) : JSX.Element=> {
             </div>
             <Divider/>
             <div className="tech-pop-out-content">
-                {programingLanguageIconArray.map(({ name, icon }: IconType) =>
-                    <IconComponent name={name} icon={icon} key={name}/>)
-                }
+                {programingLanguageIconArray.map((  props   : IconType) =>
+                    <div onClick={ handleClose}  key={props.name}>
+                        <IconComponent name = {props.name} icon ={ props.icon} />
+                    </div>
+                )}
             </div>
         </>
 
