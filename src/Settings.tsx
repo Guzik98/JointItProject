@@ -1,9 +1,10 @@
 import React, { createContext, FC, useContext, useState } from 'react';
 import { OfferType } from './types/offerType';
 import OfferTypeDetail from './types/offerDetailType';
-import { View } from './types/shortTypes';
+import { LongFilterType, View } from './types/shortTypes';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
+
 
 const useProviderSettings = () => {
     const [ data, setData ] = useState<OfferType[]>();
@@ -18,6 +19,9 @@ const useProviderSettings = () => {
     const [ employmentType, setEmploymentType ] = useState<string>('All');
     const [ sortBy, setSortBy ] = useState<string>('Latest');
     const [ withSalary, setWithSalary ] = useState<boolean>(false);
+    const [ longFilterTech, setLongFilterTech ] = useState<LongFilterType[]>([]);
+    const [ longFilterLocation, setLongFilterLocation ] = useState<LongFilterType[]>([]);
+    const [ longFilterCompany, setLongFilterCompany ] = useState<LongFilterType[]>([]);
     const [ viewport, setViewport ] = useState<View>({
         latitude: 52.237049,
         longitude: 21.017532,
@@ -53,6 +57,10 @@ const useProviderSettings = () => {
         setViewport,
         openDetailComponent,
         setOpenDetailComponent,
+        longFilterTech, setLongFilterTech,
+        longFilterLocation, setLongFilterLocation,
+        longFilterCompany, setLongFilterCompany,
+
     };
 };
 

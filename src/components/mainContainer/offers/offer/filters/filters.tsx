@@ -2,8 +2,11 @@ import { useSettings } from '../../../../../Settings';
 import { EmploymentType, OfferType } from '../../../../../types/offerType';
 import { sortSalary, checkCurrency } from './sortSalary';
 
-export const filterFunction = (): OfferType[] | undefined => {
-    const { data, city, tech, seniority, employmentType, fromSalary, toSalary, sortBy, withSalary } = useSettings();
+export const  filterFunction = (): OfferType[] | undefined => {
+    const { data, city, tech, seniority,
+        employmentType, fromSalary,
+        toSalary, sortBy, withSalary,
+        longFilterTech, longFilterCompany, longFilterLocation } = useSettings();
 
     const filterTech = data?.filter(function (item: {
             marker_icon: string;
@@ -17,7 +20,10 @@ export const filterFunction = (): OfferType[] | undefined => {
             if (tech !== 'All') {
                 return item.marker_icon === tech.toLocaleLowerCase();
             }
-            return true;
+            if (tech  === 'All') {
+                return true;
+            }
+            return false;
         }
     );
 
@@ -35,11 +41,14 @@ export const filterFunction = (): OfferType[] | undefined => {
             if (city == 'Remote Poland') {
                 return item.workplace_type == 'remote' && item.country_code == 'PL';
             }
+
             if (city !== 'all') {
                 return item.city === city;
             }
-
-            return true;
+            if (city === 'all') {
+                return true;
+            }
+            return false;
         }
     );
 
@@ -125,21 +134,64 @@ export const filterFunction = (): OfferType[] | undefined => {
         return  true;
     });
 
+    const filterLongFilterTech = filter0ffersWithOutSalary?.filter(function (item: {
+        marker_icon: string;
+    }) : boolean {
+        for (let i = 0;  longFilterTech.length >= i ; i++) {
+            if ( item.marker_icon == longFilterTech[i]?.name.toLowerCase()) {
+                return item.marker_icon == longFilterTech[i]?.name.toLowerCase();
+            }
+        }
+        if (longFilterTech.length == 0){
+            return true;
+        }
+        return  false;
+    });
+
+    const filterLongFilterCompany = filterLongFilterTech?.filter(function (item: {
+        company_name: string;
+    }) : boolean {
+        for (let i = 0;  longFilterCompany.length >= i ; i++) {
+            if ( item.company_name == longFilterCompany[i]?.name) {
+                return item.company_name === longFilterCompany[i]?.name;
+            }
+        }
+        if (longFilterCompany.length == 0){
+            return true;
+        }
+        return  false;
+    });
+
+    const filterLongFilterLocation = filterLongFilterCompany?.filter(function (item: {
+        city: string;
+    }) : boolean {
+        for (let i = 0;  longFilterLocation.length >= i ; i++) {
+            if ( item.city == longFilterLocation[i]?.name && longFilterLocation[i].category === 'Location') {
+                return item.city === longFilterLocation[i]?.name;
+            }
+        }
+        if (longFilterLocation.length == 0){
+            return true;
+        }
+        return  false;
+    });
+
+
+
     let filtered: OfferType[] | undefined;
 
     if ( sortBy !== 'latest') {
         if ( sortBy == 'Highest Salary') {
-            filtered = filter0ffersWithOutSalary?.sort(sortSalary);
+            filtered = filterLongFilterLocation?.sort(sortSalary);
         }
         if ( sortBy == 'Lowest Salary') {
-            filtered = filter0ffersWithOutSalary?.sort(sortSalary);
+            filtered = filterLongFilterLocation?.sort(sortSalary);
         }
     }
 
     if (sortBy === 'Latest') {
-        filtered = filter0ffersWithOutSalary;
+        filtered = filterLongFilterLocation;
     }
 
     return  filtered;
-
 };

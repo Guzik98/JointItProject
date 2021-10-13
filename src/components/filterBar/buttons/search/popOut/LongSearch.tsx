@@ -1,14 +1,14 @@
 import React from 'react';
-import { Autocomplete } from '@material-ui/lab';
+import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 import { createStyles, makeStyles, Theme, Chip, TextField } from '@material-ui/core';
 import './LongSearch.sass';
 import { HandlePopOut } from '../../../../../types/shortTypes';
 import IconStartLongSearch from '../../../../../assets/icons/svg/IconStartLongSearch';
 import { useSettings } from '../../../../../Settings';
-import { OfferType } from '../../../../../types/offerType';
-import PointerIconOffer from '../../../../../assets/icons/svg/PointerIconOffer';
 import { programingLanguageIconArray } from '../../../iconBar/programing-language';
 import CompanyIconOffer from '../../../../../assets/icons/svg/CompanyIconOffer';
+import PointerIconOffer from '../../../../../assets/icons/svg/PointerIconOffer';
+import ConcatFunction from './concatFunction';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,54 +52,22 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '0px 10px 0px 10px',
             border: '1px solid rgb(228, 232, 240)',
             height: '30px',
-            fontWeight: 600,
+            fontWeight: 400,
             fontSize: 12
         },
     }),
 );
 
-
 export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
     const classes = useStyles();
-    const { data } = useSettings();
+    const { setLongFilterLocation, setLongFilterTech, setLongFilterCompany } = useSettings();
 
-    let category: string;
+    const longSreachArray = ConcatFunction();
 
-    const cityAll = data?.map((item: OfferType) => {
-        return (item.city);
+    const filterOptions = createFilterOptions({
+        limit: 12,
+        stringify: (option:  { name: string, category: string } ) => option.name,
     });
-    const companyAll = data?.map((item: OfferType) => {
-        return (item.company_name);
-    });
-
-    const companyUnig = companyAll?.filter(function (item, pos, self) {
-        return self.indexOf(item) == pos;
-    });
-
-    const CityUnig = cityAll?.filter(function (item, pos, self) {
-        return self.indexOf(item) == pos;
-    });
-
-    const city = CityUnig?.map((item) => {
-        category = 'Location';
-        return ({ name: item, category: category, svg: <PointerIconOffer/> });
-    });
-
-    const company = companyUnig?.map((item) => {
-        category = 'Company';
-        return ({ name: item, category: category, svg: <CompanyIconOffer/> });
-    });
-
-    const skill = programingLanguageIconArray?.map((item) => {
-        category = 'Skill';
-        return ({ name: item.name, category: category, svg: item.icon });
-    });
-
-    if (!city || !company) {
-        throw new Error('d');
-    }
-
-    const cityTechCompany = skill?.concat(city).concat(company);
 
     return (
         <>
@@ -109,29 +77,93 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                 limitTags={5}
                 loading={true}
                 size="medium"
+                filterOptions = {filterOptions}
+                filterSelectedOptions ={true}
                 loadingText = {'It is loading'}
-                options={cityTechCompany}
+                noOptionsText={'No options'}
+                options={longSreachArray}
+                disableCloseOnSelect
+                getOptionSelected={(option, value) => option.name === value.name}
                 getOptionLabel={(option) => option.name }
-                renderOption={(option ) => {
-                     if ( option.name !== 'All') {
+                renderOption={(option) => {
+                    if (option.name === 'All') {
+                        return null;
+                    } else {
                         return (
-                            <div className="search-label">
-                                <span className="circle">
-                                    {option.svg}
-                                </span>
-                                <span className="text-label">
-                                   {option.name}
-                                    <span className="category-label">
-                                        {option.category}
-                                    </span>
-                                </span>
-                             </div>
+                            <>
+                                {option.category === 'Skill'
+                                    ?
+                                    <div
+                                        className="search-label"
+                                        onClick={() => setLongFilterTech(setLongFilterTech => [...setLongFilterTech, {
+                                            name: option.name,
+                                            category: option.category
+                                        }])}
+                                    >
+                                        {programingLanguageIconArray.map((item) => {
+                                            if (option.name === item.name) {
+                                                return (<span className="circle">
+                                                        {item.icon}
+                                                    </span>
+                                                );
+                                            }
+                                        })}
+                                        <span className="text-label">
+                                                {option.name}
+                                            <span className="category-label">
+                                                    {option.category}
+                                                </span>
+                                            </span>
+                                    </div>
+                                    : null
+                                }
+                                {option.category === 'Location' && option
+                                    ?
+                                    <div
+                                        className="search-label"
+                                        onClick={() => setLongFilterLocation(longFilterLocation => [...longFilterLocation, {
+                                            name: option.name,
+                                            category: option.category
+                                        }])}
+                                    >
+                                            <span className="circle">
+                                                <PointerIconOffer/>
+                                            </span>
+                                        <span className="text-label">
+                                                {option.name}
+                                            <span className="category-label">
+                                                    {option.category}
+                                                </span>
+                                            </span>
+                                    </div> : null
+                                }
+                                {option.category === 'Company'
+                                    ?
+                                    <div
+                                        className="search-label"
+                                        onClick={() => setLongFilterCompany(longFilterCompany => [...longFilterCompany, {
+                                            name: option.name,
+                                            category: option.category
+                                        }])}
+                                    >
+                                        <span className="circle">
+                                            <CompanyIconOffer/>
+                                        </span>
+                                        <span className="text-label">
+                                            {option.name}
+                                            <span className="category-label">
+                                                {option.category}
+                                            </span>
+                                        </span>
+                                    </div> : null
+                                }
+                            </>
                         );
                     }
-                }}
-                renderTags={(value, getTagProps) =>
+                }
+                }
+                renderTags={(value, getTagProps)=>
                     value.map((option, index) => (
-                        <>
                             <Chip
                                 classes = {{ root : classes.item }}
                                 key={option.name}
@@ -144,7 +176,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                                     </section>
                                 )}
                             />
-                        </>
                     ))
                 }
                 renderInput={(params )   => (

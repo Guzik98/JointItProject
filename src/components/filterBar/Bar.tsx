@@ -12,18 +12,31 @@ import SortBy from '../mainContainer/offers/buttons/sortBy/SortBy';
 import { ClickAwayListener } from '@material-ui/core';
 import LongSearch from './buttons/search/popOut/LongSearch';
 import { IconType } from '../../types/shortTypes';
+import { useSettings } from '../../Settings';
 
 const renderIcon = programingLanguageIconArray.map(({ name, icon }: IconType) =>
     <IconComponent name={name} icon={icon} key={name}/>);
 
 function Bar(): JSX.Element {
-
+    const { setLongFilterTech, setLongFilterLocation, setLongFilterCompany, setCity, setTech, setViewport } = useSettings();
     const [ isOpen, setIsOpen ] = React.useState(false);
 
     const handleOpenLongSearch = () => {
         setIsOpen(true);
+        setCity('all');
+        setTech('All');
+        setViewport({
+            latitude: 52.237049,
+            longitude: 21.017532,
+            width: '100%',
+            height: '98%',
+            zoom: 5,
+        });
     };
     const handleCloseLongSearch = () => {
+        setLongFilterTech([]);
+        setLongFilterLocation([]);
+        setLongFilterCompany([]);
         setIsOpen(false);
     };
 

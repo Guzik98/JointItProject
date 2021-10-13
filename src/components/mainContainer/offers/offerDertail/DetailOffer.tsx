@@ -13,6 +13,7 @@ import CompanyProfile from './components/CompanyProfile';
 import PointerIconDetail from '../../../../assets/icons/svg/PointerIconDetail';
 import { useWindowSize } from '../../../../handleScreen/useWindowSize';
 import { Size } from '../../../../types/shortTypes';
+import Loading from '../../../common/loading/Loading';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -33,7 +34,8 @@ const useStyles = makeStyles(() =>
 
 const DetailOffer = () : JSX.Element => {
     const size: Size = useWindowSize();
-    const { setViewport, setOpenDetailComponent, urlDetail, setDataDetail,  dataDetail } = useSettings();
+    const { setViewport, setOpenDetailComponent,
+        urlDetail, setDataDetail,  dataDetail } = useSettings();
     const classes = useStyles();
 
     const style = {
@@ -126,7 +128,7 @@ const DetailOffer = () : JSX.Element => {
         </div>
     );
     return  (
-            <span className = "content-detail" style={style} >Loading...</span>
+            <span className = "content-detail" style={style} ><Loading/></span>
     );
 };
 

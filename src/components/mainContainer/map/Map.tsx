@@ -7,16 +7,23 @@ import { useSettings } from '../../../Settings';
 import { putSalary, ReturnSalaryMap } from '../offers/offer/function/offerComponentFunctions';
 import { Size } from '../../../types/shortTypes';
 import { useWindowSize } from '../../../handleScreen/useWindowSize';
+import 'react-chatbot-kit/build/main.css';
+import ChatIcon from '../../../assets/icons/svg/ChatIcon';
+import { ClickAwayListener } from '@material-ui/core';
+import Chatbot from './chatbot/ChatBot';
+
 
 function Map(): JSX.Element{
     const { setUrlDetail, viewport, setViewport, setOpenDetailComponent } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
+    const [openChatBot, setOpenChatBot] = useState(false);
 
     const filter = filterFunction();
 
     const size: Size = useWindowSize();
     const style = {
-        minHeight: size.height - 165,
+        maxHeight: size.height - 155,
+        minHeight: size.height - 155,
         maxWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2 - 20),
         minWidth: (size.width < 1500 ? size.width / 2.55 : size.width / 2 - 20),
     };
@@ -30,8 +37,7 @@ function Map(): JSX.Element{
         showCompass: false,
     };
 
-
-    return (
+   return (
         <div className="map" style={style}>
             <ReactMapGl
                 {...viewport}
@@ -57,7 +63,7 @@ function Map(): JSX.Element{
                                         height: '98%',
                                         zoom: 16,
                                     });
-                                    await  setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
+                                    await setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
                                     await setOpenDetailComponent(true);
                                 } }
                         >
@@ -85,6 +91,21 @@ function Map(): JSX.Element{
                     </div>
                 </Popup> : null }
             </ReactMapGl>
+
+            <ClickAwayListener onClickAway={() => setOpenChatBot(false)}>
+            {openChatBot ?
+                <div className='chat-bot'>
+                    <Chatbot/>
+                </div>
+                :
+                    <div className='chat-bot'
+                         onClick={() => setOpenChatBot(true)}>
+                        <div className='chat-icon-border'>
+                            <ChatIcon/>
+                        </div>
+                    </div>
+            }
+            </ClickAwayListener>
         </div>
 
     );

@@ -25,15 +25,23 @@ let minSalary = 0;
 let maxSalary = 0;
 let currency = 'Undisclosed Salary';
 
-export const  putSalary = ( type: { type: string; salary: { from: number; to: number; currency: string } | null }) : void => {
+export const  putSalary = ( type:
+                                { type: string;
+                                    salary: { from: number; to: number; currency: string }
+                                        | null }
+                            , number? : number) : void | null => {
     const { employmentType, fromSalary, toSalary } = useSettings();
     const exchangeRate = checkCurrency(type.salary?.currency);
+    if ( number === 1 ) {
+        return null;
+    }
     if (type.salary !== null
         && type.salary !== undefined
         && type.type == employmentType.toLowerCase()
         && type.salary.to * exchangeRate > fromSalary
         && type.salary.from * exchangeRate < toSalary
     ) {
+        number = 1;
         minSalary = type.salary.from;
         maxSalary = type.salary.to;
         currency = type.salary.currency;
@@ -44,6 +52,7 @@ export const  putSalary = ( type: { type: string; salary: { from: number; to: nu
         && type.salary.to * exchangeRate > fromSalary
         && type.salary.from * exchangeRate < toSalary
     ) {
+        number = 1;
         minSalary = type.salary.from;
         maxSalary = type.salary.to;
         currency = type.salary.currency;
@@ -54,6 +63,7 @@ export const  putSalary = ( type: { type: string; salary: { from: number; to: nu
         && type.salary.to * exchangeRate > fromSalary
         && type.salary.from * exchangeRate < toSalary
     ) {
+        number = 1;
         minSalary = type.salary.from;
         maxSalary = type.salary.to;
         currency = type.salary.currency;
@@ -63,11 +73,13 @@ export const  putSalary = ( type: { type: string; salary: { from: number; to: nu
         && employmentType == 'All'
         && ( fromSalary === 0 && toSalary === 100000)
     ) {
+        number = 1;
         minSalary = type.salary.from;
         maxSalary = type.salary.to;
         currency = type.salary.currency;
     }
     if ( type.salary == null) {
+        number = 1;
         currency = 'Undisclosed Salary';
     }
 };

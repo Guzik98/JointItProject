@@ -50,3 +50,9 @@ export type View = {
     height: string
     zoom: number
 };
+
+
+export type LongFilterType =  {
+    name : string,
+    category : string
+};

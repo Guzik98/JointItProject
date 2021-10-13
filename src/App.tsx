@@ -8,23 +8,23 @@ import useFetch from './fetch/useFetch';
 import { useSettings } from './Settings';
 import MediaQuery from 'react-responsive';
 
+
 function App(): JSX.Element {
     const { openDetailComponent } = useSettings();
-
     useFetch();
     return (
-        <div className="App">
-            <Header/>
-            <MediaQuery maxWidth={1025}>
-                { openDetailComponent  ? null  : <Bar/>}
-            </MediaQuery>
-            <MediaQuery minWidth={1025}>
-                <Bar/>
-            </MediaQuery>
-            <MainContainer/>
-        </div>
+            <div className="App">
+                <Header/>
+                <MediaQuery maxWidth={1025}>
+                    { openDetailComponent  ? null  : <Bar/>}
+                </MediaQuery>
+                <MediaQuery minWidth={1025}>
+                    <Bar/>
+                </MediaQuery>
+                <MainContainer/>
+            </div>
 
-    );
-}
+        );
+    }
 
 export default App;
