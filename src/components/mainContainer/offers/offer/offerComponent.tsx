@@ -30,7 +30,6 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
             setOpenDetailComponent(true);
     };
 
-
     return (
         <div className="offer-border"
               onClick={ () => {
@@ -61,12 +60,10 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                             <div className="salary-info">
                                 <MediaQuery minWidth={1025}>
                                     <div className="salary-text">
-                                        {props.employment_types.map((type : EmploymentType)  => {
-                                            putSalary(type);
-
+                                        {props.employment_types.map((type : EmploymentType, index)  => {
+                                            return ( putSalary(type, index) );
                                         }
                                         )}
-                                        <ReturnSalary/>
 
                                     </div>
                                 </MediaQuery>
@@ -97,8 +94,8 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
 
                                     <MediaQuery maxWidth={1025}>
                                         <div className="salary-text">
-                                            {props.employment_types.map((type : EmploymentType, number : number)  => {
-                                              putSalary(type, number);
+                                            {props.employment_types.map((type : EmploymentType)  => {
+                                              putSalary(type);
                                             })}
                                             <ReturnSalary/>
                                         </div>
