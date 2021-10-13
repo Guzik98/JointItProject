@@ -60,7 +60,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
     const classes = useStyles();
-    const { setLongFilterLocation, setLongFilterTech, setLongFilterCompany } = useSettings();
+    const { setLongFilterLocation, setLongFilterTech, setLongFilterCompany,
+    longFilterLocation, longFilterTech, longFilterCompany } = useSettings();
 
     const longSreachArray = ConcatFunction();
 
@@ -68,6 +69,19 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
         limit: 12,
         stringify: (option:  { name: string, category: string } ) => option.name,
     });
+    
+    const handleDelete = (category : string, name: string) => {
+        console.log(category);
+        if (category === 'Skill') {
+            setLongFilterTech(longFilterTech.filter(item => { return item.name != name; }));
+        }
+        if (category === 'Company') {
+            setLongFilterCompany(longFilterCompany.filter(item => { return item.name != name; }));
+        }
+        if (category === 'Location') {
+            setLongFilterLocation(longFilterLocation.filter(item => { return item.name != name; }));
+        }
+    };
 
     return (
         <>
@@ -168,11 +182,12 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                                 classes = {{ root : classes.item }}
                                 key={option.name}
                                 size="small"
+
                                 {...getTagProps({ index })}
                                 label={(
                                     <section className = "chip-label">
-                                        <span className= "category">  {option.category} </span>
-                                        <span className = "describe"> { option.name } </span>
+                                        <div className= "category" onClick={ () => handleDelete(option.category, option.name)}>  {option.category} </div>
+                                        <div className = "describe" onClick={ () => handleDelete(option.category, option.name)}> { option.name } </div>
                                     </section>
                                 )}
                             />

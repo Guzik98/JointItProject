@@ -8,7 +8,10 @@ const LoginAsDeveloper = (): JSX.Element => {
 
     return (
         <a className="sign-btn" role="button"
-           onClick={() =>  loginWithRedirect() }
+           onClick={() =>  loginWithRedirect({
+               screen_hint: 'signup',
+           })
+           }
         >
             <span className="sign-btn-label">
                 <Developer/>

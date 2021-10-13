@@ -23,7 +23,6 @@ function Offers(): JSX.Element {
         minWidth: size.width < 1025 ? size.width - 20 : (size.width < 1500 ? size.width / 1.68 : size.width / 2),
     };
 
-
     return (
             <div className="offers">
                     <div className="offers-level-2">

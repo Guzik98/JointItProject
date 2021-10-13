@@ -7,7 +7,6 @@ import { SettingsProvider } from './Settings';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
-
             <Auth0Provider
                 domain={'dev-hc5tj--a.us.auth0.com'}
                 clientId={'IJYv6RNjytLbIZgQHt1BR7n81SExgVho'}

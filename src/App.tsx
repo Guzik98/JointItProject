@@ -7,11 +7,14 @@ import { MainContainer } from './components/mainContainer';
 import useFetch from './fetch/useFetch';
 import { useSettings } from './Settings';
 import MediaQuery from 'react-responsive';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 
 function App(): JSX.Element {
     const { openDetailComponent } = useSettings();
     useFetch();
+
+
     return (
             <div className="App">
                 <Header/>
@@ -23,8 +26,7 @@ function App(): JSX.Element {
                 </MediaQuery>
                 <MainContainer/>
             </div>
-
-        );
+        ); 
     }
 
-export default App;
+export default withAuthenticationRequired(App);
