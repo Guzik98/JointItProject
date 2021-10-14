@@ -82,17 +82,19 @@ const SideBarButton = () :  JSX.Element => {
             <button className="open-btn" type="button" onClick={handleDrawerOpen}>
                 <MenuIcon className="menu-icon"/>
             </button>
-            <Drawer
-                className="{classes.drawer}"
-                variant="temporary"
-                anchor="right"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <SideBar handleClose={handleDrawerClose}/>
-            </Drawer>
+                <Drawer
+                    className="{classes.drawer}"
+                    variant="temporary"
+                    anchor="right"
+                    ModalProps={{ onBackdropClick: handleDrawerClose }}
+                    open={open}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <SideBar handleClose={handleDrawerClose}/>
+                </Drawer>
+
         </>
     );
 };

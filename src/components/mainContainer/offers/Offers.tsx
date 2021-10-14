@@ -9,8 +9,6 @@ import { filterFunction } from './offer/filters/filters';
 import DefaultComponent from './offer/DefaultComponent';
 import { useWindowSize } from '../../../handleScreen/useWindowSize';
 import { Size } from '../../../types/shortTypes';
-import Loading from '../../common/loading/Loading';
-
 
 function Offers(): JSX.Element {
     const size: Size = useWindowSize();
@@ -38,9 +36,6 @@ function Offers(): JSX.Element {
                             </div>
                         </div>
                         <div className="offers-content-3" style={style}>
-                            { !filter ? <div className="spinner-border" role="status">
-                                <span className="sr-only"><Loading/></span>
-                            </div> : null }
                             { filter?.length != 0 ?
                                 filter?.slice(0, 50).map(( props ) =>
                                     <div key={props.id}>

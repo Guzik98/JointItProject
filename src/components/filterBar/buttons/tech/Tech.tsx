@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() =>
         chosenTech: {
             borderRadius: '32px',
             textTransform: 'none',
-            fontSize: '14px',
+            fontSize: '12px',
             color: 'rgb(255, 64, 129)',
             background: 'rgba(255, 64, 129, 0.08)',
             borderColor: 'rgb(255, 64, 129)',
@@ -42,7 +42,6 @@ export const useStyles = makeStyles(() =>
         label: {
             textTransform: 'none',
             fontWeight: 500,
-            fontSize: 14,
             fontFamily: 'Open Sans,sans-serif',
         },
     }),

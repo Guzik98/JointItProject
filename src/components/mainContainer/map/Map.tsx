@@ -11,7 +11,6 @@ import ChatIcon from '../../../assets/icons/svg/ChatIcon';
 import { ClickAwayListener } from '@material-ui/core';
 import Chatbot from './chatbot/ChatBot';
 
-
 function Map(): JSX.Element{
     const { setUrlDetail, viewport, setViewport, setOpenDetailComponent } = useSettings();
     const [ selectedOffer, setSelectedOffer ] = useState<OfferType | null>(null);
@@ -20,6 +19,7 @@ function Map(): JSX.Element{
     const filter = filterFunction();
 
     const size: Size = useWindowSize();
+
     const style = {
         maxHeight: size.height - 155,
         minHeight: size.height - 155,
@@ -54,16 +54,16 @@ function Map(): JSX.Element{
                         <button className="market-btn"
                                 onMouseOver={ () =>setSelectedOffer(offer) }
                                 onMouseLeave={ () =>setSelectedOffer(null) }
-                                onClick={ async () => {
-                                    await  setViewport({
+                                onClick={  () => {
+                                      setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
+                                      setViewport({
                                         latitude: +offer.latitude,
                                         longitude: +offer.longitude,
                                         width: '100%',
                                         height: '98%',
                                         zoom: 16,
                                     });
-                                    await setUrlDetail(`https://justjoin.it/api/offers/${offer.id}`);
-                                    await setOpenDetailComponent(true);
+                                     setOpenDetailComponent(true);
                                 } }
                         >
                             <img className = 'pointer'

@@ -37,7 +37,7 @@ export const useStyles = makeStyles(() =>
         choseCity: {
             borderRadius: '32px',
             textTransform: 'none',
-            fontSize: '14px',
+            fontSize: '12px',
             color: 'rgb(119, 119, 119)',
             background: 'rgb(255, 255, 255)',
             minWidth: '160px',
@@ -72,7 +72,6 @@ export const useStyles = makeStyles(() =>
         label: {
             textTransform: 'none',
             fontWeight: 500,
-            fontSize: 14,
             fontFamily: 'Open Sans,sans-serif',
         },
     }),
