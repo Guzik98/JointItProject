@@ -7,7 +7,6 @@ import { useSettings } from '../../../Settings';
 import { putSalary, ReturnSalaryMap } from '../offers/offer/function/offerComponentFunctions';
 import { Size } from '../../../types/shortTypes';
 import { useWindowSize } from '../../../handleScreen/useWindowSize';
-import 'react-chatbot-kit/build/main.css';
 import ChatIcon from '../../../assets/icons/svg/ChatIcon';
 import { ClickAwayListener } from '@material-ui/core';
 import Chatbot from './chatbot/ChatBot';
@@ -81,8 +80,10 @@ function Map(): JSX.Element{
                         <div className="popup-content">
                             <span>{ selectedOffer.title }</span>
                             <span className="popup-salary">
-                                {selectedOffer.employment_types.map((type) =>
-                                    (putSalary(type)))
+                                {selectedOffer.employment_types.map((type, index) =>{
+                                    const map = true;
+                                    (putSalary(type, index, map));
+                                })
                                 }
                                 <ReturnSalaryMap/>
                             </span>

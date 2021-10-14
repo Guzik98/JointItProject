@@ -3,7 +3,7 @@ import './offerComponent.sass';
 import { EmploymentType, OfferType } from '../../../../types/offerType';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
-import { getNumberOfDays, putSalary, ReturnSalary } from './function/offerComponentFunctions';
+import { getNumberOfDays, putSalary } from './function/offerComponentFunctions';
 import CompanyIconOffer from '../../../../assets/icons/svg/CompanyIconOffer';
 import PointerIconOffer from '../../../../assets/icons/svg/PointerIconOffer';
 
@@ -32,10 +32,10 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
 
     return (
         <div className="offer-border"
-              onClick={ () => {
-                  setUrl();
-                  setViewportFunction();
-                  openComponent();
+              onClick={  () => {
+                   setUrl();
+                   setViewportFunction();
+                    openComponent();
                   }}
         >
             <div className="offer-border-level2">
@@ -61,7 +61,10 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                 <MediaQuery minWidth={1025}>
                                     <div className="salary-text">
                                         {props.employment_types.map((type : EmploymentType, index)  => {
-                                            return ( putSalary(type, index) );
+                                                return ( <div key={type.type} >
+                                                            {putSalary(type, index)}
+                                                        </div>
+                                                );
                                         }
                                         )}
 
@@ -94,10 +97,12 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
 
                                     <MediaQuery maxWidth={1025}>
                                         <div className="salary-text">
-                                            {props.employment_types.map((type : EmploymentType)  => {
-                                              putSalary(type);
+                                            {props.employment_types.map((type : EmploymentType, index)  => {
+                                                return ( <div key={type.type} >
+                                                        {putSalary(type, index)}
+                                                    </div>
+                                                );
                                             })}
-                                            <ReturnSalary/>
                                         </div>
                                     </MediaQuery>
                                 </div>

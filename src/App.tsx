@@ -26,7 +26,9 @@ function App(): JSX.Element {
                 </MediaQuery>
                 <MainContainer/>
             </div>
-        ); 
+        );
     }
+
+// export default App;
 
 export default withAuthenticationRequired(App);
