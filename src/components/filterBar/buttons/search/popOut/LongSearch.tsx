@@ -16,8 +16,12 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '100%',
             height: 34,
             padding: '3px 10px 3px 10px',
+
             '&:focus': {
                 width: '20ch',
+                '@media (max-width: 1025px)': {
+                    width: '100%'
+                },
             },
             '& > * + *': {
                 marginTop: theme.spacing(2),
@@ -71,7 +75,7 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
     });
     
     const handleDelete = (category : string, name: string) => {
-        console.log(category);
+
         if (category === 'Skill') {
             setLongFilterTech(longFilterTech.filter(item => { return item.name != name; }));
         }
@@ -81,6 +85,15 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
         if (category === 'Location') {
             setLongFilterLocation(longFilterLocation.filter(item => { return item.name != name; }));
         }
+    };
+
+    const onClose = () => {
+        if (handleClose) {
+            handleClose();
+        }
+        setLongFilterLocation([]);
+        setLongFilterCompany([]);
+        setLongFilterTech([]);
     };
 
     return (
@@ -97,7 +110,7 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                 noOptionsText={'No options'}
                 options={longSreachArray}
                 disableCloseOnSelect
-                getOptionSelected={(option, value) => option.name === value.name}
+                getOptionSelected={(option, value) =>  option.name === value.name }
                 getOptionLabel={(option) => option.name }
                 renderOption={(option) => {
                     if (option.name === 'All') {
@@ -182,7 +195,6 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                                 classes = {{ root : classes.item }}
                                 key={option.name}
                                 size="small"
-
                                 {...getTagProps({ index })}
                                 label={(
                                     <section className = "chip-label">
@@ -195,7 +207,9 @@ export default function LongSearch({ handleClose }: HandlePopOut): JSX.Element {
                 }
                 renderInput={(params )   => (
                     <div className="input">
-                        <div className="back-icon" onClick = {handleClose}>
+                        <div
+                            className="back-icon"
+                            onClick = {onClose}>
                             <IconStartLongSearch/>
                         </div>
                         <TextField {...params} className="long-text-field" placeholder= "Skill, Company, Location"/>

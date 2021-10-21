@@ -14,6 +14,7 @@ const useStyles = makeStyles(() =>
         },
         root: {
             '@media (max-width: 1025px)': {
+                display: 'flex',
                 width: '100%',
                 borderRadius: '32px',
                 textTransform: 'none',

@@ -6,12 +6,18 @@ const url = 'https://justjoin.it/api/offers';
 const useFetch = () : void => {
     const { setData } = useSettings();
 
-    useEffect( () => {
-            const fetchData = async () => {
-            const response = await fetch(url);
-            return response.json();
+    useEffect(() => {
+        let isMounted = true;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                if (isMounted) {
+                    setData(data);
+                }
+            });
+        return () => {
+            isMounted = false;
         };
-        fetchData().then(data =>  setData(data));
     }, [url]);
 };
 

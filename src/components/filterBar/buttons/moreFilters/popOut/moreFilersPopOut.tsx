@@ -48,7 +48,7 @@ const useStylesBtn = makeStyles({
 
 const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     const classesBtn = useStylesBtn();
-    const { setEmploymentType, setToSalary, setFromSalary, toSalary, fromSalary, setSeniority } = useSettings();
+    const { setEmploymentType, setToSalary, setFromSalary, toSalary, fromSalary, setSeniority, setOpenDetailComponent } = useSettings();
     const [value, setValue] = React.useState<number[]>([fromSalary, toSalary]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
@@ -62,6 +62,7 @@ const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
     const submit = () => {
         setFromSalary(value[0]);
         setToSalary(value[1]);
+        setOpenDetailComponent(false);
         if (handleClose){
             handleClose();
         }

@@ -98,6 +98,7 @@ export const useStyles = makeStyles(() =>
              <MediaQuery maxWidth={1025}>
                  <Button
                      size="small"
+                     role='open-location-pop-out'
                      variant="outlined"
                      onClick={handleClick}
                      classes={city == 'all' ? { root: classes.choseCity } : { root: classes.chosenCity }}
@@ -110,6 +111,7 @@ export const useStyles = makeStyles(() =>
                  <Button
                      size="small"
                      variant="outlined"
+                     role='open-location-pop-out'
                      endIcon={open ? <ExpandLess/> : <ExpandMore/>}
                      onClick={handleClick}
                      classes={city == 'all' ? { root: classes.choseCity } : { root: classes.chosenCity }}

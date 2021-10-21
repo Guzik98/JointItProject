@@ -1,18 +1,22 @@
 import React from 'react';
 import ExitButton from '../../../../../assets/icons/svg/ExitButton';
 import Divider from '@material-ui/core/Divider';
-import LoginComponent from '../../navbar/buttons/clientOptions/login/LoginComponent';
+import LoginComponent from '../../userManagment/logIn/LoginComponent';
 import { SocialLinks } from './components/MenuItems';
 import SocialLinksComponent from './components/SocialLinksComponent';
 import '../SideBar.sass';
 import { FirstList, FromHeaderList, NestedList, SecondList } from './components/SideBarComponents';
 import { HandlePopOut } from '../../../../../types/shortTypes';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const SideBarPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
+    const { isAuthenticated } = useAuth0();
 
     return (
         <>
-            <div className='classes.drawerHeader'>
+            <div
+                role ='side-bar'
+                className='classes.drawerHeader'>
                 <div className="first-section">
                     MENU
                     <button className="close-menu" type="button" onClick={ handleClose }>
@@ -36,7 +40,8 @@ const SideBarPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
 
             <SecondList/>
 
-            <LoginComponent/>
+            { !isAuthenticated &&  <LoginComponent/> }
+
 
             <div className="social-links rwdHideContent">
                 {SocialLinks.map(({ svg, href }) => <SocialLinksComponent svg={svg} href={href} key={href}/>)}

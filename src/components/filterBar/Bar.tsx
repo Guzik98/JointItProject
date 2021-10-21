@@ -1,6 +1,5 @@
 import React from 'react';
 import './Bar.sass';
-import '../../assets/programing-language-icon.svg';
 import IconComponent from './iconBar/IconComponent';
 import { programingLanguageIconArray } from './iconBar/programing-language';
 import { SearchBtn, SearchBtnSmall } from './buttons/search/Search';
@@ -18,7 +17,7 @@ const renderIcon = programingLanguageIconArray.map(({ name, icon }: IconType) =>
     <IconComponent name={name} icon={icon} key={name}/>);
 
 function Bar(): JSX.Element {
-    const { setLongFilterTech, setLongFilterLocation, setLongFilterCompany, setCity, setTech, setViewport } = useSettings();
+    const { longFilterTech, longFilterLocation, longFilterCompany, setCity, setTech, setViewport } = useSettings();
     const [ isOpen, setIsOpen ] = React.useState(false);
 
     const handleOpenLongSearch = () => {
@@ -34,10 +33,11 @@ function Bar(): JSX.Element {
         });
     };
     const handleCloseLongSearch = () => {
-        setLongFilterTech([]);
-        setLongFilterLocation([]);
-        setLongFilterCompany([]);
-        setIsOpen(false);
+        if ( longFilterTech.length === 0
+            &&  longFilterLocation.length === 0
+            && longFilterCompany.length === 0) {
+            setIsOpen(false);
+        }
     };
 
     if ( !isOpen) {
@@ -71,6 +71,9 @@ function Bar(): JSX.Element {
                     <div className="long-search-bar-filter" >
                         <LongSearch handleClose ={handleCloseLongSearch}/>
                     </div>
+                    <MediaQuery minWidth={1025}>
+                        <MoreFilters/>
+                    </MediaQuery>
                 </div>
             </ClickAwayListener>
         );

@@ -38,7 +38,7 @@ const useStyles = makeStyles({
 
 const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
     const classes = useStyles();
-    const { setCity, city, setViewport } = useSettings();
+    const { setCity, city, setViewport, setOpenDetailComponent } = useSettings();
     const [open, setOpen] = React.useState(false);
 
     const toggle = () => {
@@ -77,7 +77,12 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                     <div className="type-work">
                         <div className="type-work-level2">
                             <div
-                                onClick={() =>setCity('Remote Poland')}
+                                role={'set-city-remote'}
+                                onClick={() => {
+                                    setCity('Remote Poland');
+                                    setOpenDetailComponent(false);
+                                    }
+                                }
                             >
                                 <Button size="small"
                                         variant="outlined"
@@ -92,7 +97,10 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                                 </Button>
                             </div>
                             <div
-                                onClick={() =>setCity('Remote Global')}
+                                onClick={() => {
+                                    setCity('Remote Global');
+                                    setOpenDetailComponent(false);
+                                }}
                             >
                                 <Button size="small"
                                         variant="outlined"

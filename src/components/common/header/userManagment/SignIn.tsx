@@ -1,7 +1,7 @@
 import React from 'react';
 import './SignIn.sass';
 import Popover from '@material-ui/core/Popover';
-import LoginComponent from './login/LoginComponent';
+import LoginComponent from './logIn/LoginComponent';
 import { useAuth0 } from '@auth0/auth0-react';
 import Logged from './logged/Logged';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
@@ -51,9 +51,7 @@ function SignIn(): JSX.Element {
                 >
                 { !isAuthenticated && ( <LoginComponent/> ) }
                 { isAuthenticated && ( <Logged/> )}
-
             </Popover>
-
         </>
     );
 }

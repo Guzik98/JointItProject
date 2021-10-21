@@ -3,11 +3,14 @@ import { useSettings } from '../../../Settings';
 import { IconType } from '../../../types/shortTypes';
 
 const IconComponent = (  props  : IconType) : JSX.Element => {
-    const { setTech, tech } = useSettings();
+    const { setTech, tech, setOpenDetailComponent } = useSettings();
 
     return (
         <div
-            onClick={() =>  setTech(`${props.name}`) }
+            onClick={() =>  {
+                setTech(`${props.name}`);
+                setOpenDetailComponent(false);
+            }}
             className = {`${tech !== props.name && tech != 'All' ? 'un-active' : '' }` }
         >
             <div

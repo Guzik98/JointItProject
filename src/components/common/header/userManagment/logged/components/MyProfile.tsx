@@ -1,5 +1,5 @@
 import React from 'react';
-import MyProfileIcon from '../../../../../../../../assets/icons/svg/MyProfileIcon';
+import MyProfileIcon from '../../../../../../assets/icons/svg/MyProfileIcon';
 
 const MyProfile = (): JSX.Element => {
     return (

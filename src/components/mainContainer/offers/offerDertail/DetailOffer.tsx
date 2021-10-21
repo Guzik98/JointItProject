@@ -121,7 +121,9 @@ const DetailOffer = () : JSX.Element => {
                 <Tab/>
             </div>
             <div>
-                { dataDetail.company_profile ? <CompanyProfile/> : null}
+                <MediaQuery minWidth={700}>
+                    { dataDetail.company_profile ? <CompanyProfile/> : null}
+                </MediaQuery>
                 <Tech/>
                 <Description/>
             </div>

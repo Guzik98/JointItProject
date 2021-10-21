@@ -4,7 +4,6 @@ export const cityPoland = [
     { city: 'Wrocław', latitude: 51.107883, longitude: 17.038538  },
     { city: 'Poznań', latitude: 52.406376, longitude: 16.925167  },
     { city: 'Trójmiasto', latitude: 54.372158, longitude: 18.638306  },
-    { city: 'Śląsk', latitude: 50.286263, longitude: 19.104078  },
 ];
 
 export const cityWorld = [

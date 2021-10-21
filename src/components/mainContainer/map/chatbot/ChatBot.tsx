@@ -15,29 +15,27 @@ let seniority: string;
 const Chatbot = () : JSX.Element => {
     const [userResponse, setUserResponse] = useState<string>('');
     const [step, setStep] = useState<number>(0);
+    const [sendUserResponse, setSendUserResponse] = useState<string>('');
+    const { setSeniority, setEmploymentType, setOpenDetailComponent } = useSettings();
     const [botResponse, setBotResponse] = useState<ResponseBotObject>({
         purpose: '',
         message: '',
         sender: 'bot'
     });
-    const [sendUserResponse, setSendUserResponse] = useState<string>('');
-    const { setSeniority, setEmploymentType } = useSettings();
-
 
     const setOffers = (step : number) => {
         switch (step){
-            case (3):
+            case (2):
                 seniority = sendUserResponse;
                 break;
-            case (4):
-                console.log(seniority);
+            case (3):
                 setSeniority(seniority);
                 setEmploymentType(sendUserResponse);
+                setOpenDetailComponent(false);
                 break;
             default : break;
         }
     };
-
 
     // setting next step when there's response and option click
     const setNextStep = (response: string) => {

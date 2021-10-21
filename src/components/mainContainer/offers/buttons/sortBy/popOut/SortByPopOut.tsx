@@ -20,7 +20,7 @@ const SortByPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
             <DialogContent>
                 <div className="sort-by-pop-out-body">
                     {sortByButtons.map(({ name }: ButtonType) =>
-                        <div onClick={handleClose} key={name}>
+                        <div onClick={handleClose} key={name} className="btn-border">
                             <SortByButtonsComponent
                                 name={name} key={name}/>
                         </div>)

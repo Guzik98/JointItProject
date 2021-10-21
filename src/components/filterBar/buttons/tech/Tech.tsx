@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Dialog } from '@material-ui/core';
 import '../buttons.sass';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import TechPopOut from './TechPopOut';
+import TechPopOut from './popOut/TechPopOut';
 import { useSettings } from '../../../../Settings';
 
 export const useStyles = makeStyles(() =>

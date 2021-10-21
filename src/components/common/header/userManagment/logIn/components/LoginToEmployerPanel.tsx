@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Employer from '../../../../../../../../assets/icons/header-icons/Employer';
+import Employer from '../../../../../../assets/icons/header-icons/Employer';
 import '../SignAs.sass';
 
 const LoginToEmployerPanel = (): JSX.Element => {

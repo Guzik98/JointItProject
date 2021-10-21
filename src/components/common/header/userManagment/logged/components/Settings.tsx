@@ -1,5 +1,5 @@
 import React from 'react';
-import SettingsIcon from '../../../../../../../../assets/icons/svg/SettingsIcon';
+import SettingsIcon from '../../../../../../assets/icons/svg/SettingsIcon';
 
 const Settings = () : JSX.Element => {
     return (

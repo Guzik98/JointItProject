@@ -27,13 +27,14 @@ const useStyles = makeStyles({
 
 const CityBtnComponent = ( props: CityType): JSX.Element => {
     const classes = useStyles();
-    const { setCity, city, setViewport } = useSettings();
+    const { setCity, city, setViewport, setOpenDetailComponent } = useSettings();
 
     const handleClick = () => {
         setViewport({
             height: '98%', latitude: props.latitude, longitude: props.longitude, width: '100%', zoom: 11,
         });
         setCity(`${props.city}`);
+        setOpenDetailComponent(false);
     };
 
     return (

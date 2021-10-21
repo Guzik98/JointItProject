@@ -1,5 +1,5 @@
 import React from 'react';
-import Developer from '../../../../../../../../assets/icons/header-icons/Developer';
+import Developer from '../../../../../../assets/icons/header-icons/Developer';
 import '../SignAs.sass';
 import { useAuth0 } from '@auth0/auth0-react';
 

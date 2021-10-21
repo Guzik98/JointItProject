@@ -33,8 +33,8 @@ const Chats: React.FC<Props> = props => {
                 setMessages([
                     {
                         purpose: 'introduction',
-                        message: `Hej, ${user?.name} abyśmy mogli Ci pomóc odpowiedz na poniższe pytania`,
-                        options: ['Employer', 'Developer'],
+                        message: `Hej, ${user?.name} abyśmy mogli znaleźć dla Ciebie oferęe proszę odpowiedz na kilka pytań`,
+                        options: ['Tak'],
                         sender: 'bot'
                     }
                 ]);   
@@ -44,7 +44,7 @@ const Chats: React.FC<Props> = props => {
                         purpose: 'introduction',
                         message:
                             'Hej, użytkowniku abyśmy mogli Ci pomóc odpowiedz na poniższe pytania',
-                        options: ['Employer', 'Developer'],
+                        options: ['Tak'],
                         sender: 'bot'
                     }
                 ]);

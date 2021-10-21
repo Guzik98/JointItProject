@@ -60,26 +60,17 @@ export const ReturnSalaryMap = (): JSX.Element => {
 export const  putSalary = ( type: EmploymentType | null, index? : number, map? : boolean) : JSX.Element | null => {
     const { employmentType, fromSalary, toSalary } = useSettings();
     const exchangeRate = checkCurrency(type?.salary?.currency);
+    let mandate = '';
+    if (employmentType === 'Mandate Contract'){
+        mandate = 'mandate_contract';
+    }
+
     if (type?.salary !== null
         && type?.salary !== undefined
-        && type.type == employmentType.toLowerCase()
-        && type.salary.to * exchangeRate > fromSalary
-        && type.salary.from * exchangeRate < toSalary
+        && type.type == ( mandate || employmentType.toLowerCase())
+        && type.salary.to * exchangeRate >= fromSalary
+        && type.salary.from * exchangeRate <= toSalary
 
-    ) {
-        minSalary = type.salary.from;
-        maxSalary = type.salary.to;
-        currency = type.salary.currency;
-        if ( map === true) {
-            return <ReturnSalaryMap/>;
-        }
-        return <ReturnSalary/>;
-    }
-    if  (type?.salary !== null
-        && type?.salary !== undefined
-        && type.type == 'mandate_contract'
-        && type.salary.to * exchangeRate > fromSalary
-        && type.salary.from * exchangeRate < toSalary
     ) {
         minSalary = type.salary.from;
         maxSalary = type.salary.to;
@@ -92,8 +83,8 @@ export const  putSalary = ( type: EmploymentType | null, index? : number, map? :
     if (type?.salary !== null
         && type?.salary !== undefined
         && employmentType == 'All'
-        && type.salary.to * exchangeRate > fromSalary
-        && type.salary.from * exchangeRate < toSalary
+        && type.salary.to * exchangeRate >= fromSalary
+        && type.salary.from * exchangeRate <= toSalary
 
     ) {
         if ( index == 1){
