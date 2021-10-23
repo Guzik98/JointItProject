@@ -3,7 +3,7 @@ import './App.sass';
 import { Header } from './components/common';
 import { Bar } from './components/filterBar';
 import { MainContainer } from './components/mainContainer';
-import useFetch from './fetch/useFetch';
+import { useFetch } from './fetch/useFetch';
 import { useSettings } from './Settings';
 import MediaQuery from 'react-responsive';
  import { withAuthenticationRequired } from '@auth0/auth0-react';

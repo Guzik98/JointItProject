@@ -89,7 +89,7 @@ const SideBarButton = () :  JSX.Element => {
                     className={classes.drawer}
                     variant="temporary"
                     anchor="right"
-                    // ModalProps={{ onBackdropClick: handleDrawerClose }}
+                    ModalProps={{ onBackdropClick: handleDrawerClose }}
                     open={open}
                     role ='content-side-bar'
                     classes={{

@@ -4,7 +4,9 @@ import LoginToEmployerPanel from './components/LoginToEmployerPanel';
 
 const LoginComponent = (): JSX.Element => {
     return (
-        <div className="sign-border">
+        <div
+            role = 'pop-out'
+            className="sign-border">
             <LoginAsDeveloper/>
             <div className="rwdHideContent">
                 <LoginToEmployerPanel/>

@@ -60,13 +60,19 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
     };
 
     return (
-        <div className="typography">
+        <div
+            className="typography"
+            role='pop-out'
+        >
             <div className="typography-border">
                 <div className="typography-container">
                     <MediaQuery maxWidth={1024}>
                         <div className="title">
                             <span>Location</span>
-                            <div className="exit-icon-border" onClick={handleClose}>
+                            <div
+                                role = 'close-location-pop-out-small'
+                                className="exit-icon-border"
+                                onClick={handleClose}>
                                 <div className="exit-icon">
                                     <ClearIcon/>
                                 </div>
@@ -116,8 +122,12 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                             </div>
                         </div>
                         <MediaQuery minWidth={1025}>
-                            <div className="exit-icon-border" onClick={handleClose}>
-                                <div className="exit-icon">
+                            <div className="exit-icon-border"
+                                 role = 'close-location-pop-out-big'
+                                 onClick={handleClose}
+                            >
+                                <div className="exit-icon"
+                                >
                                     <ClearIcon/>
                                 </div>
                             </div>
@@ -167,6 +177,7 @@ const PopOverLocation = ( { handleClose } : HandlePopOut) :JSX.Element => {
                     </div>
                     <Divider className="divider-pop" variant="fullWidth"/>
                     <Button size="small"
+                            role = 'close-location-pop-out'
                             onClick={clear}
                             variant="outlined"
                             classes={{

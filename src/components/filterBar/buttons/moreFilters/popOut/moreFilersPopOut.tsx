@@ -147,6 +147,7 @@ const MoreFilersPopOut = ({ handleClose }: HandlePopOut): JSX.Element => {
                 <Button
                     size="small"
                     variant="outlined"
+                    role = 'show-offers'
                     onClick={submit}
                     classes={{
                         root: classesBtn.showOffers,

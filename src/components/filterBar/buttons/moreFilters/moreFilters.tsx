@@ -105,6 +105,7 @@ export const MoreFilters = (): JSX.Element => {
             <Button size="small"
                     variant="outlined"
                     onClick={handleClickOpen}
+                    role ='open-pop-out'
                     classes={ (fromSalary != 0 || toSalary != 100000 ||
                         employmentType != 'All' || seniority != 'All')
                         ? { root: classes.moreFiltersBtnChosen, label: classes.label }

@@ -21,4 +21,4 @@ const useFetch = () : void => {
     }, [url]);
 };
 
-export default useFetch;
+export { useFetch };

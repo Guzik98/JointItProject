@@ -84,7 +84,9 @@ const DetailOffer = () : JSX.Element => {
                             </div>
                         </div>
                         <div className = "header-info">
-                            <div className = "offer-title"> { dataDetail.title } </div>
+                            <div className = "offer-title"
+                            role='title'
+                            > { dataDetail.title } </div>
                             <div className = "address-type">
                             <span className = "address-text">
                                     <PointerIconDetail/>

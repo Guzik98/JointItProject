@@ -19,7 +19,11 @@ const SideBarPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
                 className='classes.drawerHeader'>
                 <div className="first-section">
                     MENU
-                    <button className="close-menu" type="button" onClick={ handleClose }>
+                    <button
+                        role ='close-side-bar'
+                        className="close-menu"
+                        type="button"
+                        onClick={ handleClose }>
                         <ExitButton/>
                     </button>
                 </div>

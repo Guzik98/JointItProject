@@ -25,6 +25,7 @@ function SignIn(): JSX.Element {
         <>
             <button
                     className={'navbar-right-side-item sign-in ' + ( isAuthenticated ? 'user-in' : 'user-not-in')}
+                    role='open-user-menu'
                     aria-describedby={id}
                     onClick={ handleClick }>
                 <span className="sign-in-text">
