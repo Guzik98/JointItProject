@@ -7,14 +7,15 @@ export type EmploymentType = {
         } | null
 };
 
-export type SkillsType = [
+export type SkillsType =
     {
         name: string,
         level: number
     }
-];
+;
 
 export type OfferType = {
+    _id: string,
     title: string,
     street: string,
     city: string
@@ -33,6 +34,6 @@ export type OfferType = {
     id: string,
     employment_types: EmploymentType[]
     company_logo_url: string
-    skills: SkillsType
+    skills: SkillsType[]
     remote: boolean
 };

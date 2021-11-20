@@ -56,3 +56,15 @@ export type LongFilterType =  {
     name : string,
     category : string
 };
+
+
+export enum RoleEnum {
+    EMPLOYER = 'EMPLOYER',
+    EMPLOYEE = 'EMPLOYEE',
+}
+export type Token = {
+    username: string
+    role : RoleEnum
+    iat: string
+    exp: string
+};

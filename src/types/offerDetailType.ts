@@ -30,7 +30,7 @@ type OfferTypeDetail = {
     tags: [],
     company_logo_url: string,
     banner_url: null,
-    skills: SkillsType,
+    skills: SkillsType[],
     remote: boolean,
     employment_types : EmploymentType[]
     company_profile: {

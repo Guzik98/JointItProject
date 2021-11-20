@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSettings } from '../Settings';
 
-const url = 'https://justjoin.it/api/offers';
+const url = 'http://localhost:3000/offers';
 
 const useFetch = () : void => {
     const { setData } = useSettings();
