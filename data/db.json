@@ -1,0 +1,48 @@
+{
+  "offer": [
+    {
+      "title": "JavaScript Developer",
+      "street": "Mostowa 38",
+      "city": "Poznań",
+      "country_code": "PL",
+      "address_text": "Mostowa 38, Poznań",
+      "marker_icon": "javascript",
+      "workplace_type": "remote",
+      "company_name": "STX Next",
+      "company_url": "https://stxnext.com",
+      "company_size": "400+",
+      "experience_level": "mid",
+      "latitude": "52.4074507",
+      "longitude": "16.9387959",
+      "published_at": "2021-10-21T12:04:00.000Z",
+      "remote_interview": true,
+      "id": "stx-next-javascript-developer-bfb4c68c-a946-4750-aed8-c68a6ee648b9",
+      "employment_types": [
+        {
+          "type": "b2b",
+          "salary": {
+            "from": 8500,
+            "to": 16800,
+            "currency": "pln"
+          }
+        }
+      ],
+      "company_logo_url": "https://bucket.justjoin.it/offers/company_logos/thumb/385b5432df3be213a314c457a61fd086de080905.png?1626966932",
+      "skills": [
+        {
+          "name": "Angular",
+          "level": 3
+        },
+        {
+          "name": "React",
+          "level": 3
+        },
+        {
+          "name": "JavaScript",
+          "level": 3
+        }
+      ],
+      "remote": true
+    }
+  ]
+}
