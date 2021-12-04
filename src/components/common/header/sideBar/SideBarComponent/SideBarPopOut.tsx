@@ -7,10 +7,10 @@ import SocialLinksComponent from './components/SocialLinksComponent';
 import '../SideBar.sass';
 import { FirstList, FromHeaderList, NestedList, SecondList } from './components/SideBarComponents';
 import { HandlePopOut } from '../../../../../types/shortTypes';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAuthSettings } from '../../../../../AuthContext';
 
 const SideBarPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
-    const { isAuthenticated } = useAuth0();
+    const { username } = useAuthSettings();
 
     return (
         <>
@@ -44,8 +44,7 @@ const SideBarPopOut = ({ handleClose } : HandlePopOut) : JSX.Element => {
 
             <SecondList/>
 
-            { !isAuthenticated &&  <LoginComponent/> }
-
+            { !username &&  <LoginComponent/> }
 
             <div className="social-links rwdHideContent">
                 {SocialLinks.map(({ svg, href }) => <SocialLinksComponent svg={svg} href={href} key={href}/>)}

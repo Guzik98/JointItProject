@@ -1,9 +1,10 @@
 import React, { createContext, FC, useContext, useState } from 'react';
-import { OfferType } from '../types/offerType';
-import OfferTypeDetail from '../types/offerDetailType';
-import { LongFilterType, View } from '../types/shortTypes';
+import { OfferType } from './types/offerType';
+import OfferTypeDetail from './types/offerDetailType';
+import { LongFilterType, View } from './types/shortTypes';
 
 export const SettingsContext = createContext<SettingsContextData | null>(null);
+
 
 const useProviderSettings = () => {
     const [ data, setData ] = useState<OfferType[]>();
@@ -21,7 +22,6 @@ const useProviderSettings = () => {
     const [ longFilterTech, setLongFilterTech ] = useState<LongFilterType[]>([]);
     const [ longFilterLocation, setLongFilterLocation ] = useState<LongFilterType[]>([]);
     const [ longFilterCompany, setLongFilterCompany ] = useState<LongFilterType[]>([]);
-    const [ user, setUser ] = useState<string>();
     const [ viewport, setViewport ] = useState<View>({
         latitude: 52.237049,
         longitude: 21.017532,
@@ -60,8 +60,6 @@ const useProviderSettings = () => {
         longFilterTech, setLongFilterTech,
         longFilterLocation, setLongFilterLocation,
         longFilterCompany, setLongFilterCompany,
-        user,
-        setUser,
     };
 };
 
@@ -70,7 +68,7 @@ export const SettingsProvider: FC = ({ children }) => {
 
     return (
         <SettingsContext.Provider value={value}>
-            {children}
+            { children }
         </SettingsContext.Provider>
     );
 };

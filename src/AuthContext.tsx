@@ -1,4 +1,5 @@
 import React, { createContext, FC, useContext, useState } from 'react';
+import { OfferType } from './types/offerType';
 
 export const AuthContext = createContext<AuthContextData | null>(null);
 
@@ -6,6 +7,7 @@ const useAuthProviderSettings = () => {
     const [role, setRole] = useState<string>('');
     const [username, setUsername] = useState<string | null>();
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+    const [userOffers, setUserOffers] = useState<OfferType[]>();
 
     return {
         setRole,
@@ -13,7 +15,9 @@ const useAuthProviderSettings = () => {
         username,
         setUsername,
         isAuthenticated,
-        setIsAuthenticated
+        setIsAuthenticated,
+        userOffers,
+        setUserOffers
     };
 };
 

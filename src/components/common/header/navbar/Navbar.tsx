@@ -3,8 +3,12 @@ import './Navbar.sass';
 import PostJob from './buttons/postJob/PostJob';
 import { RightSideReferenceArray } from './buttons/rest/RightSideReferenceArray';
 import RightSideReferenceComponent from './buttons/rest/RightSideReferenceComponent';
+import { useAuthSettings } from '../../../../AuthContext';
+
 
 const Navbar = (): JSX.Element => {
+    const { role } = useAuthSettings();
+
     return (
         <div className="navbar-container">
             <div className="border-test-job rwdDisplay">
@@ -15,9 +19,12 @@ const Navbar = (): JSX.Element => {
             <div className="navbar-right-side">
                 {RightSideReferenceArray.map(({ text }) =>
                     <RightSideReferenceComponent text={text} key={text}/>)}
-                <a className="navbar-right-side-item rwdDisplay">
-                    <PostJob/>
-                </a>
+                { role === 'EMPLOYER' ?
+                    <a className="navbar-right-side-item rwdDisplay">
+                        <PostJob/>
+                    </a>
+                    : null
+                 }
             </div>
         </div>
     );

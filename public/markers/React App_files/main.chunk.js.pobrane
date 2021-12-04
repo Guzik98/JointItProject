@@ -11387,7 +11387,7 @@ const MoreFilersPopOut = props => {
         columnNumber: 17
       }, undefined), /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_5__["jsxDEV"])("div", {
         className: "label-title",
-        children: "Employment Type"
+        children: "EmploymentInfoType Type"
       }, void 0, false, {
         fileName: _jsxFileName,
         lineNumber: 117,

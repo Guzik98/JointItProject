@@ -7,10 +7,17 @@ import  Offers  from './offers/Offers';
 import DetailOffer from './offers/offerDertail/DetailOffer';
 import Loading from '../common/loading/Loading';
 import { filterFunction } from './offers/offer/filters/filters';
+import { useFetch } from '../../helpfuntions/fetch/useFetch';
+import { useAuthSettings } from '../../AuthContext';
 
 function MainContainer(): JSX.Element {
     const { openDetailComponent } = useSettings();
+    const { userOffers } = useAuthSettings();
     const filter = filterFunction();
+
+    useFetch('http://localhost:3000/offers/your-offers');
+
+    console.log(userOffers);
     return (
         <div>
             { !filter ? <div className="spinner-border" role="status">

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { programingLanguageIconArray } from '../../../components/filterBar/iconBar/programing-language';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { OfferType } from '../../../types/offerType';
+import '../post-offer.sass';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -20,29 +22,42 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const EmploymentInfo = ({ formData, setFormData }: any): JSX.Element => {
+type FormDataType = {
+    formData: OfferType;
+    setFormData: Dispatch<SetStateAction<OfferType>>;
+};
+
+
+const EmploymentInfo = ({ formData, setFormData }: FormDataType): JSX.Element => {
     const classes = useStyles();
 
     return (
         <>
             <Autocomplete
-                disablePortal
                 classes={{ root: classes.autocomplete, input: classes.autocompleteLabel }}
                 id="highlights-demo"
                 size="small"
                 ListboxProps={{ style: { maxHeight: '200px' } }}
                 options={programingLanguageIconArray}
+                getOptionSelected={(option, value) =>  option.name === value.name }
                 getOptionLabel={(option) => option.name}
-                value={formData.marker_icon}
-                onChange={(e) => {
-                    setFormData({ ...formData, marker_icon: e.target });
-                }}
                 renderOption={(option) => {
                     if (option.name === 'All') {
                         return null;
                     }
                     return (
-                        <div className="autocomplete-row">
+                        <div
+                            onClick={() =>  {
+                                if (option.name === 'JS'){
+                                    setFormData({ ...formData, marker_icon: 'javascript' });
+                                } else if (option.name === 'UX/UI'){
+                                    setFormData({ ...formData, marker_icon: 'ux' });
+                                } else {
+                                    setFormData({ ...formData, marker_icon: option.name.toLowerCase() });
+                                }
+                            }}
+                             className="autocomplete-row"
+                        >
                             <div className="circle">
                                 {option.icon}
                             </div>
@@ -59,22 +74,32 @@ const EmploymentInfo = ({ formData, setFormData }: any): JSX.Element => {
             <FormControl component="fieldset">
                 <FormLabel component="legend">Experience level</FormLabel>
                 <RadioGroup
-                    row aria-label="gender" name="row-radio-buttons-group"
+                    row aria-label="gender"
+                    name="row-radio-buttons-group"
+                    defaultValue="junior"
+                    onChange={(e) => {
+                        setFormData({ ...formData, experience_level: e.target.value });
+                    }}
                 >
-                    <FormControlLabel value="Junior" control={<Radio/>}
+                    <FormControlLabel  value="junior" control={<Radio/>}
                                       label="Junior"/>
-                    <FormControlLabel value="Mid" control={<Radio/>}
+                    <FormControlLabel value="mid" control={<Radio/>}
                                       label="Mid"/>
-                    <FormControlLabel value="Senior" control={<Radio/>}
+                    <FormControlLabel value="senior" control={<Radio/>}
                                       label="Senior"/>
                 </RadioGroup>
             </FormControl>
             <FormControl component="fieldset">
                 <FormLabel component="legend">Workplace type</FormLabel>
                 <RadioGroup
-                    row aria-label="gender" name="row-radio-buttons-group"
+                    row aria-label="gender"
+                    name="row-radio-buttons-group"
+                    defaultValue="remote"
+                    onChange={(e) => {
+                        setFormData({ ...formData, workplace_type: e.target.value });
+                    }}
                 >
-                    <FormControlLabel value="remote" control={<Radio/>}
+                    <FormControlLabel  value="remote" control={<Radio/>}
                                       label="Remote"/>
                     <FormControlLabel value="partly_remote" control={<Radio/>}
                                       label="Partly remote"/>
@@ -83,14 +108,23 @@ const EmploymentInfo = ({ formData, setFormData }: any): JSX.Element => {
                 </RadioGroup>
             </FormControl>
             <FormControl component="fieldset">
-                <FormLabel component="legend">Workplace type</FormLabel>
+                <FormLabel component="legend">Interview type</FormLabel>
                 <RadioGroup
-                    row aria-label="gender" name="row-radio-buttons-group"
+                    row
+                    aria-label="Interview type"
+                    name="row-radio-buttons-group"
+                    defaultValue="online"
                 >
-                    <FormControlLabel value="Online" control={<Radio/>}
-                                      label="Online"/>
-                    <FormControlLabel value="Offline" control={<Radio/>}
-                                      label="Offline"/>
+                    <FormControlLabel
+                        onClick={() =>   setFormData({ ...formData, remote: true })}
+                        value="online"
+                        control={<Radio/>}
+                        label="Online"/>
+                    <FormControlLabel
+                        onClick={() =>   setFormData({ ...formData, remote: false })}
+                        value="offline"
+                        control={<Radio/>}
+                        label="Offline"/>
                 </RadioGroup>
             </FormControl>
         </>

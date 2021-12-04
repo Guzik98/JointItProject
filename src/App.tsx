@@ -1,31 +1,24 @@
 import React from 'react';
 import './App.sass';
-import { Header } from './components/common';
-import { Bar } from './components/filterBar';
-import { MainContainer } from './components/mainContainer';
-import { useFetch } from './fetch/useFetch';
-import { useSettings } from './Settings';
-import MediaQuery from 'react-responsive';
- import { withAuthenticationRequired } from '@auth0/auth0-react';
+import { Route, Routes } from 'react-router-dom';
+import SignUpPage from './pages/signup/SignUpPage';
+import SignInPage from './pages/signin/SignInPage';
+import MainPage from './pages/main-page/MainPage';
+import PostOfferForm from './pages/post-offers/PostOfferForm';
+import EditOffer from './pages/edit-offer/EditOffer';
 
-function App(): JSX.Element {
-    const { openDetailComponent } = useSettings();
+const App = (): JSX.Element  => {
 
-    useFetch();
     return (
-            <div className="App">
-                <Header/>
-                <MediaQuery maxWidth={1025}>
-                    { openDetailComponent  ? null  : <Bar/>}
-                </MediaQuery>
-                <MediaQuery minWidth={1025}>
-                    <Bar/>
-                </MediaQuery>
-                <MainContainer/>
-            </div>
-        );
-    }
+        <Routes>
+            <Route path="/" element={<SignInPage/>} />
+            <Route path="/signin" element={<SignInPage/>} />
+            <Route path="/signup" element={<SignUpPage/>} />
+            <Route path="/mainpage"  element={<MainPage/>} />
+            <Route path="/postoffer" element={<PostOfferForm/>} />
+            <Route path="/mainpage/edit-offer" element={<EditOffer/>}/>
+        </Routes>
+    );
+};
 
-// export default App;
-
-export default withAuthenticationRequired(App);
+export default App;

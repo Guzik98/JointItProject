@@ -5,6 +5,8 @@ import { Button, TextField } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuthSettings } from '../../AuthContext';
+import { parseJwt } from '../../helpfuntions/accesToken/decodeAccessToken';
 
 interface IFormInput {
     username: string;
@@ -29,6 +31,7 @@ const useStyles = makeStyles(() =>
 const SignUpPage = (): JSX.Element => {
     const navigate = useNavigate();
     const classes = useStyles();
+    const  { setUsername, setRole } = useAuthSettings();
     const { register, handleSubmit } = useForm<IFormInput>();
     const [errorMessage, setErrorMessage] = useState<string>();
 
@@ -41,6 +44,8 @@ const SignUpPage = (): JSX.Element => {
             password: data.password,
         })
             .then((response) => {
+                setUsername(data.username);
+                setRole(parseJwt(response.data.accessToken).role);
                 localStorage.removeItem('accessToken');
                 localStorage.setItem('accessToken', JSON.stringify(response.data.accessToken));
 

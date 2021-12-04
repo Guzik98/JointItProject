@@ -48,13 +48,6 @@ const Skills = ({ skills, setSkills }: FormSkill): JSX.Element => {
                     return {
                         ...item,
                         [event.target.name as string]: event.target.value as string,
-
-                        errors: {
-                            [event.target.name as string]:
-                                event?.target?.value != undefined
-                                    ? null
-                                    : [event.target.name] + 'Is required',
-                        },
                     };
                 });
             });
@@ -105,10 +98,11 @@ const Skills = ({ skills, setSkills }: FormSkill): JSX.Element => {
                                 </FormControl>
                             </Box>
                         </div>
-
-                        <Button onClick={(e) => handleRemovedSkill(e, index)}>
-                            Remove Skill
-                        </Button>
+                        { skills.length > 1 &&
+                            <Button onClick={(e) => handleRemovedSkill(e, index)}>
+                                Remove Skill
+                            </Button>
+                        }
                     </>
                 );
             })}

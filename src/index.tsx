@@ -4,19 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { SettingsProvider } from './Settings';
-import { Auth0Provider } from '@auth0/auth0-react';
+import { BrowserRouter } from 'react-router-dom';
+import { AuthContextProvider } from './AuthContext';
 
 ReactDOM.render(
-            <Auth0Provider
-                domain={'dev-hc5tj--a.us.auth0.com'}
-                clientId={'IJYv6RNjytLbIZgQHt1BR7n81SExgVho'}
-                redirectUri={window.location.origin}
-            >
-                <SettingsProvider>
-                    <App/>
-                </SettingsProvider>
-            </Auth0Provider>,
-
+    <BrowserRouter>
+        <SettingsProvider>
+            <AuthContextProvider>
+                <App/>
+            </AuthContextProvider>
+        </SettingsProvider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 

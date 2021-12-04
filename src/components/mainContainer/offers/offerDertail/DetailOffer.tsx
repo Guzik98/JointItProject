@@ -11,7 +11,7 @@ import DisplaySalary from './components/DisplaySalary';
 import { EmploymentType } from '../../../../types/offerType';
 import CompanyProfile from './components/CompanyProfile';
 import PointerIconDetail from '../../../../assets/icons/svg/PointerIconDetail';
-import { useWindowSize } from '../../../../handleScreen/useWindowSize';
+import { useWindowSize } from '../../../../helpfuntions/handleScreen/useWindowSize';
 import { Size } from '../../../../types/shortTypes';
 import Loading from '../../../common/loading/Loading';
 

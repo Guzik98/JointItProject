@@ -1,23 +1,35 @@
 import { useEffect } from 'react';
-import { useSettings } from '../Settings';
+import { useAuthSettings } from '../../AuthContext';
+import axios from 'axios';
+import { useSettings } from '../../Settings';
+import { parseJwt } from '../accesToken/decodeAccessToken';
 
-const url = 'http://localhost:3000/offers';
 
-const useFetch = () : void => {
+const useFetch = (url : string) : void => {
+    const { setUsername, setRole, setIsAuthenticated } = useAuthSettings();
     const { setData } = useSettings();
+    const { setUserOffers, } = useAuthSettings();
 
-    useEffect(() => {
-        let isMounted = true;
-        fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                if (isMounted) {
-                    setData(data);
+    useEffect( () => {
+        axios.get(url,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + JSON.parse(<string>localStorage.getItem('accessToken'))
                 }
+            })
+            .then(async (response) => {
+                if (url === 'http://localhost:3000/offers') {
+                    setData(response.data);
+                    setIsAuthenticated(true);
+                    setUsername(parseJwt(<string>localStorage.getItem('accessToken')).username);
+                    setRole(parseJwt(<string>localStorage.getItem('accessToken')).role);
+                } else if (url === 'http://localhost:3000/offers/your-offers') {
+                    setUserOffers(response.data);
+                }
+            })
+            .catch(() => {
+                setIsAuthenticated(false);
             });
-        return () => {
-            isMounted = false;
-        };
     }, [url]);
 };
 

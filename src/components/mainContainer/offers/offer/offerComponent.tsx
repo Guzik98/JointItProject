@@ -1,13 +1,13 @@
 import React from 'react';
 import './offerComponent.sass';
-import { EmploymentType, OfferType } from '../../../../types/offerType';
+import { EmploymentType, OfferType, SkillsType } from '../../../../types/offerType';
 import MediaQuery from 'react-responsive';
 import { useSettings } from '../../../../Settings';
 import { getNumberOfDays, putSalary } from './function/offerComponentFunctions';
 import CompanyIconOffer from '../../../../assets/icons/svg/CompanyIconOffer';
 import PointerIconOffer from '../../../../assets/icons/svg/PointerIconOffer';
 
-const OfferComponent = (props : OfferType) : JSX.Element => {
+const OfferComponent = ( props : OfferType ) : JSX.Element => {
     const { setUrlDetail, setViewport, setOpenDetailComponent } = useSettings();
 
     const today = new Date().toISOString().split('T')[0];
@@ -67,7 +67,6 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                                                 );
                                         }
                                         )}
-
                                     </div>
                                 </MediaQuery>
                             </div>
@@ -109,8 +108,8 @@ const OfferComponent = (props : OfferType) : JSX.Element => {
                             </div>
                             <div className="bottom-info-skills">
                                 <MediaQuery minWidth={1025}>
-                                    {props.skills.map((type) =>
-                                        <span key={type.name} className="skills">{type.name}</span>
+                                    {props.skills.map((type: SkillsType) =>
+                                            <span key={type.name} className="skills">{type.name}</span>
                                     )}
                                 </MediaQuery>
 

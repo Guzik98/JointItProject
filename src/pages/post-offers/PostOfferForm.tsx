@@ -11,7 +11,8 @@ import CompanyInfo from './components/CompanyInfo';
 import EmploymentInfo from './components/EmploymentInfo';
 import Skills from './components/Skills';
 import EmploymentInfoType from './components/EmploymentInfoType';
-
+import getLocation from './functions/getCordinates';
+import axios from 'axios';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -26,18 +27,24 @@ const useStyles = makeStyles(() =>
 const PostOfferFrom = (): JSX.Element => {
     const navigate = useNavigate();
     const size: Size = useWindowSize();
-    const { isAuthenticated, role } = useAuthSettings();
+    const style = {
+        maxHeight: size.height - 200
+    };
 
-    const [formData, setFormData] = React.useState<OfferType>({
+    const classes = useStyles();
+    const today = new Date().toISOString();
+
+    const { isAuthenticated, role } = useAuthSettings();
+    const initialValue = {
         _id: '',
         address_text: '',
         city: '',
         company_logo_url: '',
         company_name: '',
-        company_size: '',
         company_url: '',
+        company_size: '',
         employment_types: [],
-        experience_level: '',
+        experience_level: 'junior',
         id: '',
         latitude: '',
         longitude: '',
@@ -48,119 +55,112 @@ const PostOfferFrom = (): JSX.Element => {
         skills: [],
         street: '',
         title: '',
-        workplace_type: '',
-        country_code: 'pl'
-    });
+        workplace_type: 'remote',
+        country_code: 'PL',
+    };
+
+    const [formData, setFormData] = React.useState<OfferType>(initialValue);
 
     const [skills, setSkills] = useState<SkillsType[]>([{
         name: '',
         level: 1
     }]);
 
-    const [employment, setEmployment] = useState<EmploymentType[]>([]);
+    const [employment, setEmployment] = useState<EmploymentType[]>([{
+        type: 'b2b',
+        salary: null
+    }]);
+
+    type ErrorType = {
+        error: string
+    };
+   const [errorArray, setErrorArray] = useState<ErrorType[]>([]);
 
 
-    const submit = () => {
-        skills.map((item) => {
-            console.log(item);
-            return formData.skills.push(item);
-        });
+    const submit = async (formData: OfferType) => {
         employment.map((item) => {
             return formData.employment_types.push(item);
         });
-        alert('FORM SUBMITTED');
-        console.log(formData);
-        console.log(skills);
+        skills.map((item) => {
+            return formData.skills.push(item);
+        });
+
+        const geocode = await getLocation(formData.street + ', ' + formData.city + ' ' + 'POLAND');
+        await axios.post('http://localhost:3000/offers', {
+            title: formData.title,
+            street: formData.street,
+            city: formData.city,
+            country_code: 'PL',
+            address_text: (formData.street + ', ' + formData.city),
+            company_name: formData.company_name,
+            latitude: geocode.latitude,
+            longitude: geocode.longitude,
+            company_url: formData.company_url,
+            company_size: formData.company_size + '+',
+            published_at: today,
+            company_logo_url: 'https://bucket.justjoin.it/offers/company_logos/thumb/4c551fc844fd284c3bb56a481bf8ee7121045deb.png?1633525582',
+            id: (formData.company_name + ' ' + formData.title + ' ' + formData.city).replaceAll(' ', '-'),
+            experience_level: formData.experience_level,
+            workplace_type: formData.workplace_type,
+            remote: formData.remote,
+            remote_interview: formData.remote_interview,
+            marker_icon: formData.marker_icon,
+            skills: formData.skills,
+            employment_types: formData.employment_types,
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('accessToken') as string)
+                    }
+            })
+            .then(() => {
+                alert('FORM SUBMITTED');
+                navigate('/mainpage');
+            })
+            .catch((error) => {
+                setFormData({ ...formData, skills: [], employment_types: [] });
+                setErrorArray([]);
+                error.response.data.message.map((text: string)=> {
+                    setErrorArray(setErrorArray =>[...setErrorArray, { error: text }]);
+                });
+                alert(error.response.data.message);
+            });
     };
-
-
-    // const incrementSkillCounter = () => {
-    //     setSkillCounter( skillCounter + 1);
-    // }
-
-    const style = {
-        maxHeight: size.height - 200
-    };
-
-    const classes = useStyles();
-    // const today = new Date().toISOString();
-
-    // const onSubmit: SubmitHandler<OfferType> = async (offer) => {
-    //     const geocode = await getLocation(offer.street + ', ' + offer.city + ' ' + 'POLAND');
-    //     let setRemote = false;
-    //     if (offer.workplace_type === 'remote') {
-    //         setRemote = true;
-    //     }
-
-    //     await axios.post('http://localhost:3000/offers', {
-    //         title: offer.title,
-    //         street: offer.street,
-    //         city: offer.city,
-    //         country_code: 'PL',
-    //         address_text: (offer.street + ', ' + offer.city),
-    //         company_name: offer.company_name,
-    //         latitude: geocode.latitude,
-    //         longitude: geocode.longitude,
-    //         company_url: offer.company_url,
-    //         company_size: offer.company_size + '+',
-    //         published_at: today,
-    //         company_logo_url: 'https://bucket.justjoin.it/offers/company_logos/thumb/4c551fc844fd284c3bb56a481bf8ee7121045deb.png?1633525582',
-    //         id: (offer.company_name + ' ' + offer.title + ' ' + offer.city).replaceAll(' ', '-'),
-    //         experience_level: offer.experience_level,
-    //         workplace_type: offer.workplace_type,
-    //         remote: setRemote,
-    //         remote_interview: interview,
-    //         marker_icon: markerIconhook.toLowerCase(),
-    //         skills: [
-    //             {
-    //                 name: 'javascript',
-    //                 level: '2',
-    //             },
-    //             {
-    //                 name: 'java',
-    //                 level: '1',
-    //             }
-    //         ],
-    //         employment_types: [
-    //             {
-    //                 type: 'b2b',
-    //                 salary: {
-    //                     from: 90000,
-    //                     to: 98000,
-    //                     currency: 'pln'
-    //                 }
-    //             }
-    //         ]
-    //     })
-    //         .then(() => {
-    //             navigate('/mainpage');
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // };
 
     if (isAuthenticated && role == 'EMPLOYER') {
         return (
-            <div className="post-offer-background">
-                <div className="post-offer-content" style={style}>
-                    <h1>
-                        Post offers on JustJoinIt
-                    </h1>
-                    <CompanyInfo formData={formData} setFormData={setFormData}/>
-                    <EmploymentInfo formData={formData} setFormData={setFormData}/>
+            <>
+                <div className="post-offer-background">
+                    <div className="post-offer-content" style={style}>
+                        <h1>
+                            Post offers on JustJoinIt
+                        </h1>
+                        <CompanyInfo formData={formData} setFormData={setFormData}/>
+                        <EmploymentInfo formData={formData} setFormData={setFormData}/>
+                        <div>
+                            <EmploymentInfoType employment={employment} setEmployment={setEmployment}/>
+                        </div>
+                        <Skills skills={skills} setSkills={setSkills}/>
 
-                    <EmploymentInfoType employment={employment} setEmployment={setEmployment}/>
-                    <Skills skills={skills} setSkills={setSkills}/>
-
-                    <Button
-                        onClick={submit}
-                        classes={{ root: classes.button }}
-                    >
-                        Submit
-                    </Button>
+                        <Button
+                            onClick={ () => submit(formData) }
+                            classes={{ root: classes.button }}
+                        >
+                            Submit
+                        </Button>
+                        {
+                            errorArray.map((item, index) => {
+                                return (
+                                    <div key={index} className='error'>
+                                        {item.error}
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
+
+            </>
+
         );
     } else {
         return (

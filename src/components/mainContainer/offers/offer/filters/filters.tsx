@@ -108,7 +108,6 @@ export const  filterFunction = (): OfferType[] | undefined => {
 
     const filter0ffersWithOutSalary =  filterSalaryBetween?.filter( item => {
         if ( withSalary || fromSalary !== 0 || toSalary !== 100000 ) {
-            console.log(fromSalary);
             return  item.employment_types[0]?.salary !== null;
         }
         return  true;
@@ -158,7 +157,9 @@ export const  filterFunction = (): OfferType[] | undefined => {
     }
 
     if (sortBy === 'Latest') {
-        filtered = filterLongFilterLocation;
+        filtered = filterLongFilterLocation?.sort(function (a, b) {
+            return ( a.published_at > b.published_at) ? -1 : ((a.published_at < b.published_at ) ? 1 : 0);
+        });
     }
 
     return  filtered;

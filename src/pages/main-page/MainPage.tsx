@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Header } from '../../components/common';
 import MediaQuery from 'react-responsive';
@@ -6,13 +7,13 @@ import { MainContainer } from '../../components/mainContainer';
 import { useSettings } from '../../Settings';
 import { useAuthSettings } from '../../AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useFetch } from '../../helpfuntions/fetch/useFetch';
 
 const MainPage = (): JSX.Element => {
     const navigate = useNavigate();
     const { openDetailComponent } = useSettings();
     const { isAuthenticated } = useAuthSettings();
-
-    console.log(isAuthenticated);
+    useFetch('http://localhost:3000/offers');
 
     if (isAuthenticated) {
         return (
@@ -30,7 +31,9 @@ const MainPage = (): JSX.Element => {
     } else {
         return (
             <>
-                {navigate('/signin')}
+                {
+                    navigate('/signin')
+                }
             </>
         );
     }

@@ -6,7 +6,7 @@ import { OfferType } from '../../../types/offerType';
 import { useSettings } from '../../../Settings';
 import { putSalary, ReturnSalaryMap } from '../offers/offer/function/offerComponentFunctions';
 import { Size } from '../../../types/shortTypes';
-import { useWindowSize } from '../../../handleScreen/useWindowSize';
+import { useWindowSize } from '../../../helpfuntions/handleScreen/useWindowSize';
 import ChatIcon from '../../../assets/icons/svg/ChatIcon';
 import { ClickAwayListener } from '@material-ui/core';
 import Chatbot from './chatbot/ChatBot';
@@ -50,7 +50,7 @@ function Map(): JSX.Element{
             >
                 <NavigationControl style={navControlStyle} />
                 { filter?.slice(0, 50).map((offer : OfferType) => (
-                    <Marker key={offer.id} latitude={+offer.latitude} longitude={+offer.longitude}  >
+                    <Marker key={offer._id} latitude={+offer.latitude} longitude={+offer.longitude}  >
                         <button className="market-btn"
                                 onMouseOver={ () =>setSelectedOffer(offer) }
                                 onMouseLeave={ () =>setSelectedOffer(null) }

@@ -3,6 +3,12 @@ export interface HandlePopOut {
     handleOpen?: () => void
 }
 
+export type TabActiveType = {
+    withSalary: boolean
+    withOutSalary: boolean
+    userOffers: boolean
+};
+
 export interface Size {
     width: number;
     height: number;
